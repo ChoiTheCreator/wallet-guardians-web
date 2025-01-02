@@ -1,0 +1,96 @@
+$primary-color: #0055ff; // 토스 파란색
+$secondary-color: #333; // 검정색
+$background-color: #ffffff; // 흰색 배경
+$font-family: 'Noto Sans KR', sans-serif;
+
+body {
+  margin: 0;
+  font-family: $font-family;
+  background-color: $background-color;
+  color: $secondary-color;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.start-page-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  max-width: 800px;
+  height: 80vh; // 화면의 80% 높이 사용
+  padding: 10px;
+
+  .header {
+    margin-top: 30px;
+    margin-bottom: 0px; // 대제목과 중제목 간 간격을 거의 제거
+
+    h1 {
+      margin-top: 100px;
+      font-size: 3rem; // 대제목 크기
+      color: $primary-color; // 파란색 강조
+      font-weight: 800; // 더 굵게
+    }
+  }
+
+  .main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .title {
+      font-size: 1.8rem;
+      line-height: 1.5;
+      margin-bottom: 10px; // 중제목과 설명 텍스트 간 간격 유지
+      font-weight: 700;
+      margin-bottom: 30px;
+    }
+
+    .description {
+      font-size: 1rem;
+      line-height: 1.5;
+      margin-bottom: 30px;
+      font-weight: 300;
+    }
+  }
+
+  .start-button {
+    background-color: $primary-color;
+    color: white;
+    padding: 14px 28px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+
+    &:hover {
+      background-color: lighten($primary-color, 10%);
+    }
+  }
+
+  .illustration {
+    margin-top: 20px;
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+
+  .footer {
+    font-weight: 800;
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    font-size: 0.8rem;
+    color: black;
+  }
+}

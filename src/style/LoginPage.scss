@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap');
+
+$primary-color: #0055ff; // 토스 파란색
+$secondary-color: #333; // 검정색
+$background-color: #ffffff; // 흰색 배경
+$font-family: 'Noto Sans KR', sans-serif;
+
+body {
+  margin: 0;
+  font-family: $font-family;
+  background-color: $background-color;
+  color: $secondary-color;
+  height: 100vh;
+  display: flex; // Flexbox 사용
+  justify-content: center; // 수평 중앙 정렬
+  align-items: center; // 수직 중앙 정렬
+}
+
+.login-page-container {
+  text-align: center;
+  background: $background-color;
+  border-radius: 15px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  width: 50vw; // 너비를 뷰포트 너비의 70%로 설정
+  max-width: 500px; // 최대 너비 제한
+  padding: 40px;
+  margin: auto; // 플렉스 레이아웃에서 불필요하지만 추가 안전 장치로 유지
+
+  h1 {
+    font-size: 2.5rem; // 제목 글자 크기 증가
+    color: $primary-color;
+    margin-bottom: 20px;
+    font-weight: 700;
+  }
+
+  p {
+    font-size: 1.2rem; // 본문 글자 크기 증가
+    color: $secondary-color;
+    margin-bottom: 20px;
+
+    &.sign-up-prompt {
+      margin-top: 10px;
+      font-size: 1.1rem; // 회원가입 텍스트 글자 크기 증가
+
+      .sign-up-link {
+        color: $primary-color;
+        cursor: pointer;
+        font-weight: 600;
+        text-decoration: underline;
+
+        &:hover {
+          color: lighten($primary-color, 10%);
+        }
+      }
+    }
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; // 입력 필드 간 간격 증가
+    margin-bottom: 20px;
+
+    .input-field {
+      padding: 15px; // 입력 필드 크기 증가
+      font-size: 1.2rem; // 입력 필드 글자 크기 증가
+      border: 1px solid lighten($secondary-color, 50%);
+      border-radius: 5px;
+      font-family: $font-family;
+
+      &:focus {
+        outline: none;
+        border-color: $primary-color;
+        box-shadow: 0 0 4px rgba(0, 85, 255, 0.5);
+      }
+    }
+
+    .login-button {
+      background-color: $primary-color;
+      color: white;
+      padding: 15px 20px; // 버튼 크기 증가
+      font-size: 1.2rem; // 버튼 글자 크기 증가
+      border: none;
+      border-radius: 5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: lighten($primary-color, 10%);
+      }
+    }
+  }
+}
