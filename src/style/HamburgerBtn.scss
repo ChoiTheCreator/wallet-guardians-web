@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap');
+
+$primary-color: #0055ff;
+
+.hamburger-button {
+  position: fixed;
+  top: 25px; // 버튼과 상단 간격 조정
+  left: 30px; // 버튼과 Navbar 간격 조정
+  background-color: transparent;
+  border: none;
+  font-size: 28px; // 버튼 크기 약간 확대
+  cursor: pointer;
+  z-index: 20;
+  transition: left 0.3s ease;
+
+  &:hover {
+    color: $primary-color;
+  }
+
+  &.shifted {
+    left: 280px; // Sidebar가 열렸을 때의 위치 조정
+  }
+
+  /* 작은 화면용 스타일 */
+  @media (max-width: 768px) {
+    left: 20px; // 작은 화면에서는 고정된 위치
+  }
+}
