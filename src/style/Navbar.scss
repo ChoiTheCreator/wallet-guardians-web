@@ -1,0 +1,48 @@
+.navbar {
+  width: 250px;
+  background-color: #1e1e2f;
+  color: white;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: -250px; // 기본적으로 화면 밖으로 숨김
+  transition: left 0.3s ease; // 부드러운 열림/닫힘 애니메이션
+  padding: 20px;
+
+  &.open {
+    left: 0; // 열렸을 때 화면 안으로 이동
+  }
+
+  &.closed {
+    left: -250px; // 닫혔을 때 화면 밖으로 숨김
+  }
+
+  .close-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    margin-bottom: 20px;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+
+    li {
+      margin: 15px 0;
+      font-size: 1rem;
+      cursor: pointer;
+
+      &:hover {
+        color: #aaa;
+      }
+    }
+  }
+}
