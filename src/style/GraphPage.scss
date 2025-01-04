@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap');
+
+$primary-color: #0055ff;
+$text-color: #333;
+$card-bg-color: #fff;
+$graph-bg-color: #ff4d4d; // 그래프 배경 색상 (빨간색)
+
+.graph-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 50px;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 30px;
+
+  .graph-left,
+  .graph-right {
+    flex: 1; // 좌우 균등 분할
+    max-width: 500px; // 최대 너비 제한
+  }
+
+  .graph-left {
+    .expense-graph-card {
+      background-color: $graph-bg-color; // 빨간색 배경
+      padding: 60px;
+      border-radius: 50%; // 원형 그래프 모양
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 600;
+      text-align: center;
+      color: white;
+    }
+  }
+
+  .graph-right {
+    .graph-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: $primary-color;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .top-expense-card,
+    .additional-info-card {
+      background-color: $card-bg-color;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .top-expense-card {
+      background-color: black; // 검은색 배경
+      color: white;
+    }
+  }
+}

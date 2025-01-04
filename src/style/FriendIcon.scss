@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap');
+
+$primary-color: #0055ff;
+$icon-bg-color: #e0e0e0;
+
+.friend-icon-container {
+  position: fixed;
+  top: 20px; // 상단 고정 위치
+  right: 40px; // 우측 여백
+  background-color: white;
+  padding: 10px;
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  z-index: 100;
+
+  &:hover {
+    background-color: $icon-bg-color; // 아이콘 배경 색상 변경
+  }
+
+  .friend-icon {
+    font-size: 2rem; // 아이콘 크기
+    color: $primary-color;
+  }
+}

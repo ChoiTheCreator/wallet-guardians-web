@@ -8,6 +8,8 @@ import NotFoundPage from './pages/NotFoundPage';
 import IncomePage from './pages/IncomePage';
 import MainPage from './pages/MainPage';
 import ExpensePage from './pages/ExpensePage';
+import InitialPage from './pages/InitialPage';
+import GoalSettingPage from './pages/GoalSettingPage';
 import GraphPage from './pages/GraphPage';
 import Layout from './components/Layout'; // Layout import
 import './style/MainPage.scss';
@@ -20,7 +22,9 @@ const App = () => {
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/income" element={<IncomePage />} />
         <Route path="/expenses" element={<ExpensePage />} />
-        <Route path="/graphs" element={<GraphPage />} /> {/* 그래프 페이지 */}
+        <Route path="/graph" element={<GraphPage />} />
+        <Route path="/goal-setting" element={<GoalSettingPage />} />
+        <Route path="/initial" element={<InitialPage />} />
       </Route>
       {/* 개별 페이지 */}
       <Route path="/" element={<StartPage />} />

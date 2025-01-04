@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap');
+
+$primary-color: #0055ff;
+$button-bg-color: #a3e4ff;
+$error-color: #ff4d4d; // 에러 메시지 색상
+
+.goal-setting-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+  font-family: 'Noto Sans KR', sans-serif;
+  padding: 20px;
+
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: $primary-color;
+  }
+
+  p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+  }
+
+  .goal-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+
+    input {
+      width: 100%;
+      max-width: 300px;
+      padding: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+      outline: none;
+
+      &:focus {
+        border-color: $primary-color;
+        box-shadow: 0 0 4px rgba(0, 85, 255, 0.5);
+      }
+    }
+
+    .error-message {
+      color: $error-color;
+      font-size: 0.9rem;
+      margin-top: -10px;
+    }
+
+    .submit-btn {
+      background-color: $primary-color;
+      color: white;
+      padding: 15px 40px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: darken($primary-color, 10%);
+      }
+    }
+  }
+}

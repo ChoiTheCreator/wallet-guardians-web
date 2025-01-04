@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap');
+
+$primary-color: #0055ff;
+$button-bg-color: #a3e4ff;
+$text-color: #333;
+
+.initial-page-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+  font-family: 'Noto Sans KR', sans-serif;
+
+  h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    color: $text-color;
+  }
+
+  p {
+    font-size: 1.5rem;
+    margin-bottom: 40px;
+  }
+
+  .goal-setting-btn {
+    background-color: $button-bg-color;
+    color: $primary-color;
+    padding: 15px 40px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: lighten($button-bg-color, 10%);
+    }
+  }
+}
