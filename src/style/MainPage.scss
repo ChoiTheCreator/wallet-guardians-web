@@ -1,34 +1,130 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap');
+.main-content {
+  padding: 40px;
+  text-align: center;
 
-$primary-color: #0055ff;
-$text-color: #333;
-$content-padding: 40px;
-
-.content {
-  width: 100vw; // 뷰포트 너비를 최대 사용
-  padding: $content-padding;
-  transition: all 0.3s ease; // 모든 변화에 부드러운 애니메이션 적용
-  box-sizing: border-box; // 패딩 포함해서 너비 계산
-
-  &.shifted {
-    margin-left: 500px; // Sidebar가 열렸을 때만 margin 적용
+  h2 {
+    margin-bottom: 30px;
+    font-size: 2.2rem; // 기존보다 크기 확대
+    font-weight: 800; // 볼드체
+    color: #0055ff;
   }
 
-  h1 {
-    font-size: 2.2rem;
-    color: $primary-color;
-    margin-bottom: 20px;
+  .goal-summary {
+    font-size: 1.6rem; // 기존 선정 예산 크기 확대
+    margin-bottom: 40px;
+    font-weight: bold;
+    color: #333;
   }
 
-  p {
-    font-size: 1.1rem;
-    line-height: 1.5;
-    color: $text-color;
+  .calendar-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px;
+
+    .react-calendar {
+      border-radius: 15px;
+      border: none;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      background-color: white;
+      font-family: 'Noto Sans KR', sans-serif;
+
+      .react-calendar__navigation {
+        background-color: #0055ff !important; // 확실한 고정
+        color: white;
+        border-bottom: 2px solid #0041cc;
+
+        button {
+          font-size: 1.1rem;
+          font-weight: bold;
+          color: blue !important; // 버튼 글자 색 고정
+
+          &:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+          }
+        }
+      }
+
+      .react-calendar__month-view__days__day {
+        padding: 12px;
+        border-radius: 50%;
+        transition: all 0.3s ease;
+
+        &:hover {
+          background-color: rgba(0, 85, 255, 0.2);
+          transform: scale(1.05);
+        }
+
+        &--weekend {
+          color: #d9534f;
+        }
+
+        &--neighboringMonth {
+          color: #ccc;
+        }
+
+        &--active {
+          background-color: #0055ff !important; // 클릭된 날짜 배경 고정
+          color: white;
+          font-weight: bold;
+        }
+      }
+    }
   }
 
-  /* 작은 화면 대응 */
-  @media (max-width: 768px) {
-    margin-left: 0; // 작은 화면에서는 Sidebar와 무관하게 유지
-    padding: 20px;
+  .expense-modal {
+    background-color: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    width: 400px;
+    text-align: center;
+
+    textarea {
+      width: 100%;
+      height: 120px;
+      margin-bottom: 20px;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      resize: none;
+      font-size: 1rem;
+      font-weight: 500;
+    }
+
+    .submit-btn {
+      margin-top: 20px; // 버튼 간격 증가
+      padding: 15px 30px; // 버튼 크기 증가
+      background-color: #0055ff !important; // 버튼 배경 확실히 고정
+      color: white !important; // 글자색 고정
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 10px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background-color: #003cb3;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      }
+    }
+
+    .close-btn {
+      margin-top: 15px;
+      background-color: transparent;
+      border: none;
+      font-size: 1rem;
+      color: #333;
+      cursor: pointer;
+
+      &:hover {
+        color: #0055ff;
+      }
+    }
   }
 }

@@ -32,7 +32,7 @@ const SignupPage = ({ closeSignupModal }) => {
   };
 
   return (
-    <div className="signup-page-overlay">
+    <div className="signup-page-overlay ">
       <div className="signup-page-container">
         <button className="close-button" onClick={closeSignupModal}>
           ✕
