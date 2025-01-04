@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap');
+
+$primary-color: #0055ff;
+$text-color: #333;
+$card-bg-color: #fff;
+$highlight-color: #ff33cc; // 임시 강조 색상 (핑크)
+
+.income-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 50px;
+  max-width: 1200px;
+  margin: 0 auto; // 가운데 정렬
+  gap: 30px;
+
+  .income-left,
+  .income-right {
+    flex: 1; // 좌우 균등 분할
+    max-width: 500px; // 최대 너비
+  }
+
+  .income-left {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .income-summary-card,
+    .budget-explanation-card {
+      background-color: $card-bg-color;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .income-summary-card {
+      height: 150px;
+      background-color: #000; // 검은색 임시 배경
+      color: white;
+    }
+
+    .budget-explanation-card {
+      height: 250px;
+      background-color: $highlight-color; // 핑크 배경색
+      color: white;
+    }
+  }
+
+  .income-right {
+    background-color: $card-bg-color;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+
+    .income-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: $primary-color;
+      margin-bottom: 20px;
+    }
+
+    .goal-amount-card {
+      background-color: #e0e0e0; // 회색 카드 배경
+      padding: 40px;
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      border-radius: 10px;
+    }
+
+    .set-goal-btn {
+      display: block;
+      width: 100%;
+      background-color: $primary-color;
+      color: white;
+      padding: 15px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: lighten($primary-color, 10%);
+      }
+    }
+  }
+}

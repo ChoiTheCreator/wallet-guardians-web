@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap');
+
+$primary-color: #0055ff;
+$background-color: #f9f9f9;
+$card-bg-color: #fff;
+$font-family: 'Noto Sans KR', sans-serif;
+
+.profile-wrapper {
+  display: flex;
+  justify-content: space-between; // 좌우로 컴포넌트 배치
+  align-items: flex-start; // 상단 정렬
+  padding: 50px;
+  max-width: 1200px;
+  margin: 0 auto; // 페이지 가운데 정렬
+  gap: 30px;
+
+  .profile-left,
+  .profile-right {
+    flex: 1; // 너비를 1:1 비율로 배치
+    max-width: 400px; // 좌우 패널의 최대 너비
+  }
+
+  .profile-left {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .profile-avatar-card,
+    .profile-stats-card {
+      background-color: $card-bg-color;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: $font-family;
+      font-size: 1.2rem;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .profile-avatar-card {
+      height: 250px; // 프로필 이미지 카드 크기
+      background-color: #b87333; // 임시 배경색 (갈색)
+    }
+
+    .profile-stats-card {
+      height: 200px; // 칭호 및 방어율 카드 크기
+      background-color: #000; // 검은색 카드
+      color: white;
+    }
+  }
+
+  .profile-right {
+    background-color: $card-bg-color;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+    .profile-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: $primary-color;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .profile-friend-list {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      li {
+        background-color: #f0f0a8; // 연한 노란색 카드 배경
+        padding: 15px;
+        font-size: 1.2rem;
+        border-radius: 8px;
+        text-align: center;
+      }
+    }
+
+    .add-friend-btn {
+      display: block;
+      background-color: $primary-color;
+      color: white;
+      padding: 15px 20px;
+      font-size: 1rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 20px;
+      width: 100%;
+      text-align: center;
+
+      &:hover {
+        background-color: lighten($primary-color, 10%);
+      }
+    }
+  }
+}

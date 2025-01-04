@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap');
+
+$primary-color: #0055ff;
+$text-color: #333;
+$card-bg-color: #fff;
+$highlight-color: #f5f68a; // 연한 노란색 강조 배경
+$list-bg-color: #e0e0e0; // 회색 카드 배경
+
+.expense-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 50px;
+  max-width: 1200px;
+  margin: 0 auto; // 페이지 가운데 정렬
+  gap: 30px;
+
+  .expense-left,
+  .expense-right {
+    flex: 1; // 좌우 균등 분할
+    max-width: 500px; // 최대 너비 제한
+  }
+
+  .expense-left {
+    .expense-summary-card {
+      background-color: $highlight-color; // 노란색 강조 배경
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 600;
+      text-align: center;
+    }
+  }
+
+  .expense-right {
+    background-color: $card-bg-color;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+    .expense-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: $primary-color;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .expense-list-card {
+      background-color: $list-bg-color;
+      padding: 20px;
+      border-radius: 10px;
+
+      ul {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        li {
+          background-color: white;
+          padding: 15px;
+          border-radius: 8px;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          text-align: center;
+          font-size: 1.1rem;
+          font-weight: 500;
+        }
+      }
+    }
+  }
+}

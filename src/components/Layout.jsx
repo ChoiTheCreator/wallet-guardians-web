@@ -16,6 +16,7 @@ const Layout = () => {
         setIsSidebarOpen={setIsSidebarOpen}
       />
       <Navbar isSidebarOpen={isSidebarOpen} />
+
       <div className={`content ${isSidebarOpen ? 'shifted' : ''}`}>
         <Outlet />
       </div>
