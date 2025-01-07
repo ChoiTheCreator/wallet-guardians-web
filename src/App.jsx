@@ -17,7 +17,7 @@ import './style/MainPage.scss';
 
 const App = () => {
   return (
-    <GoalProvider>
+    <GoalProvider> 
       {' '}
       {/* GoalProvider로 전체 라우트 감싸기 */}
       <Routes>

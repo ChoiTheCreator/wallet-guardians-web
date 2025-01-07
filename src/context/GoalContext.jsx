@@ -3,6 +3,7 @@ import React, { createContext, useState } from 'react';
 export const GoalContext = createContext();
 
 export const GoalProvider = ({ children }) => {
+  //전역 상태관리 : 10000
   const [goalAmount, setGoalAmount] = useState(10000); // 전역 상태로 목표 금액 관리
 
   return (

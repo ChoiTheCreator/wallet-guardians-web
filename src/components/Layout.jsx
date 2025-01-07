@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import HamburgerBtn from '../components/HamburgerBtn';
-import FriendIcon from '../components/FriendIcon';
+import FriendIcon from './FriendBtn';
 import AuthenticatedComponent from '../auth/AuthenticatedComponent'; // 인증 컴포넌트 import
 
 const Layout = () => {

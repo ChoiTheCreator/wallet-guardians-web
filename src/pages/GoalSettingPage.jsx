@@ -5,7 +5,8 @@ import '../style/GoalSettingPage.scss';
 
 const GoalSettingPage = () => {
   const [errorMessage, setErrorMessage] = useState(''); // 에러 메시지만 로컬 상태
-  //아래의 goalAmount는 GoalContext.jsx의 전역 상태를 가져온 거임
+  //아래의 goalAmount는 GoalContext.jsx의 전역 상태를 가져온 것.
+  //App.jsx 참고하면 됨 (거기에 다 들어있음)
   const { goalAmount, setGoalAmount: setGlobalGoalAmount } =
     useContext(GoalContext); // 전역 상태 사용
   const navigate = useNavigate();
