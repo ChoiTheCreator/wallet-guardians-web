@@ -4,7 +4,7 @@ export const GoalContext = createContext();
 
 export const GoalProvider = ({ children }) => {
   //전역 상태관리 : 10000
-  const [goalAmount, setGoalAmount] = useState(10000); // 전역 상태로 목표 금액 관리
+  const [goalAmount, setGoalAmount] = useState(); // 전역 상태로 목표 금액 관리
 
   return (
     //GoalContext는 createContext()를 통해 생성된 Context 객체임 -> 공유공간

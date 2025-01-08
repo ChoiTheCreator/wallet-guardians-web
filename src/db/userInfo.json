@@ -1,3 +1,16 @@
 {
-  "users": []
+  "users": [
+    {
+      "id": "4722",
+      "username": "wonbin11",
+      "email": "wonbin1@naver.com",
+      "password": "ww001009!"
+    },
+    {
+      "id": "27a1",
+      "username": "wonbin109",
+      "email": "wonbin109@naver.com",
+      "password": "ww001009!"
+    }
+  ]
 }

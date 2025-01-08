@@ -16,7 +16,7 @@ const Navbar = ({ isSidebarOpen }) => {
           <li onClick={() => navigate('/income')}>수입내역</li>
           <li onClick={() => navigate('/expenses')}>지출내역</li>
           <li onClick={() => navigate('/graph')}>용도별 그래프</li>
-          <li onClick={() => navigate('/logout')}>로그아웃</li>
+          <li onClick={() => navigate('')}>로그아웃</li>
         </ul>
       </nav>
     </div>
