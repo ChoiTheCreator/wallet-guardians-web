@@ -14,10 +14,11 @@ import GraphPage from './pages/GraphPage';
 import { GoalProvider } from './context/GoalContext'; // GoalContext import
 import Layout from './components/Layout'; // Layout import
 import './style/MainPage.scss';
+import FriendPage from './pages/FriendPage';
 
 const App = () => {
   return (
-    <GoalProvider> 
+    <GoalProvider>
       {' '}
       {/* GoalProvider로 전체 라우트 감싸기 */}
       <Routes>
@@ -30,6 +31,7 @@ const App = () => {
           <Route path="/graph" element={<GraphPage />} />
           <Route path="/goal-setting" element={<GoalSettingPage />} />
           <Route path="/initial" element={<InitialPage />} />
+          <Route path="/friend" element={<FriendPage />} />
         </Route>
         {/* 개별 페이지 */}
         <Route path="/" element={<StartPage />} />
