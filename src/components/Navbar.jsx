@@ -1,4 +1,3 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
 //Navbar 부분은 메인페이지 scss 스타일에 종속
 import '../style/Navbar.scss';

@@ -1,3 +1,4 @@
+@use 'sass:color';
 $primary-color: #0055ff; // 토스 파란색
 $secondary-color: #333; // 검정색
 $background-color: #ffffff; // 흰색 배경
@@ -72,7 +73,7 @@ body {
     margin-top: 20px;
 
     &:hover {
-      background-color: lighten($primary-color, 10%);
+      background-color: color.scale($primary-color, $lightness: 10%);
     }
   }
 

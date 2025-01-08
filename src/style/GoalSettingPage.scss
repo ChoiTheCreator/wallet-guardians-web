@@ -1,3 +1,4 @@
+@use 'sass:color';
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap');
 
 $primary-color: #0055ff;
@@ -64,7 +65,7 @@ $error-color: #ff4d4d; // 에러 메시지 색상
       transition: background-color 0.3s ease;
 
       &:hover {
-        background-color: darken($primary-color, 10%);
+        background-color: color.scale($primary-color, $lightness: -10%);
       }
     }
   }

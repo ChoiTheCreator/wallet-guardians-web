@@ -1,3 +1,4 @@
+@use 'sass:color';
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap');
 
 $primary-color: #0055ff;
@@ -31,7 +32,7 @@ $font-family: 'Noto Sans KR', sans-serif;
     cursor: pointer;
 
     &:hover {
-      color: lighten(white, 20%);
+      color: color.scale(white, $lightness: 20%);
     }
   }
 
@@ -53,7 +54,7 @@ $font-family: 'Noto Sans KR', sans-serif;
       transition: background-color 0.3s ease, transform 0.2s;
 
       &:hover {
-        background-color: lighten($primary-color, 15%);
+        background-color: color.adjust($primary-color, $lightness: 10%);
         transform: scale(1.03);
       }
     }
