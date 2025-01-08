@@ -31,7 +31,7 @@ const App = () => {
           <Route path="/graph" element={<GraphPage />} />
           <Route path="/goal-setting" element={<GoalSettingPage />} />
           <Route path="/initial" element={<InitialPage />} />
-          {/* 여기 디자인 개선 필요 */}
+          {/* 여기 디자인 개선 필요 --> 수정 완 */}
           <Route path="/friend" element={<FriendPage />} />
         </Route>
         {/* 개별 페이지 */}

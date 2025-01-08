@@ -1,55 +1,70 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap');
+
 $primary-color: #0055ff; // 파란색
 $font-family: 'Noto Sans KR', sans-serif;
+
 .initial-page-container {
   padding: 40px;
   text-align: center;
   font-family: $font-family;
-  .header {
-    margin-bottom: 40px;
-    h1 {
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: #333;
-    }
-    p {
-      font-size: 1rem;
-      color: #777;
-    }
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; // 화면 전체에 중앙 정렬
+
+  h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: black;
+    margin-bottom: 20px;
+    opacity: 0; // 처음에 안 나타났다가 퐝 하고 나오기 위해 투명도 0
+    transform: translateY(-20px); // h1 에도 애니메이션 추가
+    animation: fadeInDown 1s ease-out forwards;
   }
-  .welcome-message {
-    h2 {
-      font-size: 3rem; // "반가워요!" 텍스트 크기
-      font-weight: 700;
-      color: #000;
-      margin-bottom: 20px;
-    }
-    p {
-      font-size: 1.2rem; // 설명 글자 크기
-      color: #555;
-      margin-bottom: 30px;
-      /* 애니메이션 효과 */
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeInUp 1s ease-in-out 0.5s forwards;
-    }
-    .set-goal-button {
-      background-color: $primary-color;
-      color: white;
-      border: none;
-      padding: 12px 24px; // 버튼 크기 조정
-      font-size: 1.2rem; // 버튼 텍스트 크기 조정
-      cursor: pointer;
-      border-radius: 8px;
-      transition: background-color 0.3s ease, transform 0.2s;
-      &:hover {
-        background-color: lighten($primary-color, 10%);
-        transform: scale(1.05); // 살짝 커지는 효과
-      }
+
+  p {
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 40px;
+    opacity: 0;
+    transform: translateY(20px); // 아래에서 위로 올라오는 효과
+    animation: fadeInUp 1s ease-out 0.5s forwards;
+  }
+
+  .goal-setting-btn {
+    background-color: $primary-color;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: background-color 0.3s ease, transform 0.2s, box-shadow 0.3s ease;
+    opacity: 0; 
+    transform: translateY(20px); // p와 동일한 애니메이션
+    animation: fadeInUp 1s ease-out 1s forwards;
+
+    &:hover {
+      background-color: lighten($primary-color, 10%);
+      box-shadow: 0 8px 15px rgba(0, 85, 255, 0.3); // 섀도우 효과
     }
   }
 }
+
 /* 애니메이션 키프레임 정의 */
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px); // 위에서 아래로 내려오는 효과
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0); // 최종 위치
+  }
+}
+
 @keyframes fadeInUp {
   0% {
     opacity: 0;

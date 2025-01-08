@@ -4,6 +4,7 @@ import Navbar from '../components/Navbar';
 import HamburgerBtn from '../components/HamburgerBtn';
 import FriendIcon from './FriendBtn';
 import AuthenticatedComponent from '../auth/AuthenticatedComponent'; // 인증 컴포넌트 import
+import Footer from './Footer';
 
 const Layout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -19,6 +20,7 @@ const Layout = () => {
         />
         <Navbar isSidebarOpen={isSidebarOpen} />
         <FriendIcon />
+        <Footer /> {/* Footer 추가 */}
         <div className={`content ${isSidebarOpen ? 'shifted' : ''}`}>
           <Outlet />
         </div>

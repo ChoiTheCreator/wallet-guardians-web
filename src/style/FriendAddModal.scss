@@ -37,6 +37,7 @@ $modal-white: #fff;
     border-radius: 5px;
     font-size: 1rem;
     margin-bottom: 20px;
+    box-sizing: border-box; //삐져나온거 수정
   }
 
   .modal-buttons {
