@@ -16,7 +16,7 @@ const ProfilePage = () => {
         <div className="profile-stats-card">지갑 방어율 및 칭호</div>
       </div>
 
-      {/* 우측 섹션 */}
+      {/* 우측 섹션 수정 */}
       <div className="profile-right"></div>
 
       {/* 모달 컴포넌트 */}
