@@ -7,7 +7,7 @@ const FriendIcon = () => {
   const navigate = useNavigate();
 
   const handleNavigate = () => {
-    navigate('/profile'); // 친구 페이지로 이동
+    navigate('/friend'); // 친구 페이지로 이동
   };
 
   return (

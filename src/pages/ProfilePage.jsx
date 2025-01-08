@@ -17,18 +17,7 @@ const ProfilePage = () => {
       </div>
 
       {/* 우측 섹션 */}
-      <div className="profile-right">
-        <h2 className="profile-title">친구 아이디 / 칭호</h2>
-        <ul className="profile-friend-list">
-          <li>친구 1</li>
-          <li>친구 2</li>
-          <li>친구 3</li>
-          <li>친구 4</li>
-        </ul>
-        <button className="add-friend-btn" onClick={openModal}>
-          친구 추가하기
-        </button>
-      </div>
+      <div className="profile-right"></div>
 
       {/* 모달 컴포넌트 */}
       <FriendAddModal isOpen={isModalOpen} onClose={closeModal} />
