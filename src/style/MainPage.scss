@@ -1,3 +1,8 @@
+$primary-color: #0055ff; // 토스 파란색
+$secondary-color: #333; // 검정색
+$background-color: #ffffff; // 흰색 배경
+$font-family: 'Noto Sans KR', sans-serif;
+
 .main-content {
   padding: 40px;
   text-align: center;
@@ -20,56 +25,108 @@
     display: flex;
     justify-content: center;
     margin-bottom: 50px;
-
+  
     .react-calendar {
-      border-radius: 15px;
+      width: 800px; // 사이트 크기에 맞춰서 조정
       border: none;
+      border-radius: 1rem;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-      background-color: white;
       font-family: 'Noto Sans KR', sans-serif;
-
+      background-color: #fff;
+      padding: 20px;
+  
+      .react-calendar__month-view {
+        abbr {
+          color: #444;
+          font-weight: 600;
+        }
+      }
+  
+      /* 네비게이션 스타일 */
       .react-calendar__navigation {
-        background-color: #0055ff !important; // 확실한 고정
-        color: white;
-        border-bottom: 2px solid #0041cc;
-
+        background-color: transparent;
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: space-between;
+  
         button {
-          font-size: 1.1rem;
+          font-size: 1.2rem;
           font-weight: bold;
-          color: blue !important; // 버튼 글자 색 고정
-
+          color: #333;
+          background: none;
+          border: none;
+          padding: 10px 15px;
+          transition: background-color 0.3s;
+  
           &:hover {
-            background-color: rgba(255, 255, 255, 0.2);
+            background-color: rgba(0, 85, 255, 0.1);
+            border-radius: 8px;
+          }
+  
+          &:disabled {
+            color: #ccc;
           }
         }
       }
-
-      .react-calendar__month-view__days__day {
-        padding: 12px;
-        border-radius: 50%;
-        transition: all 0.3s ease;
-
+  
+      /* 일요일 빨간 폰트 , 토요일 파란 폰트 */
+      .react-calendar__month-view__weekdays__weekday--weekend abbr[title="일요일"] {
+        color: #f57373;
+      }
+      .react-calendar__month-view__weekdays__weekday--weekend abbr[title="토요일"] {
+        color: #1384e1;
+      }
+      /* 요일 밑줄 제거 */
+      .react-calendar__month-view__weekdays abbr {
+        text-decoration: none; //제거
+        font-weight: 700;
+        font-size: 1rem;
+        color: #555;
+      }
+  
+      /* 날짜 간격 및 스타일 */
+      .react-calendar__tile {
+        padding: 15px 0;
+        border-radius: 0.5rem;
+        transition: background-color 0.3s ease;
+  
         &:hover {
-          background-color: rgba(0, 85, 255, 0.2);
-          transform: scale(1.05);
+          background-color: rgba(120, 164, 253, 0.3);
         }
-
-        &--weekend {
-          color: #d9534f;
-        }
-
-        &--neighboringMonth {
-          color: #ccc;
-        }
-
-        &--active {
-          background-color: #0055ff !important; // 클릭된 날짜 배경 고정
+      }
+  
+      /* 오늘 날짜 스타일 */
+      .react-calendar__tile--now {
+        background-color: #0055ff;
+        abbr {
           color: white;
           font-weight: bold;
         }
       }
+  
+      /* 오늘 날짜 스타일 */
+      .react-calendar__tile--active {
+        background-color: #0055ff !important;
+        color: #fff !important;
+        font-weight: bold;
+        box-shadow: 0 4px 10px rgba(0, 85, 255, 0.3);
+        &:hover {
+          background-color: #1384e1;
+        }
+      }
+  
+      /* 요일 구분선 */
+      .react-calendar__month-view__weekdays {
+        text-align: center;
+        font-size: 1rem;
+        font-weight: 600;
+        color: #555;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #eee;
+      }
     }
   }
+  
 
   .expense-modal {
     background-color: white;
@@ -94,6 +151,7 @@
       resize: none;
       font-size: 1rem;
       font-weight: 500;
+      box-sizing: border-box; // 모달 텍스트에리아 박스에 맞추기
     }
 
     .submit-btn {
