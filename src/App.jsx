@@ -15,6 +15,7 @@ import { GoalProvider } from './context/GoalContext'; // GoalContext import
 import Layout from './components/Layout'; // Layout import
 import './style/MainPage.scss';
 import FriendPage from './pages/FriendPage';
+import ReceiptPage from './pages/ReceiptPage';
 
 const App = () => {
   return (
@@ -33,6 +34,8 @@ const App = () => {
           <Route path="/initial" element={<InitialPage />} />
           {/* 여기 디자인 개선 필요 --> 수정 완 */}
           <Route path="/friend" element={<FriendPage />} />
+          {/*영수증 페이지 추가*/}
+          <Route path="/receipt" element={<ReceiptPage />} />
         </Route>
         {/* 개별 페이지 */}
         <Route path="/" element={<StartPage />} />
