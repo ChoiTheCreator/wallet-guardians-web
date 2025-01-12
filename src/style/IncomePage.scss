@@ -1,93 +1,87 @@
 @use 'sass:color';
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap');
 
-$primary-color: #0055ff;
+$primary-color: #0055ff; // 메인 컬러
+$highlight-color: #34c759; // 초록색 강조 컬러
+$card-bg-color: #ffffff; // 카드 배경색
+$shadow-color: rgba(0, 0, 0, 0.1); // 그림자 색상
 $text-color: #333;
-$card-bg-color: #fff;
-$highlight-color: #ff33cc; // 임시 강조 색상 (핑크)
 
 .income-wrapper {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  padding: 50px;
-  max-width: 1200px;
-  margin: 0 auto; // 가운데 정렬
-  gap: 30px;
+  flex-direction: column;
+  padding: 80px; // 여백 확대
+  max-width: 1600px; // 전체 너비 확대
+  margin: 0 auto;
+  gap: 50px; // 카드 간격 확대
 
-  .income-left,
-  .income-right {
-    flex: 1; // 좌우 균등 분할
-    max-width: 500px; // 최대 너비
-  }
+  .income-list-card {
+    background-color: $card-bg-color;
+    padding: 60px; // 카드 내부 여백 확대
+    border-radius: 20px; // 모서리 둥글기 확대
+    box-shadow: 0 10px 20px $shadow-color;
 
-  .income-left {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-
-    .income-summary-card,
-    .budget-explanation-card {
-      background-color: $card-bg-color;
-      padding: 40px;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      font-family: 'Noto Sans KR', sans-serif;
-      font-size: 1.2rem;
-      font-weight: 600;
+    .income-title {
+      font-size: 2.5rem; // 제목 크기 확대
+      font-weight: bold;
+      margin-bottom: 40px; // 제목과 테이블 사이 여백 추가
+      color: $primary-color;
       text-align: center;
     }
 
-    .income-summary-card {
-      height: 150px;
-      background-color: #000; // 검은색 임시 배경
-      color: white;
-    }
+    .income-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: 'Noto Sans KR', sans-serif;
 
-    .budget-explanation-card {
-      height: 250px;
-      background-color: $highlight-color; // 핑크 배경색
-      color: white;
+      th,
+      td {
+        padding: 20px; // 셀 내부 여백 확대
+        text-align: center;
+        border-bottom: 2px solid #e0e0e0;
+      }
+
+      th {
+        background-color: #f1f5ff;
+        font-weight: 800; // 강조된 글씨
+        color: $primary-color;
+        font-size: 1.5rem; // 헤더 글씨 크기 증가
+      }
+
+      td {
+        font-size: 1.5rem; // 셀 글씨 크기 증가
+        color: $text-color;
+      }
+
+      .amount-cell {
+        font-weight: bold;
+        color: $highlight-color;
+      }
     }
   }
 
-  .income-right {
-    background-color: $card-bg-color;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  .view-chart-btn {
+    display: block;
+    margin: 30px auto 0;
+    background-color: $primary-color;
+    color: white;
+    padding: 20px 40px; // 버튼 크기 확대
+    font-size: 1.6rem; // 버튼 글씨 크기 확대
+    font-weight: 700;
+    border-radius: 12px;
     text-align: center;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 
-    .income-title {
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: $primary-color;
-      margin-bottom: 20px;
+    &:hover {
+      background-color: color.scale($primary-color, $lightness: -10%);
+      transform: translateY(-3px);
     }
 
-    .goal-amount-card {
-      background-color: #e0e0e0; // 회색 카드 배경
-      padding: 40px;
-      font-size: 1.5rem;
-      margin-bottom: 20px;
-      border-radius: 10px;
-    }
-
-    .set-goal-btn {
-      display: block;
-      width: 100%;
-      background-color: $primary-color;
+    a {
+      text-decoration: none;
       color: white;
-      padding: 15px;
-      font-size: 1.2rem;
-      font-weight: bold;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-
-      &:hover {
-        background-color: color.scale($primary-color, $lightness: 10%);
-      }
     }
   }
 }

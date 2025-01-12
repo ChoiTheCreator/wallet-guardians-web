@@ -1,14 +1,47 @@
 .footer {
-    position: fixed;
-    bottom: 10px;
-    right: 10px;
-    background-color: transparent;
-    padding: 0;
-    border: none;
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  background-color: transparent; // 투명 배경
+  padding: 0;
+  border: none;
 
-    .footer-text {
-      color: #7d7d7d;
-      font-size: 18px; /* 글씨 크기 증가 */
-      font-weight: bold;
+  .footer-content {
+    display: flex;
+    align-items: center;
+    gap: 10px; // 아이콘과 텍스트 간격
+  }
+
+  .footer-text {
+    font-size: 18px; // 글씨 크기
+    font-weight: bold;
+    color: #7d7d7d; // 기본 글씨 색상
+    a {
+      text-decoration: none; // 기본 밑줄 제거
+      color: inherit; // 부모 색상 상속
+      transition: color 0.3s ease-in-out;
+
+      &:hover {
+        color: #0055ff; // hover 시 파란색 강조
+        text-decoration: none; // hover 시에도 밑줄 제거
+      }
     }
   }
+
+  .footer-icon {
+    font-size: 22px; // 아이콘 크기
+    color: #7d7d7d; // 기본 아이콘 색상
+    transition: color 0.3s ease-in-out;
+
+    &:hover {
+      color: #0055ff; // hover 시 강조 색상
+    }
+  }
+
+  .copyright-text {
+    margin-top: 5px;
+    font-size: 0.9rem;
+    color: #999; // 저작권 표시 글씨 색상
+    text-align: center;
+  }
+}

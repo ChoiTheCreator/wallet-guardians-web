@@ -32,7 +32,7 @@ const App = () => {
           <Route path="/graph" element={<GraphPage />} />
           <Route path="/goal-setting" element={<GoalSettingPage />} />
           <Route path="/initial" element={<InitialPage />} />
-          {/* 여기 디자인 개선 필요 --> 수정 완 */}
+
           <Route path="/friend" element={<FriendPage />} />
           {/*영수증 페이지 추가*/}
           <Route path="/receipt" element={<ReceiptPage />} />

@@ -1,104 +1,130 @@
 @use 'sass:color';
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap');
 
-$primary-color: #0055ff;
-$background-color: #f9f9f9;
-$card-bg-color: #fff;
+$primary-color: #0055ff; // 메인 컬러
+$background-color: #f5f7fa; // 페이지 배경색
+$card-bg-color: #ffffff; // 카드 배경색
 $font-family: 'Noto Sans KR', sans-serif;
+$shadow-color: rgba(0, 0, 0, 0.15); // 그림자 색상
 
 .profile-wrapper {
   display: flex;
-  justify-content: space-between; // 좌우로 컴포넌트 배치
-  align-items: flex-start; // 상단 정렬
-  padding: 50px;
-  max-width: 1200px;
-  margin: 0 auto; // 페이지 가운데 정렬
-  gap: 30px;
-
-  .profile-left,
-  .profile-right {
-    flex: 1; // 너비를 1:1 비율로 배치
-    max-width: 400px; // 좌우 패널의 최대 너비
-  }
+  justify-content: space-between;
+  padding: 70px; // 전체 패딩을 키워 여백 추가
+  max-width: 1400px; // 최대 너비 증가
+  margin: 0 auto;
+  gap: 50px; // 좌우 섹션 간격 확대
 
   .profile-left {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+    flex: 1;
+    max-width: 500px; // 좌측 패널 최대 너비 증가
 
-    .profile-avatar-card,
-    .profile-stats-card {
+    .profile-card {
       background-color: $card-bg-color;
-      padding: 40px;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-family: $font-family;
-      font-size: 1.2rem;
-      font-weight: 600;
+      padding: 60px; // 내부 패딩 증가
+      border-radius: 20px;
+      box-shadow: 0 8px 16px $shadow-color;
       text-align: center;
-    }
 
-    .profile-avatar-card {
-      height: 250px; // 프로필 이미지 카드 크기
-      background-color: #b87333; // 임시 배경색 (갈색)
-    }
+      .profile-image {
+        width: 150px; // 이미지 크기 증가
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 20px;
+      }
 
-    .profile-stats-card {
-      height: 200px; // 칭호 및 방어율 카드 크기
-      background-color: #000; // 검은색 카드
-      color: white;
+      .profile-name {
+        font-size: 2.4rem; // 이름 글씨 크기 증가
+        font-weight: 800;
+        color: #333;
+        margin-bottom: 10px;
+      }
+
+      .profile-title {
+        font-size: 1.2rem;
+        font-weight: 400;
+        color: #777;
+        margin-bottom: 30px;
+      }
+
+      .profile-stats {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 30px;
+
+        .stats-item {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+
+          .stats-value {
+            font-size: 2rem; // 통계 값 크기 증가
+            font-weight: bold;
+            color: $primary-color;
+          }
+
+          .stats-label {
+            font-size: 1rem;
+            color: #555;
+          }
+        }
+      }
+
+      .btn-message {
+        margin-top: 40px;
+        padding: 18px 30px; // 버튼 크기 증가
+        background-color: $primary-color;
+        color: white;
+        font-size: 1.4rem; // 버튼 글씨 크기 증가
+        font-weight: 600;
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+          background-color: color.scale($primary-color, $lightness: -10%);
+        }
+      }
     }
   }
 
   .profile-right {
+    flex: 2;
     background-color: $card-bg-color;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 50px; // 내부 패딩 증가
+    border-radius: 20px;
+    box-shadow: 0 8px 16px $shadow-color;
 
-    .profile-title {
-      font-size: 1.8rem;
+    .profile-header {
+      font-size: 2.5rem; // 프로필 제목 글씨 크기 증가
       font-weight: 700;
       color: $primary-color;
-      margin-bottom: 20px;
-      text-align: center;
+      margin-bottom: 30px;
     }
 
-    .profile-friend-list {
-      list-style: none;
-      padding: 0;
+    .profile-details {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 20px;
 
-      li {
-        background-color: #f0f0a8; // 연한 노란색 카드 배경
-        padding: 15px;
-        font-size: 1.2rem;
-        border-radius: 8px;
-        text-align: center;
-      }
-    }
+      .details-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 20px 30px; // 내부 패딩 증가
+        background-color: #f9f9f9;
+        border-radius: 12px;
+        font-size: 1.3rem; // 상세 정보 글씨 크기 증가
 
-    .add-friend-btn {
-      display: block;
-      background-color: $primary-color;
-      color: white;
-      padding: 15px 20px;
-      font-size: 1rem;
-      font-weight: 600;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      margin-top: 20px;
-      width: 100%;
-      text-align: center;
+        .details-label {
+          font-weight: 600;
+          color: #555;
+        }
 
-      &:hover {
-        background-color: color.scale($primary-color, $lightness: 10%);
+        .details-value {
+          color: #333;
+        }
       }
     }
   }

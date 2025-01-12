@@ -1,14 +1,14 @@
 @use 'sass:color';
-$primary-color: #0055ff; // 토스 파란색
-$secondary-color: #333; // 검정색
-$background-color: #ffffff; // 흰색 배경
+$primary-color: #003366; // 남색 메인 컬러
+$secondary-color: #f5f5f5; // 배경 색
+$text-color: #ffffff; // 텍스트 색상
 $font-family: 'Noto Sans KR', sans-serif;
 
 body {
   margin: 0;
   font-family: $font-family;
-  background-color: $background-color;
-  color: $secondary-color;
+  background-color: $secondary-color;
+  color: $text-color;
   height: 100vh;
   display: flex;
   align-items: center;
@@ -22,19 +22,17 @@ body {
   align-items: center;
   text-align: center;
   width: 100%;
-  max-width: 800px;
-  height: 80vh; // 화면의 80% 높이 사용
-  padding: 10px;
+  max-width: 1000px;
+  height: 90vh;
+  padding: 20px;
 
   .header {
-    margin-top: 30px;
-    margin-bottom: 0px; // 대제목과 중제목 간 간격을 거의 제거
+    margin-top: 20px;
 
     h1 {
-      margin-top: 100px;
-      font-size: 3rem; // 대제목 크기
-      color: $primary-color; // 파란색 강조
-      font-weight: 800; // 더 굵게
+      font-size: 3rem;
+      color: $primary-color; // 남색 강조
+      font-weight: 800;
     }
   }
 
@@ -45,44 +43,47 @@ body {
     justify-content: center;
 
     .title {
-      font-size: 1.8rem;
+      font-size: 2rem;
       line-height: 1.5;
-      margin-bottom: 10px; // 중제목과 설명 텍스트 간 간격 유지
       font-weight: 700;
       margin-bottom: 30px;
     }
 
     .description {
-      font-size: 1rem;
-      line-height: 1.5;
-      margin-bottom: 30px;
-      font-weight: 300;
+      font-size: 1.2rem;
+      line-height: 1.8;
+      font-weight: 400;
+      color: #666;
+    }
+  }
+
+  .illustration {
+    margin: 40px 0 20px;
+    display: flex;
+    justify-content: center;
+
+    img {
+      max-width: 80%; // 이미지 너비 제한
+      max-height: 300px; // 최대 높이 제한
+      border-radius: 12px; // 둥근 모서리
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); // 그림자 효과
     }
   }
 
   .start-button {
     background-color: $primary-color;
     color: white;
-    padding: 14px 28px;
+    padding: 16px 36px;
     border: none;
-    border-radius: 8px;
-    font-size: 1rem;
+    border-radius: 10px;
+    font-size: 1.2rem;
     cursor: pointer;
-    font-weight: 600;
+    font-weight: 700;
     transition: background-color 0.3s ease;
     margin-top: 20px;
 
     &:hover {
-      background-color: color.scale($primary-color, $lightness: 10%);
-    }
-  }
-
-  .illustration {
-    margin-top: 20px;
-
-    img {
-      max-width: 100%;
-      height: auto;
+      background-color: color.scale($primary-color, $lightness: -10%);
     }
   }
 
@@ -92,6 +93,6 @@ body {
     bottom: 10px;
     left: 10px;
     font-size: 0.8rem;
-    color: black;
+    color: $primary-color;
   }
 }
