@@ -1,6 +1,14 @@
 import { useNavigate } from 'react-router-dom';
-//Navbar 부분은 메인페이지 scss 스타일에 종속
+
+import {
+  FaHome,
+  FaUser,
+  FaMoneyBill,
+  FaChartPie,
+  FaSignOutAlt,
+} from 'react-icons/fa'; // 아이콘 import
 import '../style/Navbar.scss';
+
 const Navbar = ({ isSidebarOpen }) => {
   const navigate = useNavigate();
   return (
@@ -11,12 +19,30 @@ const Navbar = ({ isSidebarOpen }) => {
           BudgetGuardians
         </div>
         <ul className="nav-menu">
-          <li onClick={() => navigate('/main')}>Home</li>
-          <li onClick={() => navigate('/profile')}>내정보</li>
-          <li onClick={() => navigate('/income')}>수입내역</li>
-          <li onClick={() => navigate('/expenses')}>지출내역</li>
-          <li onClick={() => navigate('/graph')}>용도별 그래프</li>
-          <li onClick={() => navigate('')}>로그아웃</li>
+          <li onClick={() => navigate('/main')}>
+            <FaHome style={{ marginRight: '10px' }} />
+            Home
+          </li>
+          <li onClick={() => navigate('/profile')}>
+            <FaUser style={{ marginRight: '10px' }} />
+            내정보
+          </li>
+          <li onClick={() => navigate('/income')}>
+            <FaMoneyBill style={{ marginRight: '10px' }} />
+            수입내역
+          </li>
+          <li onClick={() => navigate('/expenses')}>
+            <FaMoneyBill style={{ marginRight: '10px' }} />
+            지출내역
+          </li>
+          <li onClick={() => navigate('/graph')}>
+            <FaChartPie style={{ marginRight: '10px' }} />
+            용도별 그래프
+          </li>
+          <li onClick={() => navigate('/logout')}>
+            <FaSignOutAlt style={{ marginRight: '10px' }} />
+            로그아웃
+          </li>
         </ul>
       </nav>
     </div>

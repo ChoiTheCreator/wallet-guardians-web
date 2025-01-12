@@ -1,8 +1,10 @@
 @use 'sass:color';
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css'); // 아이콘 import
 
-$primary-color: #0055ff;
+$primary-color: #001f5c; // 남색
 $font-family: 'Noto Sans KR', sans-serif;
+$text-color: #ffffff; // 글씨 색 하얀색
 
 .sidebar {
   position: fixed;
@@ -11,8 +13,8 @@ $font-family: 'Noto Sans KR', sans-serif;
   height: 100vh;
   width: 250px;
   max-width: 250px;
-  background-color: $primary-color;
-  color: white;
+  background-color: $primary-color; // 배경색 남색
+  color: $text-color; // 글씨 색상
   display: flex;
   flex-direction: column;
   padding: 30px 20px;
@@ -32,7 +34,7 @@ $font-family: 'Noto Sans KR', sans-serif;
     cursor: pointer;
 
     &:hover {
-      color: color.scale(white, $lightness: 20%);
+      color: color.scale($text-color, $lightness: -20%); // 글씨 색상 hover 효과
     }
   }
 
@@ -51,11 +53,24 @@ $font-family: 'Noto Sans KR', sans-serif;
       cursor: pointer;
       padding: 14px 18px;
       border-radius: 8px;
+      color: $text-color; // 글씨 색상 하얀색
+      display: flex;
+      align-items: center; // 아이콘과 글씨 정렬
+      gap: 10px; // 아이콘과 텍스트 간격
       transition: background-color 0.3s ease, transform 0.2s;
 
       &:hover {
-        background-color: color.adjust($primary-color, $lightness: 10%);
+        background-color: color.scale($primary-color, $lightness: -15%);
         transform: scale(1.03);
+      }
+
+      // Home 메뉴에 아이콘 추가
+      &.home {
+        &::before {
+          content: '\f015'; // Font Awesome 'home' 아이콘 (유니코드)
+          font-family: 'Font Awesome 5 Free'; // Font Awesome 폰트 패밀리
+          font-weight: 900; // 아이콘 두께
+        }
       }
     }
   }
