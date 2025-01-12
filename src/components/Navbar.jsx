@@ -39,7 +39,7 @@ const Navbar = ({ isSidebarOpen }) => {
             <FaChartPie style={{ marginRight: '10px' }} />
             용도별 그래프
           </li>
-          <li onClick={() => navigate('/logout')}>
+          <li onClick={() => navigate('/')}>
             <FaSignOutAlt style={{ marginRight: '10px' }} />
             로그아웃
           </li>
