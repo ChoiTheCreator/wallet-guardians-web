@@ -15,7 +15,7 @@ const LoginPage = () => {
   const [errorMessage, setErrorMessage] = useState('');
 
   const navigate = useNavigate();
-  const serverUrl = 'http://localhost:3001/users';
+  const serverUrl = 'http://localhost:4000/users';
 
   const { goalAmount } = useContext(GoalContext);
 

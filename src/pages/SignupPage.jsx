@@ -28,7 +28,7 @@ const SignupPage = ({ closeSignupModal }) => {
     try {
       //여기서 newUser라는 객체와 함께보내는 메타데이터(headers 속성 -> Content-Type : 'application.json' json 형태로 보내겠다는것)
       const response = await axios.post(
-        'http://localhost:3001/users',
+        'http://localhost:4000/users',
         newUser,
         {
           headers: { 'Content-Type': 'application/json' },
