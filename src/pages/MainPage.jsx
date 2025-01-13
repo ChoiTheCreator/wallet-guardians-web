@@ -8,21 +8,15 @@ import moment from 'moment'; // 모먼트 설치
 const MainPage = () => {
   const { goalAmount } = useContext(GoalContext); //내가 설정한 Context에서 가져옴 (전역 상태관리)
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const navigate = useNavigate('/receipt');
+// 모달 삭제 후 피그마 바탕으로 새로운페이지 추가 확인 요망
+  const navigate = useNavigate();
 
-  const handleMovementClick = () => {
-    navigate('/receipt')
-  }; // 영수증 페이지로 이동
+  const handleDateClick = (selectedDate) => {
+    const formattedDate = selectedDate.toISOString().split('T')[0]; // YYYY-MM-DD 형식
+    navigate(`/input-entry/${formattedDate}`);
+  }; // 선택하면 지정한 날짜의 페이지로 이동함
+  
 
-  const handleDateClick = (date) => {
-    setSelectedDate(date);
-    setIsModalOpen(true); // 모달 열기
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false); //모달 닫기
-  };
   return (
     <div className="main-content">
       <h2>
@@ -51,17 +45,6 @@ const MainPage = () => {
           )}
         />
       </div>
-
-      {/* 지출 작성 모달 */}
-      {isModalOpen && (
-        <div className="expense-modal">
-          <h3>{`${selectedDate.toLocaleDateString()} 지출 내역 작성`}</h3>
-          <textarea placeholder="지출 내용을 입력하세요"></textarea>
-          <button>저장</button>
-          <button onClick={handleCloseModal}>모달 닫기</button>
-          <button onClick={handleMovementClick}>지출 입력하러 가기!</button>
-        </div>
-      )}
     </div>
   );
 };

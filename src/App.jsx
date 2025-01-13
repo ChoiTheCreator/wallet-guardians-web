@@ -16,6 +16,7 @@ import Layout from './components/Layout'; // Layout import
 import './style/MainPage.scss';
 import FriendPage from './pages/FriendPage';
 import ReceiptPage from './pages/ReceiptPage';
+import InputEntryPage from './pages/InputEntryPage'; // inputentry 페이지 추가 
 
 const App = () => {
   return (
@@ -36,6 +37,8 @@ const App = () => {
           <Route path="/friend" element={<FriendPage />} />
           {/*영수증 페이지 추가*/}
           <Route path="/receipt" element={<ReceiptPage />} />
+          {/* 달력 선택하면 크게 보이는 페이지 추가*/}
+          <Route path="/input-entry/:date" element={<InputEntryPage />} />
         </Route>
         {/* 개별 페이지 */}
         <Route path="/" element={<StartPage />} />
