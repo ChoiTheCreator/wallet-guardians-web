@@ -97,21 +97,11 @@ $font-family: 'Noto Sans KR', sans-serif;
   
       /* 오늘 날짜 스타일 */
       .react-calendar__tile--now {
-        background-color: #0055ff;
-        abbr {
-          color: white;
-          font-weight: bold;
-        }
-      }
-  
-      /* 오늘 날짜 스타일 */
-      .react-calendar__tile--active {
-        background-color: #0055ff !important;
-        color: #fff !important;
+        background-color: #0055ff;  
         font-weight: bold;
-        box-shadow: 0 4px 10px rgba(0, 85, 255, 0.3);
-        &:hover {
-          background-color: #1384e1;
+      
+        abbr {
+          color: #ffffff;  // 파란색 글씨
         }
       }
   

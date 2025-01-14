@@ -11,8 +11,12 @@ const MainPage = () => {
 // 모달 삭제 후 피그마 바탕으로 새로운페이지 추가 확인 요망
   const navigate = useNavigate();
 
-  const handleDateClick = (selectedDate) => {
-    const formattedDate = selectedDate.toISOString().split('T')[0]; // YYYY-MM-DD 형식
+  const handleDateClick = (newDate) => {
+    const year = newDate.getFullYear();
+    const month = String(newDate.getMonth() + 1).padStart(2, '0');
+    const day = String(newDate.getDate()).padStart(2, '0');
+    
+    const formattedDate = `${year}-${month}-${day}`;
     navigate(`/input-entry/${formattedDate}`);
   }; // 선택하면 지정한 날짜의 페이지로 이동함
   
