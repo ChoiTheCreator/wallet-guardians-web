@@ -13,12 +13,13 @@
   
     /* 뒤로가기 버튼 (달력 오른쪽 상단) */
     .back-button {
-      position: absolute;
-      top: 125px;
-      right: 100px;
+      position: fixed;
+      top: 130px;
+      right: 110px;
       background-color: transparent;
       border: none;
       cursor: pointer;
+      z-index: 1000;
   
       img {
         width: 40px;
