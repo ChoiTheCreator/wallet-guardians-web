@@ -4,7 +4,7 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import '../style/InputEntryPage.scss';
 import moment from 'moment';
-import backbutton from '../buttonIMG/backbutton.png';
+import backbutton from '../buttonIMG/pngwing.com.png';
 
 const InputEntryPage = () => {
   const { date } = useParams();
