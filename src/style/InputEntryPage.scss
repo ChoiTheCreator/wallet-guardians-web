@@ -13,17 +13,17 @@
   
     /* 뒤로가기 버튼 (달력 오른쪽 상단) */
     .back-button {
-      position: fixed;
-      top: 130px;
-      right: 110px;
+      position: relative;
+      top: 10;
+      left: 370px;
       background-color: transparent;
       border: none;
       cursor: pointer;
       z-index: 1000;
   
       img {
-        width: 40px;
-        height: 40px;
+        width: 39px;
+        height: 45.357px;
         transition: transform 0.3s ease;
   
         &:hover {
