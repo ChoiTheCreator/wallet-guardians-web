@@ -6,6 +6,7 @@ import {
   FaMoneyBill,
   FaChartPie,
   FaSignOutAlt,
+  FaFileImage,
 } from 'react-icons/fa'; // 아이콘 import
 import '../style/Navbar.scss';
 
@@ -38,6 +39,10 @@ const Navbar = ({ isSidebarOpen }) => {
           <li onClick={() => navigate('/graph')}>
             <FaChartPie style={{ marginRight: '10px' }} />
             용도별 그래프
+          </li>
+          <li onClick={() => navigate('/receipt-picture')}>
+            <FaFileImage style={{ marginRight: '10px' }} />
+            영수증 사진 모음
           </li>
           <li onClick={() => navigate('/')}>
             <FaSignOutAlt style={{ marginRight: '10px' }} />

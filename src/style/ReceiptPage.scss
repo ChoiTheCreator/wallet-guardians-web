@@ -1,0 +1,107 @@
+.receipt-page {
+    text-align: center;
+    padding: 30px;
+    font-family: 'Noto Sans KR', sans-serif;
+  
+    h1 {
+      font-size: 2.5rem;
+      color: #0055ff;
+      margin-bottom: 20px;
+    }
+
+    p {
+        font-size: 1.5rem;
+        color: #333;
+        opacity: 0;  /* 처음에는 보이지 않음 */
+        animation: fadeIn 2s ease-in forwards;
+      }
+      
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px); /* 아래에서 올라오는 효과 */
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      
+  
+    .upload-section {
+      margin-bottom: 30px;
+  
+      input[type="file"] {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 1rem;
+      }
+  
+      button {
+        padding: 12px 20px;
+        background-color: #0055ff;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-size: 1.2rem;
+        cursor: pointer;
+        margin-left: 15px;
+        transition: background-color 0.3s ease;
+  
+        &:hover {
+          background-color: #003bb5;
+        }
+  
+        &:disabled {
+          background-color: #ccc;
+          cursor: not-allowed;
+        }
+      }
+    }
+  
+    .preview-section {
+      margin-top: 20px;
+  
+      h3 {
+        font-size: 1.8rem;
+        margin-bottom: 10px;
+        color: #333;
+      }
+  
+      img {
+        width: 100%;
+        max-width: 400px;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+    }
+  
+    .result-section {
+      margin-top: 30px;
+      padding: 20px;
+      border-radius: 10px;
+      background: #f9f9f9;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      text-align: left;
+      max-width: 500px;
+      margin: 0 auto;
+  
+      h2 {
+        font-size: 2rem;
+        margin-bottom: 15px;
+        color: #333;
+      }
+  
+      p {
+        font-size: 1.4rem;
+        color: #333;
+        margin: 8px 0;
+  
+        strong {
+          color: #0055ff;
+        }
+      }
+    }
+  }
+  
