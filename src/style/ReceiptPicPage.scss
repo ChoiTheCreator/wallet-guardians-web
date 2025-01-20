@@ -1,0 +1,32 @@
+.receipt-pic-page {
+    text-align: center;
+    padding: 30px;
+    font-family: 'Noto Sans KR', sans-serif;
+  
+    h1 {
+      font-size: 2.5rem;
+      color: #0055ff;
+      margin-bottom: 20px;
+    }
+  
+    .receipt-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+      justify-content: center;
+  
+      .receipt-item {
+        background: #f9f9f9;
+        border-radius: 10px;
+        padding: 15px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  
+        img {
+          width: 100%;
+          height: auto;
+          border-radius: 8px;
+        }
+      }
+    }
+  }
+  
