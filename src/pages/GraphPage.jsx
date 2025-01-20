@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import {
   BarChart,
   Bar,
@@ -10,10 +10,13 @@ import {
   CartesianGrid,
 } from 'recharts';
 import { GoalContext } from '../context/GoalContext';
+import { useSidebar } from '../context/SidebarContext';
 import '../style/GraphPage.scss';
 
 const GraphPage = () => {
   const { goalAmount } = useContext(GoalContext);
+
+  const { isSidebarActive } = useSidebar();
 
   // **주요 소비 항목 데이터**
   const expenseItems = [
@@ -33,7 +36,7 @@ const GraphPage = () => {
   ];
 
   return (
-    <div className="graph-wrapper">
+    <div className={`graph-wrapper ${isSidebarActive ? 'sidebar-active' : ''}`}>
       {/* 좌측 섹션: 그래프 */}
       <div className="graph-left">
         <div className="expense-graph-card">

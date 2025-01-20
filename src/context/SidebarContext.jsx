@@ -1,5 +1,5 @@
 // src/context/SidebarContext.jsx
-import React, { createContext, useState, useContext } from 'react';
+import { createContext, useState, useContext } from 'react';
 
 // SidebarContext 생성
 const SidebarContext = createContext();
