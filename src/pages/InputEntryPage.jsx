@@ -4,7 +4,7 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import '../style/InputEntryPage.scss';
 import moment from 'moment';
-import backbutton from '../buttonIMG/pngwing.com.png';
+import backbutton from '../IMG/backbutton.png';
 
 const InputEntryPage = () => {
   const { date } = useParams();
@@ -41,7 +41,11 @@ const InputEntryPage = () => {
       return;
     }
 
-    alert(`날짜: ${selectedDate.toLocaleDateString('ko-KR')}\n카테고리: ${selectedCategory}\n금액: ${amount}원`);
+    alert(
+      `날짜: ${selectedDate.toLocaleDateString(
+        'ko-KR'
+      )}\n카테고리: ${selectedCategory}\n금액: ${amount}원`
+    );
   };
 
   return (
@@ -50,7 +54,11 @@ const InputEntryPage = () => {
       <h1>{selectedDate.toLocaleDateString('ko-KR')} 가계부 작성</h1>
 
       {/* 뒤로가기 버튼 (달력 오른쪽 상단에 배치) */}
-      <button className="back-button" onClick={handleBackClick} title="뒤로가기">
+      <button
+        className="back-button"
+        onClick={handleBackClick}
+        title="뒤로가기"
+      >
         <img src={backbutton} alt="뒤로가기" />
       </button>
 
@@ -60,9 +68,9 @@ const InputEntryPage = () => {
           value={selectedDate}
           locale="ko-KR"
           calendarType="gregory"
-          formatDay={(locale, date) => moment(date).format("D")}
-          formatYear={(locale, date) => moment(date).format("YYYY")}
-          formatMonthYear={(locale, date) => moment(date).format("YYYY. MM")}
+          formatDay={(locale, date) => moment(date).format('D')}
+          formatYear={(locale, date) => moment(date).format('YYYY')}
+          formatMonthYear={(locale, date) => moment(date).format('YYYY. MM')}
           showNeighboringMonth={false}
           next2Label={null}
           prev2Label={null}
@@ -118,4 +126,3 @@ const InputEntryPage = () => {
 };
 
 export default InputEntryPage;
-
