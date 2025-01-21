@@ -2,10 +2,11 @@
 import { createContext, useState, useContext } from 'react';
 
 // SidebarContext 생성
-const SidebarContext = createContext();
+export const SidebarContext = createContext();
 
 // SidebarProvider 컴포넌트 생성
 export const SidebarProvider = ({ children }) => {
+  //이 상태 이름 그대로 가져와야함
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   const toggleSidebar = () => {
@@ -18,6 +19,3 @@ export const SidebarProvider = ({ children }) => {
     </SidebarContext.Provider>
   );
 };
-
-// Context 사용을 위한 커스텀 훅
-export const useSidebar = () => useContext(SidebarContext);

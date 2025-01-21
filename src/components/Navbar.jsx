@@ -8,9 +8,12 @@ import {
   FaSignOutAlt,
   FaFileImage,
 } from 'react-icons/fa'; // 아이콘 import
+import { SidebarContext } from '../context/SidebarContext';
 import '../style/Navbar.scss';
+import { useContext } from 'react';
 
-const Navbar = ({ isSidebarOpen }) => {
+const Navbar = () => {
+  const { isSidebarOpen } = useContext(SidebarContext);
   const navigate = useNavigate();
   return (
     <div>
@@ -20,6 +23,9 @@ const Navbar = ({ isSidebarOpen }) => {
           BudgetGuardians
         </div>
         <ul className="nav-menu">
+          {/* 스타일 컴포넌트로 쪼갤것인가? const navBarBtn  -> 바꿀만함  리액트 아이콘 이름도 바꿔버려서
+          블로그에 써야징 ㅋㅋ ㅅㄱㅇ ㅋㅋ
+          성능개선 할수있어용 코드차원에서 좋아짐 */}
           <li onClick={() => navigate('/main')}>
             <FaHome style={{ marginRight: '10px' }} />
             Home

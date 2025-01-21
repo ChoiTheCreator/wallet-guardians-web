@@ -25,7 +25,6 @@ const IncomePage = () => {
     <div className="expense-wrapper">
       {/* 좌측 섹션 -> 더미 서버 만들자 ㅅㅂ 
       더미 서버로 연결하면, 컴포넌트 빼도 props 안까도됌 아오 */}
-
       <div className="expense-left">
         <div className="expense-summary-card">
           <h3>수입 현황 그래프</h3>

@@ -28,6 +28,7 @@ const LoginPage = () => {
         (user) => user.username === username && user.password === password
       );
 
+      //로그인 성공시
       if (user) {
         setErrorMessage('');
         // 목표 금액 설정 여부에 따라 페이지 이동
@@ -36,6 +37,7 @@ const LoginPage = () => {
         } else {
           navigate('/initial'); // 목표 금액이 설정되지 않은 경우 InitialPage로 이동
         }
+        //로그인 실패시
       } else {
         setErrorMessage('아이디 혹은 비밀번호가 올바르지 않습니다.');
       }

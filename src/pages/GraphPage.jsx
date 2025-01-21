@@ -10,13 +10,15 @@ import {
   CartesianGrid,
 } from 'recharts';
 import { GoalContext } from '../context/GoalContext';
-import { useSidebar } from '../context/SidebarContext';
-import '../style/GraphPage.scss';
 
+import '../style/GraphPage.scss';
+import { SidebarContext } from '../context/SidebarContext';
 const GraphPage = () => {
   const { goalAmount } = useContext(GoalContext);
 
-  const { isSidebarActive } = useSidebar();
+  //여기서 useContext를 해서 글로벌 상태를 가져올때는 무조건 같은 이름을 활용해야함
+
+  const { isSidebarOpen } = useContext(SidebarContext);
 
   // **주요 소비 항목 데이터**
   const expenseItems = [
@@ -26,6 +28,7 @@ const GraphPage = () => {
     { category: '여가 활동', item: '넷플릭스 구독', amount: 14_000 },
     { category: '기타', item: '책 구입', amount: 20_000 },
   ];
+  console.log(isSidebarOpen);
 
   // **그래프 데이터 생성**
   const totalSpending = expenseItems.reduce((acc, cur) => acc + cur.amount, 0);
@@ -36,7 +39,7 @@ const GraphPage = () => {
   ];
 
   return (
-    <div className={`graph-wrapper ${isSidebarActive ? 'sidebar-active' : ''}`}>
+    <div className={`graph-wrapper ${isSidebarOpen ? 'sidebar-active' : ''}`}>
       {/* 좌측 섹션: 그래프 */}
       <div className="graph-left">
         <div className="expense-graph-card">

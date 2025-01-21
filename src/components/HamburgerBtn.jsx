@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useCallback, useContext } from 'react';
 import '../style/HamburgerBtn.scss';
-const HamburgerBtn = ({ setIsSidebarOpen, isSidebarOpen }) => {
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
-  };
+import { SidebarContext } from '../context/SidebarContext';
+const HamburgerBtn = () => {
+  const { isSidebarOpen, toggleSidebar } = useContext(SidebarContext);
+  console.log(isSidebarOpen);
 
   return (
     <div>

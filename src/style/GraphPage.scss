@@ -7,6 +7,24 @@
   margin: 0 auto;
   gap: 20px;
 
+  .sidebar-active {
+    .graph-left {
+      width: 100%; // 좌측 섹션 전체 너비
+    }
+    .graph-right {
+      display: none;
+    }
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column; // 작은 화면에서 기본 정렬 변경
+
+    &.sidebar-active {
+      .graph-right {
+        display: none; // 작은 화면에서도 우측 섹션 숨김
+      }
+    }
+  }
   .graph-left {
     flex: 2; // 좌측 섹션의 너비를 더 넓게 설정
     max-width: 600px;
@@ -67,27 +85,6 @@
           background-color: #f0f4ff;
         }
       }
-    }
-  }
-
-  // 사이드바 활성화 시 레이아웃 변경
-  &.sidebar-active {
-    flex-direction: column; // 세로로 정렬
-    .graph-left {
-      width: 100%;
-    }
-    .graph-right {
-      display: none; // 우측 섹션 숨김
-    }
-  }
-}
-
-// 미디어 쿼리로 사이드바 상태 반영
-@media (max-width: 768px) {
-  .graph-wrapper {
-    flex-direction: column; // 작은 화면에서는 세로로 정렬
-    .graph-right {
-      display: none; // 작은 화면에서는 우측 섹션 숨김
     }
   }
 }
