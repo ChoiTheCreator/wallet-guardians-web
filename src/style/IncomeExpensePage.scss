@@ -7,6 +7,26 @@
   margin: 0 auto;
   gap: 30px;
 
+  @media (max-width: 900px) {
+    flex-direction: column; // 작은 화면에서는 세로 정렬
+    padding: 20px; // 패딩 줄임
+    gap: 15px; // 요소 간격 줄임
+
+    .expense-left {
+      margin-left: 200px;
+      width: 60%; // 좌측 섹션 전체 너비
+      max-width: none; // 고정 너비 해제
+      .expense-graph-card {
+        height: 300px; // 그래프 높이 제한
+        padding: 5px; // 내부 여백 줄임
+      }
+    }
+
+    .expense-right {
+      display: none; // 우측 섹션 숨김
+    }
+  }
+
   .expense-left,
   .expense-right {
     flex: 1;

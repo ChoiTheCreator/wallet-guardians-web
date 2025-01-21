@@ -28,6 +28,8 @@ const GraphPage = () => {
     { category: '여가 활동', item: '넷플릭스 구독', amount: 14_000 },
     { category: '기타', item: '책 구입', amount: 20_000 },
   ];
+
+  // 디버깅
   console.log(isSidebarOpen);
 
   // **그래프 데이터 생성**

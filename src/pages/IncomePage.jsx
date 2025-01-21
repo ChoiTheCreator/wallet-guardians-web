@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
   BarChart,
   Bar,
@@ -8,9 +8,11 @@ import {
   ResponsiveContainer,
   CartesianGrid,
 } from 'recharts';
-import '../style/ExpensePage.scss'; // ExpensePage 스타일 재사용
+import { SidebarContext } from '../context/SidebarContext';
+import '../style/IncomeExpensePage.scss'; // ExpensePage, IncomePage 통합
 
 const IncomePage = () => {
+  const { isSidebarOpen } = useContext(SidebarContext);
   // **수입 데이터 생성**
   const incomeData = [
     { category: '월급', value: 3_000_000 },
@@ -22,12 +24,12 @@ const IncomePage = () => {
   const totalIncome = incomeData.reduce((acc, cur) => acc + cur.value, 0);
 
   return (
-    <div className="expense-wrapper">
+    <div className={`expense-wrapper ${isSidebarOpen ? 'sidebar-active' : ''}`}>
       {/* 좌측 섹션 -> 더미 서버 만들자 ㅅㅂ 
       더미 서버로 연결하면, 컴포넌트 빼도 props 안까도됌 아오 */}
       <div className="expense-left">
         <div className="expense-summary-card">
-          <h3>수입 현황 그래프</h3>
+          <h3 style={{ color: '#34c759' }}>수입 현황 그래프</h3>
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={incomeData} barGap={10}>
               <CartesianGrid strokeDasharray="3 3" />

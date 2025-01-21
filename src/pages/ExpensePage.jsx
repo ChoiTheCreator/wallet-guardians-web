@@ -8,7 +8,7 @@ import {
   ResponsiveContainer,
   CartesianGrid,
 } from 'recharts';
-import '../style/ExpensePage.scss';
+import '../style/IncomeExpensePage.scss'; // ExpensePage, IncomePage 통합
 
 const ExpensePage = () => {
   // **더미 데이터 생성 (지출 현황)**
