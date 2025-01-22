@@ -32,8 +32,8 @@ const ReceiptPage = () => {
     try {
       const response = await axios.post('http://clovaocr-api-kr.ncloud.com/external/v1/37918/8d26c27c4212d627768bd830b680507a90317c8b58e7c516440c36f734e42705', formData, {
         headers: {
-          'X-NCP-APIGW-API-KEY-ID': '',
-          'X-NCP-APIGW-API-KEY': '',
+          'X-NCP-APIGW-API-KEY-ID': process.env.REACT_APP_NAVER_CLIENT_ID,
+          'X-NCP-APIGW-API-KEY': process.env.REACT_APP_NAVER_CLIENT_SECRET,
           'Content-Type': 'multipart/form-data'
         }
       });
