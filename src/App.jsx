@@ -33,7 +33,6 @@ const App = () => {
             <Route path="/expenses" element={<ExpensePage />} />
             <Route path="/graph" element={<GraphPage />} />
             <Route path="/goal-setting" element={<GoalSettingPage />} />
-            <Route path="/initial" element={<InitialPage />} />
 
             <Route path="/friend" element={<FriendPage />} />
             {/*영수증 페이지 추가*/}
@@ -43,6 +42,7 @@ const App = () => {
             <Route path="/receipt-picture" element={<ReceiptPicPage />} />
           </Route>
           {/* 개별 페이지 */}
+          <Route path="/initial" element={<InitialPage />} />
           <Route path="/" element={<StartPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
