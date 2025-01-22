@@ -30,10 +30,10 @@ const ReceiptPage = () => {
     formData.append('file', image);
 
     try {
-      const response = await axios.post('https://naver-ocr-api-endpoint.com', formData, {
+      const response = await axios.post('http://clovaocr-api-kr.ncloud.com/external/v1/37918/8d26c27c4212d627768bd830b680507a90317c8b58e7c516440c36f734e42705', formData, {
         headers: {
-          'X-NCP-APIGW-API-KEY-ID': 'YOUR_CLIENT_ID',
-          'X-NCP-APIGW-API-KEY': 'YOUR_CLIENT_SECRET',
+          'X-NCP-APIGW-API-KEY-ID': 'ncp_iam_BPAMKR4jfOcFGcClLn60',
+          'X-NCP-APIGW-API-KEY': 'ncp_iam_BPKMKRCNOP0fb9Qvs1WvlYOwpvJgE1Kmsy',
           'Content-Type': 'multipart/form-data'
         }
       });
