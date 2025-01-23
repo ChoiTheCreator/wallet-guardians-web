@@ -7,7 +7,7 @@ const ReceiptPage = () => {
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  // 이미지 선택 처리
+  // 이미지 업로드 처리
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file && (file.type === 'image/jpeg' || file.type === 'image/png')) {
@@ -17,10 +17,10 @@ const ReceiptPage = () => {
     }
   };
 
-  // 이미지 업로드 및 분석 요청
+  // OCR API 요청
   const handleUpload = async () => {
     if (!image) {
-      alert('이미지를 먼저 업로드하세요.');
+      alert('이미지를 먼저 업로드 해주세요.');
       return;
     }
 
@@ -29,31 +29,25 @@ const ReceiptPage = () => {
     const formData = new FormData();
     formData.append('file', image);
 
-    // 백엔드로 이미지 보내기
     try {
-      await axios.post('백엔드 서버', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
+      const response = await axios.post(
+        'http://clovaocr-api-kr.ncloud.com/external/v1/37918/8d26c27c4212d627768bd830b680507a90317c8b58e7c516440c36f734e42705',
+        formData,
+        {
+          headers: {
+            'X-NCP-APIGW-API-KEY-ID': process.env.REACT_APP_NAVER_CLIENT_ID,
+            'X-NCP-APIGW-API-KEY': process.env.REACT_APP_NAVER_CLIENT_SECRET,
+            'Content-Type': 'multipart/form-data',
+          },
+        }
+      );
       alert('이미지가 업로드 되었습니다');
       fetchResult(); // OCR 결과 가져오기
     } catch (error) {
-      console.error('영수증 분석 실패:', error);
-      alert('서버 오류가 발생했습니다.');
+      console.error('OCR 처리 중 오류 발생:', error);
+      alert('영수증을 분석하는 중 오류가 발생했습니다.');
     } finally {
       setLoading(false);
-    }
-  };
-
-  // OCR 결과 가져오기
-  const fetchResult = async () => {
-    try {
-      const response = await axios.get('개설된 백엔드 서버');
-      setResult(response.data);
-    } catch (error) {
-      console.error('결과 조회 실패:', error);
-      alert('결과를 불러올 수 없습니다.');
     }
   };
 
