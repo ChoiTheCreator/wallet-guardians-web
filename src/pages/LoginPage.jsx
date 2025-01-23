@@ -1,49 +1,53 @@
 import { useContext, useState } from 'react';
 import '../style/LoginPage.scss';
-import SignupPage from './SignUpPage';
+import SignupPage from './SignupPage';
 import { useNavigate } from 'react-router-dom';
 import { GoalContext } from '../context/GoalContext';
-import axios from 'axios';
+import { login } from '../api/authApi.jsx'; // 로그인 API 호출
 
 const LoginPage = () => {
-  const [isSignupOpen, SetIsSignupOpen] = useState(false);
-
-  const openSignupModal = () => [SetIsSignupOpen(true)];
-  const closeSignupModal = () => [SetIsSignupOpen(false)];
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
+  const [isSignupOpen, setIsSignupOpen] = useState(false); // 회원가입 모달 상태
+  const [email, setEmail] = useState(''); // 이메일 입력 값
+  const [password, setPassword] = useState(''); // 비밀번호 입력 값
+  const [errorMessage, setErrorMessage] = useState(''); // 에러 메시지
 
   const navigate = useNavigate();
-  const serverUrl = 'http://localhost:4000/users';
+  const { goalAmount } = useContext(GoalContext); // 목표 금액 상태 (컨텍스트 사용)
 
-  const { goalAmount } = useContext(GoalContext);
+  // 회원가입 모달 열기
+  const openSignupModal = () => setIsSignupOpen(true);
 
+  // 회원가입 모달 닫기
+  const closeSignupModal = () => setIsSignupOpen(false);
+
+  // 로그인 처리 함수
   const handleLogin = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await axios.get(serverUrl);
-      const users = response.data;
-      const user = users.find(
-        (user) => user.username === username && user.password === password
-      );
+    e.preventDefault(); // 기본 폼 제출 동작 방지
 
-      //로그인 성공시
-      if (user) {
-        setErrorMessage('');
-        // 목표 금액 설정 여부에 따라 페이지 이동
-        if (goalAmount && goalAmount > 0) {
-          navigate('/main'); // 목표 금액이 설정된 경우 MainPage로 이동
-        } else {
-          navigate('/initial'); // 목표 금액이 설정되지 않은 경우 InitialPage로 이동
-        }
-        //로그인 실패시
+    try {
+      // API 요청 보내기
+      const data = await login(email, password);
+      const { token, refreshToken } = data;
+
+      // 토큰 저장
+      localStorage.setItem('token', token);
+      localStorage.setItem('refreshToken', refreshToken);
+
+      setErrorMessage(''); // 에러 메시지 초기화
+
+      // 목표 금액 설정 여부에 따라 페이지 이동
+      if (goalAmount && goalAmount > 0) {
+        navigate('/main'); // 목표 금액이 설정된 경우
       } else {
-        setErrorMessage('아이디 혹은 비밀번호가 올바르지 않습니다.');
+        navigate('/initial'); // 목표 금액이 설정되지 않은 경우
       }
-    } catch (e) {
-      console.log(e);
-      setErrorMessage('로그인서버에 오류가 발생했다.');
+    } catch (error) {
+      console.error('로그인 실패:', error);
+      // 에러 메시지 설정
+      setErrorMessage(
+        error.response?.data?.message ||
+          '아이디 혹은 비밀번호가 올바르지 않습니다.'
+      );
     }
   };
 
@@ -51,13 +55,14 @@ const LoginPage = () => {
     <div className="login-page-container">
       <h1>Login Page</h1>
       <p>로그인을 진행해주세요.</p>
+
       <form className="form" onSubmit={handleLogin}>
         <input
-          type="text"
-          placeholder="아이디"
+          type="email"
+          placeholder="이메일"
           className="input-field"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           required
         />
         <input
@@ -72,13 +77,16 @@ const LoginPage = () => {
           로그인
         </button>
       </form>
+
       {errorMessage && <p className="error-message">{errorMessage}</p>}
+
       <p className="sign-up-prompt">
         계정이 없으신가요?{' '}
         <span className="sign-up-link" onClick={openSignupModal}>
           회원가입
         </span>
       </p>
+
       {isSignupOpen && <SignupPage closeSignupModal={closeSignupModal} />}
     </div>
   );
