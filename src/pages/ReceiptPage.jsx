@@ -17,7 +17,7 @@ const ReceiptPage = () => {
     }
   };
 
-  // 이미지 업로드 및 분석 요청
+  // 이미지 업로드 및 분석 요청, 주석 수정 요청
   const handleUpload = async () => {
     if (!image) {
       alert('이미지를 먼저 업로드하세요.');
