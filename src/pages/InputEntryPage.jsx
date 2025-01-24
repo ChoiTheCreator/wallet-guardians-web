@@ -5,6 +5,7 @@ import 'react-calendar/dist/Calendar.css';
 import '../style/InputEntryPage.scss';
 import moment from 'moment';
 import backbutton from '../IMG/backbutton.png';
+import InputEntryModal from './InputEntryModal';
 
 const InputEntryPage = () => {
   const { date } = useParams();
