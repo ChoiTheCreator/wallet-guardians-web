@@ -42,6 +42,8 @@ const FriendPage = () => {
         <div className="friend-item">친구 1</div>
         <div className="friend-item">친구 2</div>
         <div className="friend-item">친구 3</div>
+        <div className="friend-item">친구 4</div>
+        <div className="friend-item">친구 5</div>
       </div>
 
       {/* 버튼 그룹 */}
