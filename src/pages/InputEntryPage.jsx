@@ -5,16 +5,17 @@ import 'react-calendar/dist/Calendar.css';
 import '../style/InputEntryPage.scss';
 import moment from 'moment';
 import backbutton from '../IMG/backbutton.png';
+import InputEntryModal from '../pages/InputEntryModal';
 
 const InputEntryPage = () => {
   const { date } = useParams();
   const navigate = useNavigate();
   const selectedDate = new Date(date);
 
-  const [category, setCategory] = useState('');
-  const [customCategory, setCustomCategory] = useState('');
-  const [amount, setAmount] = useState('');
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
+  const openAddModal = () => setIsAddModalOpen(true);
+  const closeAddModal = () => setIsAddModalOpen(false);
   // 날짜 클릭 시 해당 날짜 페이지로 이동
   const handleDateClick = (newDate) => {
     const year = newDate.getFullYear();
@@ -34,24 +35,12 @@ const InputEntryPage = () => {
     navigate('/main');
   };
 
-  const handleSave = () => {
-    const selectedCategory = category === '기타' ? customCategory : category;
-    if (!selectedCategory || !amount) {
-      alert('카테고리와 금액을 모두 입력해주세요!');
-      return;
-    }
-
-    alert(
-      `날짜: ${selectedDate.toLocaleDateString(
-        'ko-KR'
-      )}\n카테고리: ${selectedCategory}\n금액: ${amount}원`
-    );
-  };
-
   return (
     <div className="input-entry-page">
       {/* 제목 가운데 정렬 */}
       <h1>{selectedDate.toLocaleDateString('ko-KR')} 가계부 작성</h1>
+
+      <p>이제 지출을 추가해보세요!</p>
 
       {/* 뒤로가기 버튼 (달력 오른쪽 상단에 배치) */}
       <button
@@ -61,65 +50,34 @@ const InputEntryPage = () => {
       >
         <img src={backbutton} alt="뒤로가기" />
       </button>
-
-      <div className="calendar-container">
-        <Calendar
-          onClickDay={handleDateClick}
-          value={selectedDate}
-          locale="ko-KR"
-          calendarType="gregory"
-          formatDay={(locale, date) => moment(date).format('D')}
-          formatYear={(locale, date) => moment(date).format('YYYY')}
-          formatMonthYear={(locale, date) => moment(date).format('YYYY. MM')}
-          showNeighboringMonth={false}
-          next2Label={null}
-          prev2Label={null}
-          minDetail="year"
-        />
-      </div>
-
-      <div className="form-button-wrapper">
-        <div className="entry-form">
-          <select
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-            className="category-select"
-          >
-            <option value="">카테고리를 선택하세요</option>
-            <option value="식비">🍽️ 식비</option>
-            <option value="교통비">🚗 교통비</option>
-            <option value="쇼핑">🛍️ 쇼핑</option>
-            <option value="주거비">🏠 주거비</option>
-            <option value="취미/여가">🎨 취미/여가</option>
-            <option value="기타">✏️ 기타</option>
-          </select>
-
-          {category === '기타' && (
-            <input
-              type="text"
-              placeholder="직접 입력하세요"
-              value={customCategory}
-              onChange={(e) => setCustomCategory(e.target.value)}
-              className="custom-category-input"
-            />
-          )}
-
-          <input
-            type="number"
-            placeholder="금액을 입력하세요 (₩)"
-            value={amount}
-            onChange={(e) => setAmount(e.target.value)}
-            className="amount-input"
+      <div className="content-wrapper">
+        <div className="calendar-container">
+          <Calendar
+            onClickDay={handleDateClick}
+            value={selectedDate}
+            locale="ko-KR"
+            calendarType="gregory"
+            formatDay={(locale, date) => moment(date).format('D')}
+            formatYear={(locale, date) => moment(date).format('YYYY')}
+            formatMonthYear={(locale, date) => moment(date).format('YYYY. MM')}
+            showNeighboringMonth={false}
+            next2Label={null}
+            prev2Label={null}
+            minDetail="year"
           />
 
-          <button className="save-button" onClick={handleSave}>
-            저장하기
-          </button>
+          <div className="form-button-wrapper">
+            <button className="add-expense-button" onClick={openAddModal}>
+              👉 직접 추가하기
+            </button>
+            <button className="receipt-button" onClick={handleReceiptPage}>
+              🧾 영수증으로 추가하기
+            </button>
+          </div>
         </div>
-
-        <button className="receipt-button" onClick={handleReceiptPage}>
-          🧾
-        </button>
+        <div>
+          <InputEntryModal isOpen={isAddModalOpen} onClose={closeAddModal} />
+        </div>
       </div>
     </div>
   );

@@ -1,6 +1,5 @@
 @use 'sass:color';
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap');
-
 $primary-color: #0055ff;
 $font-family: 'Noto Sans KR', sans-serif;
 .freind-page-container {
@@ -11,6 +10,11 @@ $font-family: 'Noto Sans KR', sans-serif;
     font-size: 2.5rem;
     color: #333;
     margin-bottom: 30px;
+  }
+  span {
+    font-size: 2rem;
+    color: #333;
+    margin-top: 20px;
   }
   .friend-list {
     display: flex;
