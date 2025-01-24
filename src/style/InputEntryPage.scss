@@ -1,173 +1,177 @@
 .input-entry-page {
-  text-align: center;
-  padding: 20px;
-  font-family: 'Noto Sans KR', sans-serif;
-
-  /* 제목 스타일 */
-  h1 {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #0055ff;
-    margin-bottom: 20px;
-  }
-
-  p {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #333;
-    opacity: 0;  /* 처음에는 투명 */
-    animation: fadeIn 2s ease-in-out forwards;
-  }
+    text-align: center;
+    padding: 20px;
+    font-family: 'Noto Sans KR', sans-serif;
   
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(20px);  /* 아래에서 위로 등장 */
+    /* 제목 스타일 */
+    h1 {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #0055ff;
+      margin-bottom: 20px;
     }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
   
-  
-
-  /* 뒤로가기 버튼 (달력 오른쪽 상단) */
-  .back-button {
-    position: relative;
-    left: 360px;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    z-index: 1000;
-
-    img {
-      width: 39px;
-      height: 45.357px;
-      transition: transform 0.3s ease;
-
-      &:hover {
-        transform: scale(1.2);
-      }
-    }
-  }
-
-  /* 달력 및 입력 폼 래퍼 */
-  .content-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-  }
-
-  /* 달력 스타일 */
-  .calendar-container {
-    margin-bottom: 50px;
-    .react-calendar {
-      width: 800px;
+    /* 뒤로가기 버튼 (달력 오른쪽 상단) */
+    .back-button {
+      position: relative;
+      top: 10;
+      left: 370px;
+      background-color: transparent;
       border: none;
-      border-radius: 1rem;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-      background-color: #fff;
-      padding: 20px;
-
-      /* 네비게이션 버튼 */
-      .react-calendar__navigation {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 20px;
-
-        button {
-          font-size: 1.2rem;
+      cursor: pointer;
+      z-index: 1000;
+  
+      img {
+        width: 39px;
+        height: 45.357px;
+        transition: transform 0.3s ease;
+  
+        &:hover {
+          transform: scale(1.2);
+        }
+      }
+    }
+  
+    /* 달력 스타일 */
+    .calendar-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 50px;
+  
+      .react-calendar {
+        width: 800px;
+        border: none;
+        border-radius: 1rem;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+        padding: 20px;
+  
+        /* 네비게이션 버튼 */
+        .react-calendar__navigation {
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 20px;
+  
+          button {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+            background: none;
+            border: none;
+            padding: 10px 15px;
+            transition: background-color 0.3s;
+  
+            &:hover {
+              background-color: rgba(0, 85, 255, 0.1);
+              border-radius: 8px;
+            }
+  
+            &:disabled {
+              color: #ccc;
+            }
+          }
+        }
+  
+        /* 오늘 날짜 스타일 */
+        .react-calendar__tile--now {
+          background-color: #eeff6b;
+  
+          abbr {
+            color: #000;
+            font-weight: bold;
+          }
+        }
+  
+        /* 선택된 날짜 스타일 */
+        .react-calendar__tile--active {
+          background-color: #0055ff !important;
+          color: #fff !important;
           font-weight: bold;
-          color: #333;
-          background: none;
-          border: none;
-          padding: 10px 15px;
-          transition: background-color 0.3s;
-
+          box-shadow: 0 4px 10px rgba(0, 85, 255, 0.3);
+  
+          abbr {
+            color: #fff;
+          }
+  
           &:hover {
-            background-color: rgba(0, 85, 255, 0.1);
-            border-radius: 8px;
-          }
-
-          &:disabled {
-            color: #ccc;
+            background-color: #1384e1;
           }
         }
-      }
-
-      /* 오늘 날짜 스타일 */
-      .react-calendar__tile--now {
-        background-color: #eeff6b;
-
-        abbr {
-          color: #000;
-          font-weight: bold;
-        }
-      }
-
-      /* 선택된 날짜 스타일 */
-      .react-calendar__tile--active {
-        background-color: #0055ff !important;
-        color: #fff !important;
-        font-weight: bold;
-        box-shadow: 0 4px 10px rgba(0, 85, 255, 0.3);
-
-        abbr {
-          color: #fff;
-        }
-
-        &:hover {
-          background-color: #1384e1;
-        }
-      }
-
-      /* 날짜 타일 */
-      .react-calendar__tile {
-        padding: 15px 0;
-        border-radius: 0.5rem;
-        transition: background-color 0.3s ease;
-
-        &:hover {
-          background-color: rgba(120, 164, 253, 0.3);
+  
+        /* 날짜 타일 */
+        .react-calendar__tile {
+          padding: 15px 0;
+          border-radius: 0.5rem;
+          transition: background-color 0.3s ease;
+  
+          &:hover {
+            background-color: rgba(120, 164, 253, 0.3);
+          }
         }
       }
     }
-  }
-  /* 버튼들을 중앙 정렬 및 수평 배치 */
-  .form-button-wrapper {
-    display: flex;
-    justify-content: center; /* 중앙 정렬 */
-    align-items: center; /* 수직 정렬 */
-    gap: 70px; /* 버튼 간격 조정 */
-    margin-top: 50px; /* 상단 여백 추가 */
-    flex-direction: row;
-  }
-
-  /* 버튼 공통 스타일 */
-  .add-expense-button,
-  .receipt-button {
-    width: 300px; /* 버튼 크기 조정 */
-    height: 60px;
-    background-color: #0055ff;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    font-size: 1.3rem; /* 글자 크기 조정 */
-    cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0, 85, 255, 0.3);
-    transition: background-color 0.3s ease, transform 0.2s;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    &:hover {
-      background-color: #003bb5;
-      transform: scale(1.05);
+  
+    /* 입력 폼과 영수증 버튼을 수평으로 배치 */
+    .form-button-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+    }
+  
+    /* 입력 폼 */
+    .entry-form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+  
+      select, input {
+        width: 300px;
+        padding: 10px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        font-size: 1rem;
+        box-sizing: border-box;
+      }
+  
+      .save-button {
+        width: 300px;
+        padding: 12px;
+        background-color: #0055ff;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 1.1rem;
+        cursor: pointer;
+  
+        &:hover {
+          background-color: #003bb5;
+        }
+      }
+    }
+  
+    /* 영수증 버튼 */
+    .receipt-button {
+      width: 140px;
+      height: 140px;
+      background-color: #0055ff;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 2rem;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0, 85, 255, 0.3);
+      transition: background-color 0.3s ease, transform 0.2s;
+  
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  
+      &:hover {
+        background-color: #003bb5;
+        transform: scale(1.1);
+      }
     }
   }
-}
-
   
   

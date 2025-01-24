@@ -7,12 +7,11 @@ const apiClient = axios.create({
   },
 });
 
-export const signup = async (userName, email, password) => {
+export const signup = async (username, email, password) => {
   try {
     const response = await apiClient.post(
       '/api/auth/sign-up',
-      { userName, email, password }, // 요청 본문
-      { withCredentials: true } // 쿠키 기반 인증 포함
+      { username, email, password } // 요청 본문
     );
     return response.data;
   } catch (error) {
@@ -29,3 +28,6 @@ export const login = async (email, password) => {
   });
   return response.data;
 };
+
+//로그인, 사인업 함수 제외 한 모든 api function에는 헤더 두줄이 들어가야함
+//

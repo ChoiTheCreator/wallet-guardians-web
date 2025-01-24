@@ -7,7 +7,7 @@
   margin: 0 auto;
   gap: 30px;
 
-  @media (max-width: 900px) {
+  @media (max-width: 1000px) {
     flex-direction: column; // 작은 화면에서는 세로 정렬
     padding: 20px; // 패딩 줄임
     gap: 15px; // 요소 간격 줄임
