@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import '../style/InputEntryModal.scss';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const InputEntryModal = ({ isOpen, onClose }) => {
   const [category, setCategory] = useState('');
@@ -7,6 +9,7 @@ const InputEntryModal = ({ isOpen, onClose }) => {
   const [amount, setAmount] = useState('');
   const [storeName, setStoreName] = useState(''); // 명세서 대로 추가
   const [description, setDescription] = useState(''); // 명세서 대로 추가 22
+  const navigate = useNavigate();
 
   const handleSave = async () => {
     const selectedCategory = category === '기타' ? customCategory : category;
@@ -24,7 +27,7 @@ const InputEntryModal = ({ isOpen, onClose }) => {
 
     try {
       const response = await axios.post(
-        `http://백엔드서버주소/expense/${date}`,
+        // `http://백엔드서버주소/expense/${date}`,
         expenseData,
         {
           headers: {

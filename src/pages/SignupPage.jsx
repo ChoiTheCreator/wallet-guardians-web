@@ -1,3 +1,4 @@
+/*eslint-disabled */
 import { useState } from 'react';
 import { signup } from '../api/authApi.jsx';
 import '../style/SignupPage.scss';

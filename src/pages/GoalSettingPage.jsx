@@ -1,6 +1,7 @@
-import React, { useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { GoalContext } from '../context/GoalContext'; // Context import
+import axios from 'axios';
 import '../style/GoalSettingPage.scss';
 
 const GoalSettingPage = () => {
