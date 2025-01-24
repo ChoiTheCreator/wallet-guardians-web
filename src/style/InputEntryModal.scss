@@ -1,0 +1,101 @@
+/* 모달 오버레이 (배경) */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);  /* 어두운 배경 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+  }
+  
+  /* 모달 컨테이너 */
+  .modal-container {
+    background: #fff;
+    width: 450px; /* 너비 조정 */
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    animation: fadeIn 0.3s ease-in-out; /* 등장 애니메이션 */
+  }
+  
+  /* 모달 타이틀 */
+  h2 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #0055ff;
+    margin-bottom: 20px;
+  }
+  
+  /* 입력 폼 스타일 */
+  .entry-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  
+    select, input {
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      outline: none;
+      transition: border 0.3s ease;
+  
+      &:focus {
+        border-color: #0055ff;
+        box-shadow: 0 0 8px rgba(0, 85, 255, 0.3);
+      }
+    }
+  }
+  
+  /* 버튼 스타일 */
+  .save-button, 
+  .close-button {
+    width: 100%;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .save-button {
+    background-color: #0055ff;
+    color: #fff;
+    border: none;
+  
+    &:hover {
+      background-color: #003bb5;
+      transform: scale(1.05);
+    }
+  }
+  
+  .close-button {
+    background-color: #ccc;
+    color: #333;
+    border: none;
+    margin-top: 10px;
+  
+    &:hover {
+      background-color: #999;
+      transform: scale(1.05);
+    }
+  }
+  
+  /* 애니메이션 효과 */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  

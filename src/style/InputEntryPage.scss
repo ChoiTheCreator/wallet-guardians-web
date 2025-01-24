@@ -35,8 +35,7 @@
   /* 뒤로가기 버튼 (달력 오른쪽 상단) */
   .back-button {
     position: relative;
-    top: 10px;
-    left: 200px;
+    left: 360px;
     background-color: transparent;
     border: none;
     cursor: pointer;
@@ -58,11 +57,11 @@
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    gap: 50px; /* 달력과 폼 사이 간격 조정 */
   }
 
   /* 달력 스타일 */
   .calendar-container {
+    margin-bottom: 50px;
     .react-calendar {
       width: 800px;
       border: none;
@@ -135,54 +134,26 @@
       }
     }
   }
-
-  /* 입력 폼과 영수증 버튼을 달력 오른쪽으로 배치 */
+  /* 버튼들을 중앙 정렬 및 수평 배치 */
   .form-button-wrapper {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 20px;
+    justify-content: center; /* 중앙 정렬 */
+    align-items: center; /* 수직 정렬 */
+    gap: 70px; /* 버튼 간격 조정 */
+    margin-top: 50px; /* 상단 여백 추가 */
+    flex-direction: row;
   }
 
-  /* 입력 폼 */
-  .entry-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-
-    select, input {
-      width: 300px;
-      padding: 10px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      font-size: 1rem;
-      box-sizing: border-box;
-    }
-
-    .save-button {
-      width: 300px;
-      padding: 12px;
-      background-color: #0055ff;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 1.1rem;
-      cursor: pointer;
-
-      &:hover {
-        background-color: #003bb5;
-      }
-    }
-  }
-
-  /* 영수증 버튼 */
+  /* 버튼 공통 스타일 */
+  .add-expense-button,
   .receipt-button {
-    width: 300px;
+    width: 300px; /* 버튼 크기 조정 */
+    height: 60px;
     background-color: #0055ff;
     color: white;
     border: none;
     border-radius: 10px;
-    font-size: 2rem;
+    font-size: 1.3rem; /* 글자 크기 조정 */
     cursor: pointer;
     box-shadow: 0 4px 10px rgba(0, 85, 255, 0.3);
     transition: background-color 0.3s ease, transform 0.2s;
@@ -193,7 +164,7 @@
 
     &:hover {
       background-color: #003bb5;
-      transform: scale(1.1);
+      transform: scale(1.05);
     }
   }
 }
