@@ -3,7 +3,6 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "proxy": "http://34.123.24.28:8080/api",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

@@ -28,3 +28,6 @@ export const login = async (email, password) => {
   });
   return response.data;
 };
+
+//로그인, 사인업 함수 제외 한 모든 api function에는 헤더 두줄이 들어가야함
+//
