@@ -34,6 +34,8 @@ const FriendPage = () => {
   return (
     <div className="freind-page-container">
       <h1>친구 목록</h1>
+      
+      <span className="freind-text">친구를 추가하여 경쟁해 보세요!</span>
 
       {/* 친구 목록 */}
       <div className="friend-list">

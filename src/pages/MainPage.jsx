@@ -44,7 +44,7 @@ const MainPage = () => {
           minDetail="year" // 10년단위 년도 숨기기
           tileContent={({date}) => (
             <div className='expensecontent'>
-              <span className='expense'>'지출'</span>
+              <span className='expense'></span>
             </div>  
           )}
         />
