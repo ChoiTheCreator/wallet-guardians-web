@@ -23,7 +23,7 @@ const refreshAccessToken = async () => {
       {},
       {
         headers: {
-          //시온
+          //시온님이 강조하신 헤더 전송 방식( 로그인 ,사인업 제외 모든 곳에 헤더 포함 보내야함)
           'ACCESS-AUTH-KEY': `BEARER ${accessToken}`,
           'REFRESH-AUTH-KEY': `BEARER ${refreshToken}`,
         },
