@@ -73,6 +73,9 @@
     font-size: 1.2rem;
     cursor: pointer;
     transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   
   .save-button {
