@@ -43,7 +43,7 @@ const MainPage = () => {
         {/* 목표 금액 & 잔액 (Row 배치) */}
         <div className="goal-balance-container">
           <div onClick={handleBoxClick} className="goal-box">
-            <h3 className="goal-title">💰 목표 금액</h3>
+            <h3 className="goal-title">💰 이 달의 목표 금액</h3>
             <p className="goal-amount">
               {goalAmount !== null && goalAmount !== undefined ? (
                 <CountUp
