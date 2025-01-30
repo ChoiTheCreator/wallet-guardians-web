@@ -2,13 +2,14 @@ import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Calendar from 'react-calendar';
 import { GoalContext } from '../context/GoalContext';
-import { SidebarContext } from '../context/SidebarContext'; // SidebarContext 추가
+import { SidebarContext } from '../context/SidebarContext';
+import CountUp from 'react-countup'; // 숫자 애니메이션 라이브러리 추가
 import '../style/MainPage.scss';
 import moment from 'moment';
 
 const MainPage = () => {
   const { goalAmount } = useContext(GoalContext);
-  const { isSidebarOpen } = useContext(SidebarContext); // Sidebar 상태 가져오기
+  const { isSidebarOpen } = useContext(SidebarContext);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const navigate = useNavigate();
 
@@ -24,10 +25,14 @@ const MainPage = () => {
     goalAmount ? navigate('/profile') : navigate('/goal-setting');
   };
 
-  // Sidebar의 너비를 감안하여 동적으로 width 계산
-  const sidebarWidth = isSidebarOpen ? 250 : 0; // Sidebar 열려 있으면 250px, 닫히면 0px
+  // Sidebar 크기에 따른 동적 너비 조정
+  const sidebarWidth = isSidebarOpen ? 250 : 0;
   const mainWidth = `calc(100vw - ${sidebarWidth}px)`;
-  const mainMarginLeft = `${sidebarWidth / 2}px`; // 중앙 정렬 조정
+  const mainMarginLeft = `${sidebarWidth / 2}px`;
+
+  // 예제: 사용된 금액
+  const usedAmount = 150000;
+  const remainingAmount = goalAmount ? goalAmount - usedAmount : null;
 
   return (
     <div className="main-wrapper">
@@ -40,18 +45,34 @@ const MainPage = () => {
           <div onClick={handleBoxClick} className="goal-box">
             <h3 className="goal-title">💰 목표 금액</h3>
             <p className="goal-amount">
-              {goalAmount !== null && goalAmount !== undefined
-                ? `${goalAmount.toLocaleString()}원`
-                : '목표 금액을 설정하세요!'}
+              {goalAmount !== null && goalAmount !== undefined ? (
+                <CountUp
+                  start={0}
+                  end={goalAmount}
+                  duration={1.5}
+                  separator=","
+                  suffix="원"
+                />
+              ) : (
+                '목표 금액을 설정하세요!'
+              )}
             </p>
           </div>
 
           <div onClick={handleBoxClick} className="balance-box">
             <h3 className="balance-title">💳 잔액</h3>
             <p className="balance-amount">
-              {goalAmount !== null
-                ? `${(goalAmount - 150000).toLocaleString()}원`
-                : '목표 금액을 설정하세요!'}
+              {remainingAmount !== null ? (
+                <CountUp
+                  start={0}
+                  end={remainingAmount}
+                  duration={1.5}
+                  separator=","
+                  suffix="원"
+                />
+              ) : (
+                '목표 금액을 설정하세요!'
+              )}
             </p>
           </div>
         </div>
