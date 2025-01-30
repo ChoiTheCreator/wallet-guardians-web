@@ -3,7 +3,7 @@ import axios from 'axios';
 // Axios 인스턴스
 
 const apiClient = axios.create({
-  baseURL: '', // 프록시 설정을 사용할 때는 빈 문자열 유지
+  baseURL: '', // vite.config Default server을 사용중이기에 baseURL은 빈문자열
   headers: {
     'Content-Type': 'application/json',
   },
@@ -23,7 +23,7 @@ const refreshAccessToken = async () => {
       {},
       {
         headers: {
-          //시온
+          //시온님이 강조하신 헤더 전송 방식( 로그인 ,사인업 제외 모든 곳에 헤더 포함 보내야함)
           'ACCESS-AUTH-KEY': `BEARER ${accessToken}`,
           'REFRESH-AUTH-KEY': `BEARER ${refreshToken}`,
         },
@@ -45,7 +45,7 @@ const refreshAccessToken = async () => {
   }
 };
 
-// 요청 인터셉터
+// 요청 인터셉터 (서버 전송 전처리 하는곳)
 apiClient.interceptors.request.use(
   (config) => {
     const accessToken = localStorage.getItem('token');
@@ -56,6 +56,11 @@ apiClient.interceptors.request.use(
     }
     if (refreshToken) {
       config.headers['REFRESH-AUTH-KEY'] = `BEARER ${refreshToken}`;
+    }
+    //서버 전송 config 데이터의 디폴트값 Content-Type이 application/JSON
+    //그러나 multipart도 받아야할 상황이 생긴다면 요청 인터셉터에서 필터링
+    if (config.data instanceof FormData) {
+      config.headers['Content-Type'] = 'multipart/formData';
     }
     return config;
   },

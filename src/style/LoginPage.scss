@@ -5,6 +5,7 @@ $primary-color: #0055ff; // 토스 파란색
 $secondary-color: #333; // 검정색
 $background-color: #ffffff; // 흰색 배경
 $font-family: 'Noto Sans KR', sans-serif;
+$error-color: red;
 
 body {
   margin: 0;
@@ -94,9 +95,48 @@ body {
   }
 }
 
-.error-message {
-  color: red;
-  font-size: 14px;
-  margin-top: 10px;
+.modal-message {
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -20%);
+  padding: 15px 25px;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  font-weight: 600;
   text-align: center;
+  z-index: 1500;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  animation: fade-in-out 4s ease-in-out forwards;
+
+  &.success {
+    background-color: color.scale($primary-color, $lightness: 90%);
+    color: $primary-color;
+    border: 2px solid $primary-color;
+  }
+
+  &.error {
+    background-color: color.scale($error-color, $lightness: 90%);
+    color: $error-color;
+    border: 2px solid $error-color;
+  }
+}
+
+@keyframes fade-in-out {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -30%);
+  }
+  10% {
+    opacity: 1;
+    transform: translate(-50%, -20%);
+  }
+  90% {
+    opacity: 1;
+    transform: translate(-50%, -20%);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -30%);
+  }
 }
