@@ -1,178 +1,83 @@
-$primary-color: #0055ff; // 토스 파란색
-$secondary-color: #333; // 검정색
-$background-color: #ffffff; // 흰색 배경
+$primary-color: #0055ff;
+$navy-color: #002366; // 남색
+$secondary-color: #333;
+$background-color: #ffffff;
 $font-family: 'Noto Sans KR', sans-serif;
+$shadow-color: rgba(0, 0, 0, 0.15);
 
 .main-content {
-  padding: 40px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px; // 요소 간 간격 조정
+  transition: width 0.3s ease-in-out; // Sidebar 열고 닫힐 때 부드럽게 변경
+  margin: 0 auto; // 중앙 정렬 유지
 
-  h2 {
-    margin-bottom: 30px;
-    font-size: 2.2rem; // 기존보다 크기 확대
-    font-weight: 800; // 볼드체
-    color: #0055ff;
+  .goal-balance-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 800px; // 달력과 동일한 너비
+    gap: 20px; // 박스 간 간격 조절
   }
 
-  .goal-summary {
-    font-size: 1.6rem; // 기존 선정 예산 크기 확대
-    margin-bottom: 40px;
-    font-weight: bold;
-    color: #333;
+  /* 목표 금액 박스 & 잔액 박스 */
+  .goal-box,
+  .balance-box {
+    flex: 1; // 동일한 크기 유지
+    background: $navy-color; // 남색 배경
+    color: white;
+    padding: 20px 40px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px $shadow-color;
+    text-align: center;
+    cursor: pointer; // 클릭 가능한 UI
+
+    &:hover {
+      background: darken($navy-color, 10%);
+    }
+
+    .goal-title,
+    .balance-title {
+      font-size: 1.4rem;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .goal-amount,
+    .balance-amount {
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
   }
 
+  /* 캘린더 컨테이너 */
   .calendar-container {
     display: flex;
     justify-content: center;
-    margin-bottom: 50px;
-  
+    margin-top: 10px; // 박스와의 간격 조절
+
     .react-calendar {
-      width: 800px; // 사이트 크기에 맞춰서 조정
+      width: 800px; // 목표 금액 & 잔액과 동일한 너비
       border: none;
       border-radius: 1rem;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-      font-family: 'Noto Sans KR', sans-serif;
-      background-color: #fff;
+      font-family: $font-family;
+      background-color: white;
       padding: 20px;
-  
-      .react-calendar__month-view {
-        abbr {
-          color: #444;
-          font-weight: 600;
-        }
-      }
-  
-      /* 네비게이션 스타일 */
-      .react-calendar__navigation {
-        background-color: transparent;
-        margin-bottom: 20px;
-        display: flex;
-        justify-content: space-between;
-  
-        button {
-          font-size: 1.2rem;
-          font-weight: bold;
-          color: #333;
-          background: none;
-          border: none;
-          padding: 10px 15px;
-          transition: background-color 0.3s;
-  
-          &:hover {
-            background-color: rgba(0, 85, 255, 0.1);
-            border-radius: 8px;
-          }
-  
-          &:disabled {
-            color: #ccc;
-          }
-        }
-      }
-  
-      /* 일요일 빨간 폰트 , 토요일 파란 폰트 */
-      .react-calendar__month-view__weekdays__weekday--weekend abbr[title="일요일"] {
-        color: #f57373;
-      }
-      .react-calendar__month-view__weekdays__weekday--weekend abbr[title="토요일"] {
-        color: #1384e1;
-      }
-      /* 요일 밑줄 제거 */
-      .react-calendar__month-view__weekdays abbr {
-        text-decoration: none; //제거
-        font-weight: 700;
-        font-size: 1rem;
-        color: #555;
-      }
-  
-      /* 날짜 간격 및 스타일 */
-      .react-calendar__tile {
-        padding: 15px 0;
-        border-radius: 0.5rem;
-        transition: background-color 0.3s ease;
-  
-        &:hover {
-          background-color: rgba(120, 164, 253, 0.3);
-        }
-      }
-  
-      /* 오늘 날짜 스타일 */
-      .react-calendar__tile--now {
-        background-color: #0055ff;  
-        font-weight: bold;
-      
-        abbr {
-          color: #ffffff;  // 파란색 글씨
-        }
-      }
-  
-      /* 요일 구분선 */
-      .react-calendar__month-view__weekdays {
-        text-align: center;
-        font-size: 1rem;
-        font-weight: 600;
-        color: #555;
-        padding-bottom: 10px;
-        border-bottom: 1px solid #eee;
-      }
     }
   }
-  
+}
 
-  .expense-modal {
-    background-color: white;
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1000;
-    width: 400px;
-    text-align: center;
-
-    textarea {
-      width: 100%;
-      height: 120px;
-      margin-bottom: 20px;
-      padding: 12px;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      resize: none;
-      font-size: 1rem;
-      font-weight: 500;
-      box-sizing: border-box; // 모달 텍스트에리아 박스에 맞추기
-    }
-
-    .submit-btn {
-      margin-top: 20px; // 버튼 간격 증가
-      padding: 15px 30px; // 버튼 크기 증가
-      background-color: #0055ff !important; // 버튼 배경 확실히 고정
-      color: white !important; // 글자색 고정
-      font-size: 1.2rem;
-      border: none;
-      border-radius: 10px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.3s ease;
-
-      &:hover {
-        background-color: #003cb3;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-      }
-    }
-
-    .close-btn {
-      margin-top: 15px;
-      background-color: transparent;
-      border: none;
-      font-size: 1rem;
-      color: #333;
-      cursor: pointer;
-
-      &:hover {
-        color: #0055ff;
-      }
-    }
+/* 목표 금액 및 잔액 박스 애니메이션 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
