@@ -43,9 +43,12 @@ const MainPage = () => {
         {/* 목표 금액 & 잔액 (Row 배치) */}
         <div className="goal-balance-container">
           <div onClick={handleBoxClick} className="goal-box">
-            <h3 className="goal-title">💰 이 달의 목표 금액</h3>
+            <h3 className="goal-title" style={{ color: 'white' }}>
+              💰 이 달의 목표 금액
+            </h3>
             <p className="goal-amount">
               {goalAmount !== null && goalAmount !== undefined ? (
+                //호도독 애니메이션
                 <CountUp
                   start={0}
                   end={goalAmount}
@@ -60,7 +63,9 @@ const MainPage = () => {
           </div>
 
           <div onClick={handleBoxClick} className="balance-box">
-            <h3 className="balance-title">💳 잔액</h3>
+            <h3 className="balance-title" style={{ color: 'white' }}>
+              💳 잔액
+            </h3>
             <p className="balance-amount">
               {remainingAmount !== null ? (
                 <CountUp
