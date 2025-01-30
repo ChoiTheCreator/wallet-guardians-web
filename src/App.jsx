@@ -13,7 +13,6 @@ import GraphPage from './pages/GraphPage';
 import { GoalProvider } from './context/GoalContext'; // GoalContext import
 import Layout from './components/Layout'; // Layout import
 import './style/MainPage.scss';
-import FriendPage from './pages/FriendPage';
 import InputEntryPage from './pages/InputEntryPage'; // inputentry 페이지 추가
 import ReceiptPicPage from './pages/ReceiptPicPage';
 import { SidebarProvider } from './context/SidebarContext';
@@ -36,8 +35,6 @@ const App = () => {
               <Route path="/expenses" element={<ExpensePage />} />
               <Route path="/graph" element={<GraphPage />} />
               <Route path="/goal-setting" element={<GoalSettingPage />} />
-
-              <Route path="/friend" element={<FriendPage />} />
               {/* 달력 선택하면 크게 보이는 페이지 추가*/}
               <Route path="/input-entry/:date" element={<InputEntryPage />} />
               <Route path="/receipt-picture" element={<ReceiptPicPage />} />

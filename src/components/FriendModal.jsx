@@ -7,7 +7,7 @@ const FriendModal = () => {
   const { isFriendModalOpen, toggleFriendModal } = useFriendContext();
   const [isListVisible, setIsListVisible] = useState(true);
   const [isAddingFriend, setIsAddingFriend] = useState(false); // 친구 추가 화면 전환 
-  const [friendId, setFriendId] = useState(''); // 아이디로 친구추가
+  const [friendId, setFriendId] = useState(''); // 아이디로 친구 추가
 
   if (!isFriendModalOpen) return null;
 
@@ -35,7 +35,7 @@ const FriendModal = () => {
             <button className="back-btn" onClick={() => setIsAddingFriend(false)}>
               <FaArrowLeft /> 뒤로가기
             </button>
-            <h3>친구 추가하기</h3>
+            <h3 style={{ color: 'navy' }}>친구 추가하기</h3>
             <input
               type="text"
               value={friendId}
@@ -43,7 +43,7 @@ const FriendModal = () => {
               placeholder="친구 아이디를 입력하세요"
             />
             <div className="modal-buttons">
-              <button className="confirm-button" onClick={handleSubmit}>
+              <button className="confirm-button" onClick={handleSubmit} style={{ backgroundColor: 'navy', color: 'white' }}>
                 추가
               </button>
               <button className="cancel-button" onClick={() => setIsAddingFriend(false)}>
@@ -72,9 +72,9 @@ const FriendModal = () => {
             {/* 🔹 친구 목록 */}
             <ul className={`friend-list ${isListVisible ? 'show' : 'hide'}`}>
               <li>📱 일성진 (온라인)</li>
-              <li>💻 이성진 (오프라인 1시간전)</li>
-              <li>💻 삼성진 (오프라인 2개월전)</li>
-              <li>📱 사성진 (오프라인 3년전)</li>
+              <li>💻 이성진 (오프라인 1시간 전)</li>
+              <li>💻 삼성진 (오프라인 2개월 전)</li>
+              <li>📱 사성진 (오프라인 3년 전)</li>
             </ul>
           </>
         )}
@@ -84,5 +84,6 @@ const FriendModal = () => {
 };
 
 export default FriendModal;
+
 
 
