@@ -48,7 +48,7 @@ const MainPage = () => {
             </h3>
             <p className="goal-amount">
               {goalAmount !== null && goalAmount !== undefined ? (
-                //호도독 애니메이션
+                //호도독 애니메이션 -> 엉이 아이디어
                 <CountUp
                   start={0}
                   end={goalAmount}
