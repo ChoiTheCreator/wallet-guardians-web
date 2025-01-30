@@ -3,50 +3,73 @@ import { useNavigate } from 'react-router-dom';
 import Calendar from 'react-calendar';
 import { GoalContext } from '../context/GoalContext';
 import '../style/MainPage.scss';
-import moment from 'moment'; // 모먼트 설치
+import moment from 'moment';
+
 const MainPage = () => {
-  const { goalAmount } = useContext(GoalContext); //내가 설정한 Context에서 가져옴 (전역 상태관리)
+  const { goalAmount } = useContext(GoalContext);
   const [selectedDate, setSelectedDate] = useState(new Date());
-  // 모달 삭제 후 피그마 바탕으로 새로운페이지 추가 확인 요망
+
   const navigate = useNavigate();
   const handleDateClick = (newDate) => {
     const year = newDate.getFullYear();
     const month = String(newDate.getMonth() + 1).padStart(2, '0');
     const day = String(newDate.getDate()).padStart(2, '0');
-
     const formattedDate = `${year}-${month}-${day}`;
     navigate(`/input-entry/${formattedDate}`);
-  }; // 선택하면 지정한 날짜의 페이지로 이동함
+  };
+
+  const handleBoxClick = ({ goalAmount }) => {
+    {
+      goalAmount ? navigate('/profile') : navigate('/goal-setting');
+    }
+  };
+
+  // 예시: 현재까지 사용한 금액 (더미 데이터)
+  const usedAmount = 150000; // 가계부 데이터를 연동해서 실제 사용 금액을 가져올 수 있음
+  const remainingAmount = goalAmount ? goalAmount - usedAmount : null;
 
   return (
     <div className="main-content">
-      <h2>
-        기존 선정 예산:{' '}
-        {goalAmount
-          ? `${goalAmount.toLocaleString()}원`
-          : '목표 금액을 설정해 주세요'}
-      </h2>
+      {/* 목표 금액 & 잔액 (Row 배치) */}
+      <div className="goal-balance-container">
+        <div onClick={handleBoxClick} className="goal-box">
+          <h3 className="goal-title">💰 목표 금액</h3>
+          <p className="goal-amount">
+            {goalAmount !== null && goalAmount !== undefined
+              ? `${goalAmount.toLocaleString()}원`
+              : '목표 금액을 설정하세요!'}
+          </p>
+        </div>
+
+        <div onClick={handleBoxClick} className="balance-box">
+          <h3 className="balance-title">💳 잔액</h3>
+          <p className="balance-amount">
+            {remainingAmount !== null
+              ? `${remainingAmount.toLocaleString()}원`
+              : '목표 금액을 설정하세요!'}
+          </p>
+        </div>
+      </div>
+
+      {/* 달력 */}
       <div className="calendar-container">
         <Calendar
-          onClickDay={handleDateClick} // 날짜 클릭 시 모달 열기
+          onClickDay={handleDateClick}
           value={selectedDate}
-          locale="ko-kr" // 한국어 적용
-          calendarType="gregory" // 일요일부터 시작하기!
-          formatDay={(locale, date) => moment(date).format('D')} // 1일 할때 일 삭제
-          formatYear={(locale, date) => moment(date).format('YYYY')} // 네비게이션 눌렀을때 숫자 년도만 보이게
-          formatMonthYear={(locale, date) => moment(date).format('YYYY. MM')} // 네비게이션에서 2023. 12 이렇게 보이도록 설정
-          showNeighboringMonth={false} // 전달, 다음달 날짜 숨기기
-          next2Label={null} // +1년 & +10년 이동 버튼 숨기기
-          prev2Label={null} // -1년 & -10년 이동 버튼 숨기기
-          minDetail="year" // 10년단위 년도 숨기기
-          tileContent={({ date }) => (
-            <div className="expensecontent">
-              <span className="expense"></span>
-            </div>  
-          )}
+          locale="ko-kr"
+          calendarType="gregory"
+          formatDay={(locale, date) => moment(date).format('D')}
+          formatYear={(locale, date) => moment(date).format('YYYY')}
+          formatMonthYear={(locale, date) => moment(date).format('YYYY. MM')}
+          showNeighboringMonth={false}
+          next2Label={null}
+          prev2Label={null}
+          minDetail="year"
+          tileContent={({ date }) => <div className="expensecontent"></div>}
         />
       </div>
     </div>
   );
 };
+
 export default MainPage;
