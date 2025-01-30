@@ -18,9 +18,9 @@ $shadow-color: rgba(0, 0, 0, 0.15);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 30px; // 요소 간 간격 조정
-  transition: width 0.3s ease-in-out, margin-left 0.3s ease-in-out; // 부드러운 전환 효과
-  margin: 0 auto; // 중앙 정렬 유지
+  gap: 20px; // 요소 간 간격 조정 (줄여서 더 컴팩트하게)
+  transition: width 0.3s ease-in-out, margin-left 0.3s ease-in-out;
+  margin: 0 auto;
 
   /* 목표 금액 & 잔액을 가로(row) 배치 */
   .goal-balance-container {
@@ -28,20 +28,21 @@ $shadow-color: rgba(0, 0, 0, 0.15);
     justify-content: center;
     align-items: center;
     width: 800px; // 달력과 동일한 너비
-    gap: 20px; // 박스 간 간격 조절
+    gap: 15px; // 박스 간 간격 조절 (줄여서 더 타이트하게)
   }
 
   /* 목표 금액 박스 & 잔액 박스 */
   .goal-box,
   .balance-box {
-    flex: 1; // 동일한 크기 유지
-    background: $navy-color; // 남색 배경
+    flex: 1;
+    background: $navy-color;
     color: white;
-    padding: 20px 40px;
+    padding: 15px 30px; // 내부 패딩 줄임 (기존: 20px 40px)
     border-radius: 10px;
-    box-shadow: 0 5px 15px $shadow-color;
+    box-shadow: 0 4px 12px $shadow-color;
     text-align: center;
-    cursor: pointer; // 클릭 가능한 UI
+    cursor: pointer;
+    height: 120px; // 높이 줄이기 (기존보다 축소)
 
     &:hover {
       background: darken($navy-color, 10%);
@@ -49,14 +50,14 @@ $shadow-color: rgba(0, 0, 0, 0.15);
 
     .goal-title,
     .balance-title {
-      font-size: 1.4rem;
+      font-size: 1.2rem; // 제목 크기 소폭 축소
       font-weight: bold;
-      margin-bottom: 5px;
+      margin-bottom: 3px; // 여백 줄이기
     }
 
     .goal-amount,
     .balance-amount {
-      font-size: 1.8rem;
+      font-size: 1.6rem; // 글씨 크기 약간 축소
       font-weight: 700;
     }
   }
@@ -65,16 +66,16 @@ $shadow-color: rgba(0, 0, 0, 0.15);
   .calendar-container {
     display: flex;
     justify-content: center;
-    margin-top: 10px; // 박스와의 간격 조절
+    margin-top: 8px; // 박스와의 간격 소폭 조정
 
     .react-calendar {
       width: 800px; // 목표 금액 & 잔액과 동일한 너비
       border: none;
       border-radius: 1rem;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
       font-family: $font-family;
       background-color: white;
-      padding: 20px;
+      padding: 18px;
     }
   }
 }
