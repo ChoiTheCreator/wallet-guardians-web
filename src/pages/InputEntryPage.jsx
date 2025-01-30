@@ -6,6 +6,7 @@ import '../style/InputEntryPage.scss';
 import moment from 'moment';
 import backbutton from '../IMG/backbutton.png';
 import InputEntryModal from './InputEntryModal';
+import ReceiptModal from './ReceiptAddModal';
 
 const InputEntryPage = () => {
   const { date } = useParams();
@@ -13,9 +14,13 @@ const InputEntryPage = () => {
   const selectedDate = new Date(date);
 
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [isReceiptModalOpen, setReceiptModalOpen] = useState(false);
 
   const openAddModal = () => setIsAddModalOpen(true);
   const closeAddModal = () => setIsAddModalOpen(false);
+  const openReceiptModalOpen = () => setReceiptModalOpen(true);
+  const closeReceiptModal = () => setReceiptModalOpen(false);
+
   // 날짜 클릭 시 해당 날짜 페이지로 이동
   const handleDateClick = (newDate) => {
     const year = newDate.getFullYear();
@@ -70,13 +75,14 @@ const InputEntryPage = () => {
             <button className="add-expense-button" onClick={openAddModal}>
               👉 직접 추가하기
             </button>
-            <button className="receipt-button" onClick={handleReceiptPage}>
+            <button className="receipt-button" onClick={openReceiptModalOpen}>
               🧾 영수증으로 추가하기
             </button>
           </div>
         </div>
         <div>
           <InputEntryModal isOpen={isAddModalOpen} onClose={closeAddModal} />
+          <ReceiptModal isOpen={isReceiptModalOpen} onClose={closeReceiptModal} />
         </div>
       </div>
     </div>

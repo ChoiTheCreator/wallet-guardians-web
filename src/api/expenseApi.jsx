@@ -11,9 +11,9 @@ export const saveExpense = async (date, expenseData) => {
     }
   };
   
-export const getExpense = async (date) => {
+export const getExpense = async (date, expenseData) => {
     try{
-        const response = await apiClient.get(`/expense/${date}`, {})
+        const response = await apiClient.get(`/expense/${date}`, expenseData, {})
         return response.data;    
     } catch (error) {
         console.error('지출 저장 실패:', error.response?.data || error.message);
