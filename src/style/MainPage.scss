@@ -6,14 +6,14 @@ $font-family: 'Noto Sans KR', sans-serif;
 $shadow-color: rgba(0, 0, 0, 0.15);
 
 .main-content {
-  padding: 50px;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 30px; // 요소 간 간격 조정
+  transition: width 0.3s ease-in-out; // Sidebar 열고 닫힐 때 부드럽게 변경
+  margin: 0 auto; // 중앙 정렬 유지
 
-  /* 목표 금액 & 잔액을 가로(row) 배치 */
   .goal-balance-container {
     display: flex;
     justify-content: center;
@@ -32,7 +32,11 @@ $shadow-color: rgba(0, 0, 0, 0.15);
     border-radius: 10px;
     box-shadow: 0 5px 15px $shadow-color;
     text-align: center;
-    animation: fadeIn 0.8s ease-in-out;
+    cursor: pointer; // 클릭 가능한 UI
+
+    &:hover {
+      background: darken($navy-color, 10%);
+    }
 
     .goal-title,
     .balance-title {

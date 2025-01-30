@@ -2,14 +2,16 @@ import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Calendar from 'react-calendar';
 import { GoalContext } from '../context/GoalContext';
+import { SidebarContext } from '../context/SidebarContext'; // SidebarContext 추가
 import '../style/MainPage.scss';
 import moment from 'moment';
 
 const MainPage = () => {
   const { goalAmount } = useContext(GoalContext);
+  const { isSidebarOpen } = useContext(SidebarContext); // Sidebar 상태 가져오기
   const [selectedDate, setSelectedDate] = useState(new Date());
-
   const navigate = useNavigate();
+
   const handleDateClick = (newDate) => {
     const year = newDate.getFullYear();
     const month = String(newDate.getMonth() + 1).padStart(2, '0');
@@ -18,18 +20,20 @@ const MainPage = () => {
     navigate(`/input-entry/${formattedDate}`);
   };
 
-  const handleBoxClick = ({ goalAmount }) => {
-    {
-      goalAmount ? navigate('/profile') : navigate('/goal-setting');
-    }
+  const handleBoxClick = () => {
+    goalAmount ? navigate('/profile') : navigate('/goal-setting');
   };
 
-  // 예시: 현재까지 사용한 금액 (더미 데이터)
-  const usedAmount = 150000; // 가계부 데이터를 연동해서 실제 사용 금액을 가져올 수 있음
+  // 예시 데이터 (실제 가계부 데이터를 연동하면 여기에 변경 가능)
+  const usedAmount = 150000;
   const remainingAmount = goalAmount ? goalAmount - usedAmount : null;
 
+  // Sidebar의 너비를 감안하여 동적으로 width 계산
+  const sidebarWidth = isSidebarOpen ? 2000 : 0; // Sidebar 열려 있으면 250px, 닫히면 0px
+  const mainWidth = `calc(100vw - ${sidebarWidth}px)`;
+
   return (
-    <div className="main-content">
+    <div className="main-content" style={{ width: mainWidth }}>
       {/* 목표 금액 & 잔액 (Row 배치) */}
       <div className="goal-balance-container">
         <div onClick={handleBoxClick} className="goal-box">
