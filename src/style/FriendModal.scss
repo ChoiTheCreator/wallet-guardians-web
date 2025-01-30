@@ -1,0 +1,204 @@
+/* 네이비 컬러 변수 */
+$navy-color: #002366;
+
+/* 모달 오버레이 (배경) */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+  
+/* 모달 컨테이너 */
+.modal-container {
+    background: #fff;
+    width: 400px;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    position: relative;
+}
+  
+/* 닫기 버튼 */
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $navy-color;
+    border-radius: 50%;
+    transition: background 0.3s ease, color 0.3s ease;
+
+    &:hover {
+        background: $navy-color;
+        color: white;
+    }
+}
+  
+/* 뒤로가기 버튼 */
+.back-btn {
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: $navy-color; /* ✅ 네이비 적용 */
+    margin-bottom: 15px;
+    transition: color 0.3s ease;
+
+    &:hover {
+        color: darken($navy-color, 10%);
+    }
+}
+
+/* 친구 목록 제목 스타일 */
+h2, h3 {
+    color: $navy-color; /* ✅ 네이비 적용 */
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+/* 아이콘 버튼 컨테이너 */
+.icon-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+/* 아이콘 버튼 */
+.icon-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px auto;
+    color: $navy-color;
+    transition: transform 0.3s ease, color 0.3s ease;
+
+    &:hover {
+        color: darken($navy-color, 10%);
+        transform: scale(1.1);
+    }
+}
+  
+/* 친구 목록 스타일 */
+.friend-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+    text-align: left;
+}
+
+.friend-list li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 10px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: black;
+}
+
+/* 친구 목록 접기/펼치기 버튼 */
+.toggle-list-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px auto;
+    color: $navy-color;
+    transition: transform 0.3s ease, color 0.3s ease;
+
+    &:hover {
+        color: darken($navy-color, 10%);
+        transform: scale(1.1);
+    }
+}
+
+/* 친구 추가하기 버튼 */
+.confirm-button {
+    background: $navy-color; /* ✅ 네이비 적용 */
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s ease;
+
+    &:hover {
+        background: darken($navy-color, 10%);
+    }
+}
+
+/* 취소 버튼 */
+.cancel-button {
+    background: #ddd;
+    color: black;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s ease;
+
+    &:hover {
+        background: #bbb;
+    }
+}
+
+/* 친구 목록 애니메이션 */
+.friend-list {
+    list-style: none;
+    padding: 0;
+    overflow: hidden;
+    max-height: 200px;
+    transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.friend-list.hide {
+    max-height: 0;
+    opacity: 0;
+}
+
+.friend-list.show {
+    max-height: 200px;
+    opacity: 1;
+}
+
+/* 검색 결과가 없을 때 */
+.no-result {
+    color: #999;
+    padding: 10px 0;
+}
+
+
+
+  
+  
+  
