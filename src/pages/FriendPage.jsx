@@ -26,9 +26,9 @@ const FriendPage = () => {
     setFriendRequests((prev) => prev.filter((r) => r.name !== request.name));
   };
   return (
-    <div className="freind-page-container">
+    <div className="friend-page-container">
       <h1>친구 목록</h1>
-
+      
       <span className="freind-text">친구를 추가하여 경쟁해 보세요!</span>
 
       {/* 친구 목록 */}
@@ -36,8 +36,6 @@ const FriendPage = () => {
         <div className="friend-item">친구 1</div>
         <div className="friend-item">친구 2</div>
         <div className="friend-item">친구 3</div>
-        <div className="friend-item">친구 4</div>
-        <div className="friend-item">친구 5</div>
       </div>
 
       {/* 버튼 그룹 */}

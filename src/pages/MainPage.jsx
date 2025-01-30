@@ -42,7 +42,7 @@ const MainPage = () => {
           tileContent={({ date }) => (
             <div className="expensecontent">
               <span className="expense"></span>
-            </div>
+            </div>  
           )}
         />
       </div>
