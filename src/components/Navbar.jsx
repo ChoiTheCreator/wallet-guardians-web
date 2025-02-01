@@ -1,5 +1,4 @@
 import { useNavigate } from 'react-router-dom';
-import outTeamLogo from '../IMG/walletGuardiansLogoReal.png'; //
 import {
   FaHome,
   FaUser,
@@ -7,7 +6,8 @@ import {
   FaChartPie,
   FaSignOutAlt,
   FaFileImage,
-} from 'react-icons/fa';
+  FaShieldAlt,
+} from 'react-icons/fa'; // FaWallet 대체 가능
 import { SidebarContext } from '../context/SidebarContext';
 import '../style/Navbar.scss';
 import { useContext } from 'react';
@@ -16,21 +16,19 @@ const Navbar = () => {
   const { isSidebarOpen } = useContext(SidebarContext);
   const navigate = useNavigate();
 
-  const handleLogoClick = () => {
-    navigate('/');
-  };
-
   return (
     <div>
       {/* Sidebar */}
       <nav className={`sidebar ${isSidebarOpen ? 'open' : 'closed'}`}>
         <div className="nav-logo" onClick={() => navigate('/main')}>
           <span className="logo-text">
-            {' '}
-            <img
-              src={outTeamLogo}
-              style={{ marginBottom: '10px', height: '130px' }}
-              alt="Wallet Guardians Logo"
+            <FaShieldAlt
+              style={{
+                height: '120px',
+                marginBottom: '10px',
+                fontSize: '90px',
+                color: '#fff',
+              }} // 크기 및 색상 조정
               className="logo-img"
             />
             WalletGuardians
