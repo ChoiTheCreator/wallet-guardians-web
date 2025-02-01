@@ -58,14 +58,14 @@ const FriendModal = () => {
 
             {/* 🔹 아이콘 버튼 (친구 추가, 친구 관리, 목록 접기) */}
             <div className="icon-buttons">
+              <button className="icon-btn" onClick={() => setIsListVisible(!isListVisible)}>
+                {isListVisible ? <FaChevronUp /> : <FaChevronDown />}
+              </button>
               <button className="icon-btn" onClick={() => setIsAddingFriend(true)}>
                 <FaUserPlus />
               </button>
               <button className="icon-btn">
                 <FaUserCog />
-              </button>
-              <button className="icon-btn" onClick={() => setIsListVisible(!isListVisible)}>
-                {isListVisible ? <FaChevronUp /> : <FaChevronDown />}
               </button>
             </div>
 

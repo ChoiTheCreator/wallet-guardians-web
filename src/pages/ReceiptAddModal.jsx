@@ -35,7 +35,7 @@ const ReceiptModal = ({ isOpen, onClose }) => {
 
     setLoading(true);
     try {
-      await uploadReceiptImage(image, category, description);
+      await uploadReceiptImage(image, category, description, date);
       alert('영수증이 성공적으로 업로드되었습니다!');
       navigate('/main');
     } catch (error) {
