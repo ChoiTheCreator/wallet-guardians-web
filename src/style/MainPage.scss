@@ -7,7 +7,7 @@ $shadow-color: rgba(0, 0, 0, 0.15);
 
 .main-wrapper {
   display: flex;
-  justify-content: center; // 중앙 정렬
+  justify-content: center;
   align-items: center;
   width: 100vw;
   transition: margin-left 0.3s ease-in-out;
@@ -18,7 +18,7 @@ $shadow-color: rgba(0, 0, 0, 0.15);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px; // 요소 간 간격 조정 (줄여서 더 컴팩트하게)
+  gap: 20px;
   transition: width 0.3s ease-in-out, margin-left 0.3s ease-in-out;
   margin: 0 auto;
 
@@ -27,8 +27,8 @@ $shadow-color: rgba(0, 0, 0, 0.15);
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 800px; // 달력과 동일한 너비
-    gap: 15px; // 박스 간 간격 조절 (줄여서 더 타이트하게)
+    width: 800px;
+    gap: 15px;
   }
 
   /* 목표 금액 박스 & 잔액 박스 */
@@ -37,27 +37,28 @@ $shadow-color: rgba(0, 0, 0, 0.15);
     flex: 1;
     background: $navy-color;
     color: white;
-    padding: 15px 30px; // 내부 패딩 줄임 (기존: 20px 40px)
+    padding: 15px 30px;
     border-radius: 10px;
     box-shadow: 0 4px 12px $shadow-color;
     text-align: center;
     cursor: pointer;
-    height: 120px; // 높이 줄이기 (기존보다 축소)
+    height: 120px;
+    transition: background 0.2s ease-in-out; // 부드러운 색상 변화 추가
 
     &:hover {
-      background: darken($navy-color, 10%);
+      background: rgba(0, 35, 102, 0.9); // `darken` 없이 RGBA로 처리
     }
 
     .goal-title,
     .balance-title {
-      font-size: 1.2rem; // 제목 크기 소폭 축소
+      font-size: 1.2rem;
       font-weight: bold;
-      margin-bottom: 3px; // 여백 줄이기
+      margin-bottom: 3px;
     }
 
     .goal-amount,
     .balance-amount {
-      font-size: 1.6rem; // 글씨 크기 약간 축소
+      font-size: 1.6rem;
       font-weight: 700;
     }
   }
@@ -66,10 +67,10 @@ $shadow-color: rgba(0, 0, 0, 0.15);
   .calendar-container {
     display: flex;
     justify-content: center;
-    margin-top: 8px; // 박스와의 간격 소폭 조정
+    margin-top: 8px;
 
     .react-calendar {
-      width: 800px; // 목표 금액 & 잔액과 동일한 너비
+      width: 800px;
       border: none;
       border-radius: 1rem;
       box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);

@@ -1,32 +1,88 @@
 .receipt-pic-page {
-    text-align: center;
-    padding: 30px;
-    font-family: 'Noto Sans KR', sans-serif;
-  
-    h1 {
-      font-size: 2.5rem;
-      color: #0055ff;
-      margin-bottom: 20px;
+  text-align: center;
+  padding: 20px;
+  max-width: 900px;
+  margin: auto;
+
+  h1 {
+    font-size: 26px;
+    margin-bottom: 20px;
+  }
+
+  /* 필터 컨테이너 */
+  .filter-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+
+  /* 연도 선택 스타일 */
+  .year-selector,
+  .month-selector {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    label {
+      font-size: 16px;
+      font-weight: bold;
     }
-  
-    .receipt-gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 20px;
-      justify-content: center;
-  
-      .receipt-item {
-        background: #f9f9f9;
-        border-radius: 10px;
-        padding: 15px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  
-        img {
-          width: 100%;
-          height: auto;
-          border-radius: 8px;
-        }
+
+    select {
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 2px solid #ccc;
+      cursor: pointer;
+      font-weight: bold;
+      background: #f9f9f9;
+    }
+  }
+
+  .year-selector select {
+    font-size: 18px;
+    border: 2px solid #007bff;
+    background: #e9f2ff;
+  }
+
+  .receipt-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    padding: 10px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    max-height: 500px;
+    overflow-y: auto;
+
+    .receipt-item {
+      width: 160px;
+      height: 220px;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      &:hover {
+        transform: scale(1.05);
       }
     }
   }
-  
+
+  .no-receipt {
+    color: #777;
+    font-size: 16px;
+    font-style: italic;
+    margin-top: 20px;
+  }
+}
+

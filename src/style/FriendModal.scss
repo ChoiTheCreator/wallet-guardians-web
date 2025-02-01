@@ -42,10 +42,10 @@ $navy-color: #002366;
     justify-content: center;
     color: $navy-color;
     border-radius: 50%;
-    transition: background 0.3s ease, color 0.3s ease;
+    transition: all 0.3s ease-in-out;
 
     &:hover {
-        background: $navy-color;
+        background: rgba(0, 35, 102, 0.9); // `darken` 대신 RGBA 사용
         color: white;
     }
 }
@@ -61,10 +61,10 @@ $navy-color: #002366;
     gap: 5px;
     color: $navy-color;
     margin-bottom: 15px;
-    transition: color 0.3s ease;
+    transition: all 0.3s ease-in-out;
 
     &:hover {
-        color: darken($navy-color, 10%);
+        color: rgba(0, 35, 102, 0.8);
     }
 }
 
@@ -84,7 +84,7 @@ input {
     border: 1px solid #ccc;
     font-size: 1rem;
     outline: none;
-    transition: border 0.3s ease;
+    transition: all 0.3s ease-in-out;
     margin-bottom: 20px;
     margin-top: 5px;
 
@@ -105,10 +105,10 @@ input {
     cursor: pointer;
     font-size: 1rem;
     margin-right: 10px;
-    transition: background 0.3s ease;
+    transition: all 0.3s ease-in-out;
 
     &:hover {
-        background: darken($navy-color, 10%);
+        background: rgba(0, 35, 102, 0.85); // `darken` 없이 대체
     }
 }
 
@@ -121,7 +121,7 @@ input {
     border-radius: 8px;
     cursor: pointer;
     font-size: 1rem;
-    transition: background 0.3s ease;
+    transition: all 0.3s ease-in-out;
 
     &:hover {
         background: #bbb;
@@ -155,10 +155,10 @@ input {
     justify-content: center;
     margin: 10px auto;
     color: $navy-color;
-    transition: transform 0.3s ease, color 0.3s ease;
+    transition: all 0.3s ease-in-out;
 
     &:hover {
-        color: darken($navy-color, 10%);
+        color: rgba(0, 35, 102, 0.85);
         transform: scale(1.1);
     }
 }
@@ -192,10 +192,10 @@ input {
     justify-content: center;
     margin: 10px auto;
     color: $navy-color;
-    transition: transform 0.3s ease, color 0.3s ease;
+    transition: all 0.3s ease-in-out;
 
     &:hover {
-        color: darken($navy-color, 10%);
+        color: rgba(0, 35, 102, 0.85);
         transform: scale(1.1);
     }
 }
@@ -209,10 +209,10 @@ input {
     border-radius: 8px;
     cursor: pointer;
     font-size: 1rem;
-    transition: background 0.3s ease;
+    transition: all 0.3s ease-in-out;
 
     &:hover {
-        background: darken($navy-color, 10%);
+        background: rgba(0, 35, 102, 0.85);
     }
 }
 
@@ -225,7 +225,7 @@ input {
     border-radius: 8px;
     cursor: pointer;
     font-size: 1rem;
-    transition: background 0.3s ease;
+    transition: all 0.3s ease-in-out;
 
     &:hover {
         background: #bbb;
@@ -256,6 +256,7 @@ input {
     color: #999;
     padding: 10px 0;
 }
+
 
 
 
