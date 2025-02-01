@@ -2,7 +2,7 @@ import { Outlet } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import HamburgerBtn from '../components/HamburgerBtn';
 import FriendIcon from './FriendBtn';
-import AuthenticatedComponent from '../auth/AuthenticatedComponent.jsx';
+import AuthenticatedComponent from '../auth/AuthenticatedComponent';
 
 import Footer from './Footer';
 
