@@ -1,17 +1,22 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom'; // useNavigate 가져오기
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../style/StartPage.scss';
 import accountingImage from '../IMG/accountingIMG.png';
 
 const StartPage = () => {
-  const navigate = useNavigate(); // useNavigate 초기화
+  const navigate = useNavigate();
+  const [fadeIn, setFadeIn] = useState(false);
+
+  useEffect(() => {
+    setFadeIn(true);
+  }, []);
 
   const handleStartClick = () => {
-    navigate('/login'); // LoginPage로 라우팅
+    navigate('/login');
   };
 
   return (
-    <div className="start-page-container">
+    <div className={`start-page-container ${fadeIn ? 'fade-in' : ''}`}>
       <header className="header">
         <h1>Wallet Guardians</h1>
       </header>
@@ -29,9 +34,12 @@ const StartPage = () => {
           그래야 가계부를 쓰는 의미가 있습니다.
         </p>
 
-        {/* 이미지가 버튼 위에 위치 */}
         <aside className="illustration">
-          <img src={accountingImage} alt="가계부 설명 이미지" />
+          <img
+            src={accountingImage}
+            alt="가계부 설명 이미지"
+            className="animated-image"
+          />
         </aside>
 
         <button className="start-button" onClick={handleStartClick}>
