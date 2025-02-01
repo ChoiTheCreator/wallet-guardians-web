@@ -43,7 +43,6 @@ const App = () => {
             <Route path="/initial" element={<InitialPage />} />
             <Route path="/" element={<StartPage />} />
             <Route path="/login" element={<LoginPage />} />
-            <Route path="/signup" element={<SignupPage />} />
             <Route path="*" element={<NotFoundPage />} /> {/* 404 페이지 */}
           </Routes>
           <FriendModal />
