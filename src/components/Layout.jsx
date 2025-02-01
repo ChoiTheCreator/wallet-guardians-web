@@ -1,11 +1,10 @@
-import { useContext, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import HamburgerBtn from '../components/HamburgerBtn';
 import FriendIcon from './FriendBtn';
-import AuthenticatedComponent from '../auth/AuthenticatedComponent'; // 인증 컴포넌트 import
+import AuthenticatedComponent from '../auth/AuthenticatedComponent.jsx';
+
 import Footer from './Footer';
-import { SidebarContext } from '../context/SidebarContext';
 
 const Layout = () => {
   //일단 목표설정되었다고 가정. (아직 관련 코드를 안짜서)
