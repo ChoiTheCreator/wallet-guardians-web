@@ -87,6 +87,8 @@ apiClient.interceptors.response.use(
         console.error('토큰 갱신 실패:', refreshError);
         localStorage.removeItem('token');
         localStorage.removeItem('refreshToken');
+        
+        //실패시 로그인으로 가겠는데..
         window.location.href = '/login';
         return Promise.reject(refreshError);
       }
