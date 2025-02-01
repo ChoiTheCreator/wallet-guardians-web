@@ -1,19 +1,20 @@
 import React, { useState } from 'react';
 import '../style/ReceiptPicPage.scss';
+import receiptimg1 from '../receiptIMG/receipt1.jpg';
+import receiptimg2 from '../receiptIMG/receipt2.jpg';
 
 const ReceiptPicPage = () => {
-  const [selectedYear, setSelectedYear] = useState('2024');
+  const [selectedYear, setSelectedYear] = useState('2025');
   const [selectedMonth, setSelectedMonth] = useState('01');
 
-  // 가짜 데이터 (서버에서 불러오는 것으로 대체 가능)
+  // 실제 이미지 경로를 배열에 저장
   const receiptImages = {
-    '2024-01': ['/images/receipt1.jpg', '/images/receipt2.jpg'],
-    '2024-02': ['/images/receipt3.jpg'],
-    '2024-03': [],
-    '2023-12': ['/images/receipt4.jpg'],
+    '2025-01': [receiptimg1], // 객체 {} 대신 직접 경로 배열 사용
+    '2025-02': [receiptimg2],
+    '2025-03': [],
   };
 
-  const years = ['2023', '2024', '2025']; // 원하는 연도 추가 가능
+  const years = ['2023', '2024', '2025', '2026'];
   const months = [
     { value: '01', label: '1월' },
     { value: '02', label: '2월' },
@@ -42,7 +43,7 @@ const ReceiptPicPage = () => {
 
   return (
     <div className="receipt-pic-page">
-      <h1>📸 영수증 사진 모음</h1>
+      <h1> 영수증 사진 모음</h1>
 
       {/* 연도 및 월 선택 */}
       <div className="filter-container">
