@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 // Axios 인스턴스
-
 const apiClient = axios.create({
   baseURL: import.meta.env.VITE_API_URL, // 환경 변수에서 API URL 설정
   headers: {

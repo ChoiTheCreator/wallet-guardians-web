@@ -8,6 +8,7 @@ const StartPage = () => {
   const [fadeIn, setFadeIn] = useState(false);
 
   useEffect(() => {
+    console.log('API URL:', import.meta.env.VITE_API_URL);
     setFadeIn(true);
   }, []);
 
