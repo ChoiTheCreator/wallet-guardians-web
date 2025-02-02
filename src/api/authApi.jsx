@@ -10,7 +10,7 @@ const apiClient = axios.create({
 export const signup = async (username, email, password) => {
   try {
     const response = await apiClient.post(
-      '/api/auth/signup',
+      '/auth/signup',
       { username, email, password } // 요청 본문
     );
     return response.data;
@@ -23,7 +23,7 @@ export const signup = async (username, email, password) => {
 // 로그인 요청
 export const login = async (email, password) => {
   try {
-    const response = await apiClient.post('/api/auth/login', {
+    const response = await apiClient.post('/auth/login', {
       email,
       password,
     });
@@ -33,3 +33,4 @@ export const login = async (email, password) => {
     throw error;
   }
 };
+405;
