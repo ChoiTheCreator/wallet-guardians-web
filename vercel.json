@@ -4,11 +4,5 @@
       "source": "/api/:path*",
       "destination": "https://wallet-guardians.duckdns.org/api/:path*"
     }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
-    }
   ]
 }
