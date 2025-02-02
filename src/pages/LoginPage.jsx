@@ -55,6 +55,7 @@ const LoginPage = () => {
       });
     }
   };
+
   // 모달 메시지 상태 초기화 (4초 후 자동 사라짐)
   useEffect(() => {
     if (modalMessage.message) {

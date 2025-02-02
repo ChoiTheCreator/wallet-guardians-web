@@ -3,7 +3,7 @@ import axios from 'axios';
 // Axios 인스턴스
 
 const apiClient = axios.create({
-  baseURL: '', // vite.config Default server을 사용중이기에 baseURL은 빈문자열
+  baseURL: import.meta.env.VITE_API_URL, // 환경 변수에서 API URL 설정
   headers: {
     'Content-Type': 'application/json',
   },
@@ -87,7 +87,7 @@ apiClient.interceptors.response.use(
         console.error('토큰 갱신 실패:', refreshError);
         localStorage.removeItem('token');
         localStorage.removeItem('refreshToken');
-        
+
         //실패시 로그인으로 가겠는데..
         window.location.href = '/login';
         return Promise.reject(refreshError);
