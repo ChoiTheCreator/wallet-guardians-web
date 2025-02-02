@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
 import '../style/ReceiptPicPage.scss';
-import receiptimg1 from '../receiptIMG/receipt1.jpg';
-import receiptimg2 from '../receiptIMG/receipt2.jpg';
+import receiptimg1 from '../IMG/receipt1.jpg';
+import { useState } from 'react';
+import receiptimg2 from '../IMG/receipt2.jpg';
 
 const ReceiptPicPage = () => {
   const [selectedYear, setSelectedYear] = useState('2025');
