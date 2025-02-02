@@ -34,13 +34,14 @@ const App = () => {
               <Route path="/income" element={<IncomePage />} />
               <Route path="/expenses" element={<ExpensePage />} />
               <Route path="/graph" element={<GraphPage />} />
-              <Route path="/goal-setting" element={<GoalSettingPage />} />
+
               {/* 달력 선택하면 크게 보이는 페이지 추가*/}
               <Route path="/input-entry/:date" element={<InputEntryPage />} />
               <Route path="/receipt-picture" element={<ReceiptPicPage />} />
             </Route>
             {/* 개별 페이지 */}
             <Route path="/initial" element={<InitialPage />} />
+            <Route path="/goal-setting" element={<GoalSettingPage />} />
             <Route path="/" element={<StartPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="*" element={<NotFoundPage />} /> {/* 404 페이지 */}

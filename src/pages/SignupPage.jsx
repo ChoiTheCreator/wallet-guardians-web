@@ -1,5 +1,5 @@
-/*eslint-disabled */
-import { useState } from 'react';
+/* eslint-disable */
+import { useState, useEffect } from 'react';
 import { signup } from '../api/authApi.jsx';
 import '../style/SignupPage.scss';
 
@@ -9,8 +9,10 @@ const SignupPage = ({ closeSignupModal }) => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-  //성공 혹은 실패시 보여지는 모달 메시지 (객체로 초기화, 속성은 type, message)
+  // 성공 혹은 실패시 보여지는 모달 메시지 (객체로 초기화, 속성은 type, message)
   const [modalMessage, setModalMessage] = useState({ type: '', message: '' });
+
+  // 회원가입 submit 로직
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -25,22 +27,29 @@ const SignupPage = ({ closeSignupModal }) => {
     if (password.length < 8) {
       setModalMessage({
         type: 'error',
-        message: '비밀번호는 8자 이상이어야합니다.',
+        message: '비밀번호는 8자 이상이어야 합니다.',
       });
       return;
     }
 
     try {
-      //매개변수
-      const data = await signup(username, email, password); // 상대 경로를 사용해 API 호출
+      // 회원가입 API 호출
+      const data = await signup(username, email, password);
       console.log('회원가입 성공:', data);
-      //성공시에는 모달메시지를 성공했다고 표시한다. type -> success, message -> 성공 ㅋ
+
+      // 성공 메시지 설정
       setModalMessage({ type: 'success', message: '회원가입에 성공했습니다!' });
 
+      // 입력 필드 초기화
       setUsername('');
       setEmail('');
       setPassword('');
       setConfirmPassword('');
+
+      // 2초 후 모달 자동 닫기
+      setTimeout(() => {
+        closeSignupModal();
+      }, 900);
     } catch (error) {
       setModalMessage({
         type: 'error',
@@ -94,7 +103,7 @@ const SignupPage = ({ closeSignupModal }) => {
           <button type="submit" className="signup-button">
             회원가입
           </button>
-          {/* 모달 메시지 내의 메세지가 존재한다면 type으로 클래스 탈부착하여 메세지를 보여준다.*/}
+          {/* 모달 메시지 내의 메시지가 존재한다면 type으로 클래스 탈부착하여 메시지를 보여준다. */}
           {modalMessage.message && (
             <div className={`modal-message ${modalMessage.type}`}>
               {modalMessage.message}
@@ -102,7 +111,6 @@ const SignupPage = ({ closeSignupModal }) => {
           )}
         </form>
       </div>
-      {}
     </div>
   );
 };

@@ -22,7 +22,7 @@ const MainPage = () => {
   };
 
   const handleBoxClick = () => {
-    goalAmount ? navigate('/profile') : navigate('/goal-setting');
+    goalAmount ? navigate('/graph') : navigate('/goal-setting');
   };
 
   // Sidebar 크기에 따른 동적 너비 조정
