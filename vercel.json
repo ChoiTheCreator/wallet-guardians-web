@@ -1,7 +1,8 @@
 {
   "rewrites": [
     {
-      "source": "/api/:path*"
+      "source": "/api/:path*",
+      "destination": "https://wallet-guardians.duckdns.org/api/:path*"
     }
   ]
 }
