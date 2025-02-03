@@ -140,3 +140,24 @@ body {
     transform: translate(-50%, -30%);
   }
 }
+
+.login-button {
+  background-color: $primary-color;
+  color: white;
+  padding: 15px 20px;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: color.scale($primary-color, $lightness: 10%);
+  }
+
+  &:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+}

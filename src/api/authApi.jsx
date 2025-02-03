@@ -33,4 +33,3 @@ export const login = async (email, password) => {
     throw error;
   }
 };
-405;
