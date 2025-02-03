@@ -1,6 +1,8 @@
 // api/receiptApi.jsx
 import apiClient from './apiClient'; // axiosInstance를 import
 
+// 이함수는 영수증을 업로드 할때 사용하면 됨
+
 export const uploadReceiptImage = async (image, category, description, date, accessToken, refreshToken) => {
   const formData = new FormData();
   formData.append('file', image);
@@ -28,12 +30,7 @@ export const uploadReceiptImage = async (image, category, description, date, acc
   }
 };
 
-/**
- * 📌 전체 영수증 조회 API (GET /api/receipt)
- * @param {string} accessToken - 로그인 시 받은 accessToken
- * @param {string} refreshToken - 로그인 시 받은 refreshToken
- * @returns {Promise<Object>} 등록된 영수증 목록 반환
- */
+//이 함수는 영수증 데이터를 받아왔을때 바로 보여주거나 영수증 사진 모음에서 사용하면됨
 export const fetchReceiptResult = async (accessToken, refreshToken) => {
   try {
     const response = await apiClient.get('/api/receipt', {
