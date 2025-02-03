@@ -26,7 +26,6 @@ export const getBudget = async (date) => {
   try {
     const response = await apiClient.get(`/api/my/budget/${date}`, {
       headers: {
-        "Content-Type": "application/json",
         "ACCESS-AUTH-KEY": `BEARER ${localStorage.getItem("token")}`,
         "REFRESH-AUTH-KEY": `BEARER ${localStorage.getItem("refreshToken")}`,
       },
