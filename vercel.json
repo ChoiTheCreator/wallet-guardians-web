@@ -3,6 +3,10 @@
     {
       "source": "/api/:path*",
       "destination": "https://wallet-guardians.store:443/api/:path*"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }
