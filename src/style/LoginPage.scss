@@ -109,6 +109,7 @@ body {
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   animation: fade-in-out 4s ease-in-out forwards;
 
+  //주석처리
   &.success {
     background-color: color.scale($primary-color, $lightness: 90%);
     color: $primary-color;
