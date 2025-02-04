@@ -1,11 +1,10 @@
-import axios from 'axios';
-
-const apiClient = axios.create({
-  baseURL: import.meta.env.VITE_API_URL, // 환경 변수에서 API URL 설정
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
+import apiClient from './apiClient';
+// const apiClient = axios.create({
+//   baseURL: import.meta.env.VITE_API_URL, // 환경 변수에서 API URL 설정
+//   headers: {
+//     'Content-Type': 'application/json',
+//   },
+// });
 
 export const signup = async (username, email, password) => {
   try {
