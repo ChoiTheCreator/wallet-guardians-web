@@ -1,31 +1,27 @@
 // api/receiptApi.jsx
-import apiClient from './apiClient'; // axiosInstance를 import
+import apiClient from './apiClient';
 
-// 이함수는 영수증을 업로드 할때 사용하면 됨
+// 영수증 이미지 업로드 함수 (토큰은 인터셉터에서 자동 추가)
 export const uploadReceiptImage = async (
   image,
   category,
   description,
-  date,
-  accessToken,
-  refreshToken
+  date
 ) => {
   const formData = new FormData();
   formData.append('file', image);
 
-  // JSON 데이터는 Blob 형태로 변환 후 추가
   const info = JSON.stringify({ category, description });
   formData.append('info', new Blob([info], { type: 'application/json' }));
 
   try {
     const response = await apiClient.post(
-      `/expense/receipt/${date}`, // URL에 날짜 포함
+      `/expense/receipt/${date}`, // 날짜가 포함된 URL
       formData,
       {
         headers: {
-          'Content-Type': 'multipart/form-data', // multipart/form-data 전송
-          'ACCESS-AUTH-KEY': `BEARER ${accessToken}`,
-          'REFRESH-AUTH-KEY': `BEARER ${refreshToken}`,
+          'Content-Type': 'multipart/form-data',
+          // 토큰은 인터셉터가 자동 추가합니다.
         },
       }
     );
@@ -36,15 +32,10 @@ export const uploadReceiptImage = async (
   }
 };
 
-//이 함수는 영수증 데이터를 받아왔을때 바로 보여주거나 영수증 사진 모음에서 사용하면됨
-export const fetchReceiptResult = async (accessToken, refreshToken) => {
+// 영수증 데이터 조회 함수 (토큰은 인터셉터에서 자동 추가)
+export const fetchReceiptResult = async () => {
   try {
-    const response = await apiClient.get('/receipt', {
-      headers: {
-        'ACCESS-AUTH-KEY': `BEARER ${accessToken}`,
-        'REFRESH-AUTH-KEY': `BEARER ${refreshToken}`,
-      },
-    });
+    const response = await apiClient.get('/receipt');
     return response.data;
   } catch (error) {
     console.error('📌 결과 조회 실패:', error);

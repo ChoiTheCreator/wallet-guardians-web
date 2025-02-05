@@ -8,7 +8,7 @@ export const saveExpense = async (
   refreshToken
 ) => {
   try {
-    await apiClient.post(`/expense/${date}`, expenseData, {
+    await apiClient.post(`/expense/receipt/${date}`, expenseData, {
       headers: {
         'Content-Type': 'application/json', // JSON 데이터 전송
         'ACCESS-AUTH-KEY': `BEARER ${accessToken}`,
