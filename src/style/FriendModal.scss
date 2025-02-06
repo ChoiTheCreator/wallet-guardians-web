@@ -18,7 +18,7 @@ $navy-color: #002366;
 /* 모달 컨테이너 */
 .modal-container {
     background: #fff;
-    width: 450px; /* 🔹 기존보다 크기 키움 */
+    width: 450px;
     padding: 25px;
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
@@ -43,8 +43,6 @@ $navy-color: #002366;
     color: $navy-color;
     border-radius: 50%;
     transition: all 0.3s ease-in-out;
-    box-sizing: border-box;
-
 }
 
 /* 뒤로가기 버튼 */
@@ -71,50 +69,37 @@ h2, h3 {
     font-size: 1.6rem;
     font-weight: bold;
     margin-bottom: 15px;
+    text-align: center;
 }
 
-/* 입력 필드 스타일 */
-input {
-    width: 90%;
-    padding: 12px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    font-size: 1rem;
-    outline: none;
-    transition: all 0.3s ease-in-out;
-    margin-bottom: 20px;
-    margin-top: 5px;
-
-    &:focus {
-        border-color: $navy-color;
-        box-shadow: 0 0 8px rgba(0, 35, 102, 0.3);
-    }
+/* 버튼 컨테이너 */
+.modal-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
 }
 
 /* 버튼 스타일 */
-.confirm-button {
+.confirm-button, .profile-btn {
     background: $navy-color;
     color: white;
     border: none;
-    padding: 12px;
-    width: 200px;
+    padding: 10px;
     border-radius: 8px;
     cursor: pointer;
     font-size: 1rem;
-    margin-right: 10px;
     transition: all 0.3s ease-in-out;
 
     &:hover {
-        background: rgba(0, 35, 102, 0.85); // `darken` 없이 대체
+        background: rgba(0, 35, 102, 0.85);
     }
 }
 
-.cancel-button {
+.cancel-button, .delete-btn {
     background: #ddd;
     color: black;
     border: none;
-    padding: 12px;
-    width: 200px;
+    padding: 10px;
     border-radius: 8px;
     cursor: pointer;
     font-size: 1rem;
@@ -125,12 +110,13 @@ input {
     }
 }
 
-/* 버튼 컨테이너 */
-.modal-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 10px;
+.delete-btn {
+    background-color: red;
+    color: white;
+}
+
+.profile-btn {
+    padding: 8px 12px;
 }
 
 /* 아이콘 버튼 컨테이너 */
@@ -176,57 +162,7 @@ input {
     font-size: 1rem;
     font-weight: 500;
     color: black;
-}
-
-/* 친구 목록 접기/펼치기 버튼 */
-.toggle-list-btn {
-    background: none;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 10px auto;
-    color: $navy-color;
-    transition: all 0.3s ease-in-out;
-
-    &:hover {
-        color: rgba(0, 35, 102, 0.85);
-        transform: scale(1.1);
-    }
-}
-
-/* 친구 추가하기 버튼 */
-.confirm-button {
-    background: $navy-color; 
-    color: white;
-    border: none;
-    padding: 10px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: all 0.3s ease-in-out;
-
-    &:hover {
-        background: rgba(0, 35, 102, 0.85);
-    }
-}
-
-/* 취소 버튼 */
-.cancel-button {
-    background: #ddd;
-    color: black;
-    border: none;
-    padding: 10px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: all 0.3s ease-in-out;
-
-    &:hover {
-        background: #bbb;
-    }
+    padding-left: 50px;
 }
 
 /* 친구 목록 애니메이션 */
@@ -238,43 +174,86 @@ input {
     transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
 }
 
-.friend-list.hide {
-    max-height: 0;
-    opacity: 0;
-}
-
-.friend-list.show {
-    max-height: 200px;
-    opacity: 1;
-}
-
-/* 검색 결과가 없을 때 */
-.no-result {
-    color: #999;
+/* 받은 친구 요청 스타일 */
+.request-list {
+    margin: 10px 0;
     padding: 10px 0;
+    border-radius: 8px;
+    background-color: white;
+    max-height: 150px;
+    overflow-y: auto;
+    text-align: left;
+    
 }
 
-.friend-list {
-    list-style: none;
-    padding: 0;
-    margin-top: 10px;
+.request-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    font-weight: 500;
+    font-size: 1rem;
+    color: black;
+}
+
+/* 보낸 친구 요청 스타일 */
+.request-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.accept-btn {
+    background-color: navy;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.reject-btn {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* 친구 항목 스타일 */
+.friend-item {
+    cursor: pointer;
+    padding: 10px;
+    transition: background 0.2s;
+}
+
+.friend-item:hover {
+    background: #f0f0f0;
+}
+/* 보낸 친구 요청 스타일 */
+.sent-request-list {
+    margin: 10px 0;
+    padding: 10px 0;
+    border-radius: 8px;
+    background-color: white;
+    max-height: 150px;
+    overflow-y: auto;
     text-align: left;
-  
-    li {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 10px;
-      font-size: 1rem;
-      font-weight: 500;
-      color: black;
-      border-bottom: 1px solid #ddd;
-    }
-  }
-  
-  .cancel-request-btn {
-    background: #ff4d4d;
+}
+
+.sent-request-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    font-weight: 500;
+    font-size: 1rem;
+    color: black;
+}
+
+/* 보낸 친구 요청 버튼 스타일 */
+.cancel-request-btn {
+    background-color: red;
     color: white;
     border: none;
     padding: 6px 10px;
@@ -282,92 +261,16 @@ input {
     cursor: pointer;
     font-size: 0.9rem;
     transition: background 0.3s ease;
-  
-    &:hover {
-      background: #cc0000;
-    }
-  }
-  .request-buttons {
+    margin-left: auto; /* 🔹 버튼을 오른쪽으로 이동 */
     display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-  }
-  
+    justify-content: flex-end; /* 🔹 오른쪽 정렬 */
+}
 
-  .request-list {
-    margin: 10px 0;
-    padding: 10px;
-    border-radius: 8px;
-    background-color: #f8f9fa;
-    max-height: 150px; /* 크기 줄이기 */
-    overflow-y: auto; /* 리스트가 길어지면 스크롤 */
-  }
-  
-  .request-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 5px 0;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  .request-buttons {
-    display: flex;
-    gap: 8px;
-  }
-  
-  .accept-btn {
-    background-color: navy;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .reject-btn {
-    background-color: red;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  .friend-item {
-    cursor: pointer;
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-    transition: background 0.2s;
-  }
-  
-  .friend-item:hover {
-    background: #f0f0f0;
-  }
-  
-  .modal-buttons {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-  }
-  
-  .profile-btn {
-    background-color: navy;
-    color: white;
-    padding: 8px 12px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .delete-btn {
-    background-color: red;
-    color: white;
-    padding: 8px 12px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-   
+.cancel-request-btn:hover {
+    background: #cc0000;
+}
+
+
 
 
 

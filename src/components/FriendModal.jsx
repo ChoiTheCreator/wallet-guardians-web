@@ -110,7 +110,7 @@ const FriendModal = () => {
                 <ul>
                   {receivedRequests.map((request) => (
                     <li key={request.id} className="request-item">
-                      <span>{request.name} ({request.email})</span>
+                      {request.name} ({request.email})
                       <div className="request-buttons">
                         <button className="accept-btn" onClick={() => alert('친구 요청을 수락했습니다.')}>수락</button>
                         <button className="reject-btn" onClick={() => alert('친구 요청을 거절했습니다.')}>거절</button>
