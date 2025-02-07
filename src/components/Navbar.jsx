@@ -11,10 +11,20 @@ import {
 import { SidebarContext } from '../context/SidebarContext';
 import '../style/Navbar.scss';
 import { useContext } from 'react';
+import { logout } from '../api/authApi';
 
 const Navbar = () => {
   const { isSidebarOpen } = useContext(SidebarContext);
   const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      navigate('/login');
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div>
@@ -59,7 +69,7 @@ const Navbar = () => {
             <FaFileImage className="nav-icon" />
             영수증 사진 모음
           </li>
-          <li onClick={() => navigate('/')}>
+          <li onClick={handleLogout}>
             <FaSignOutAlt className="nav-icon" />
             로그아웃
           </li>

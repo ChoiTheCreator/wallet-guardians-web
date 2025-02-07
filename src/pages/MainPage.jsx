@@ -13,6 +13,9 @@ const MainPage = () => {
   const { isSidebarOpen } = useContext(SidebarContext);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  //디버깅용 예산설정한 데이터 조회
+  const [budgetData, setBudgetData] = useState(null);
   const navigate = useNavigate();
 
   const handleDateClick = (newDate) => {
@@ -26,10 +29,10 @@ const MainPage = () => {
       return;
     }
 
-    if (type === "goal") {
+    if (type === 'goal') {
       setIsModalOpen(true); // 목표 금액 수정 모달 열기
-    } else if (type === "balance") {
-      navigate("/graph"); // 잔액 클릭 시 그래프 페이지로 이동
+    } else if (type === 'balance') {
+      navigate('/graph'); // 잔액 클릭 시 그래프 페이지로 이동
     }
   };
 
@@ -44,8 +47,6 @@ const MainPage = () => {
   const mainMarginLeft = `${sidebarWidth / 2}px`;
 
   // 예제: 사용된 금액
-  const usedAmount = 150000;
-  const remainingAmount = goalAmount ? goalAmount - usedAmount : null;
 
   return (
     <div className="main-wrapper">
@@ -55,22 +56,41 @@ const MainPage = () => {
       >
         {/* 목표 금액 & 잔액 (Row 배치) */}
         <div className="goal-balance-container">
-          <div onClick={() => handleBoxClick("goal")} className="goal-box">
-            <h3 className="goal-title" style={{ color: 'white' }}>💰 이 달의 목표 금액</h3>
+          <div onClick={() => handleBoxClick('goal')} className="goal-box">
+            <h3 className="goal-title" style={{ color: 'white' }}>
+              💰 이 달의 목표 금액
+            </h3>
             <p className="goal-amount">
               {goalAmount !== null && goalAmount !== undefined ? (
-                <CountUp start={0} end={goalAmount} duration={1.5} separator="," suffix="원" />
+                <CountUp
+                  start={0}
+                  end={goalAmount}
+                  duration={1.5}
+                  separator=","
+                  suffix="원"
+                />
               ) : (
                 '목표 금액을 설정하세요!'
               )}
             </p>
           </div>
 
-          <div onClick={() => handleBoxClick("balance")} className="balance-box">
-            <h3 className="balance-title" style={{ color: 'white' }}>💳 잔액</h3>
+          <div
+            onClick={() => handleBoxClick('balance')}
+            className="balance-box"
+          >
+            <h3 className="balance-title" style={{ color: 'white' }}>
+              💳 잔액
+            </h3>
             <p className="balance-amount">
-              {remainingAmount !== null ? (
-                <CountUp start={0} end={remainingAmount} duration={1.5} separator="," suffix="원" />
+              {goalAmount !== null ? (
+                <CountUp
+                  start={0}
+                  end={goalAmount}
+                  duration={1.5}
+                  separator=","
+                  suffix="원"
+                />
               ) : (
                 '목표 금액을 설정하세요!'
               )}
@@ -105,7 +125,7 @@ const MainPage = () => {
           id: 1, // 예제 ID (실제 API 호출 시 변경 필요)
           user_id: 5, // 예제 user_id (실제 API 호출 시 변경 필요)
           goalAmount: goalAmount || 0, // 목표 금액이 없으면 0으로 설정
-          date: moment().format("YYYY-MM"), // 현재 연월로 설정
+          date: moment().format('YYYY-MM'), // 현재 연월로 설정
         }}
       />
     </div>
@@ -113,5 +133,3 @@ const MainPage = () => {
 };
 
 export default MainPage;
-
-

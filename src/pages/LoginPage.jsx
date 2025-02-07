@@ -25,9 +25,14 @@ const LoginPage = () => {
 
     try {
       const data = await login(email, password);
-      const { token, refreshToken } = data;
+      // const { token, refreshToken } = data;
+      const { accessToken, refreshToken } = data.data;
+      console.log('🔹 로그인 응답 데이터:', data); // 응답 구조 확인 디버깅용임
+      console.log('🔑 저장할 accessToken:', accessToken);
+      console.log('🔄 저장할 refreshToken:', refreshToken);
 
-      localStorage.setItem('token', token);
+      //로그인 성공시 로컬스토리지에서 받아온 토큰들 저장.
+      localStorage.setItem('accessToken', accessToken);
       localStorage.setItem('refreshToken', refreshToken);
 
       setModalMessage({

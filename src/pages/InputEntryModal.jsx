@@ -21,17 +21,18 @@ const InputEntryModal = ({ isOpen, onClose }) => {
     }
 
     const expenseData = {
-      category: selectedCategory,  // ✅ 필드명 수정
+      category: selectedCategory, // ✅ 필드명 수정
       amount: parseInt(amount, 10),
-      storename: storename,  // ✅ 필드명 수정
+      storename: storename, // ✅ 필드명 수정
       description: description,
     };
 
     try {
-      await saveExpense(date, expenseData);  // ✅ 수정된 API 호출
+      await saveExpense(date, expenseData); // ✅ 수정된 API 호출
       alert('지출이 성공적으로 저장되었습니다!');
       navigate('/main');
     } catch (error) {
+      console.log(error);
       alert('📌 지출 저장에 실패했습니다.');
     }
   };
