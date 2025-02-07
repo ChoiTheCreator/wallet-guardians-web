@@ -9,13 +9,10 @@ import BudgetEditModal from './BudgetEditModal';
 import '../style/MainPage.scss';
 
 const MainPage = () => {
-  const { goalAmount } = useContext(GoalContext);
+  const { goalAmount, fetchBudget, error } = useContext(GoalContext);
   const { isSidebarOpen } = useContext(SidebarContext);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  //디버깅용 예산설정한 데이터 조회
-  const [budgetData, setBudgetData] = useState(null);
   const navigate = useNavigate();
 
   const handleDateClick = (newDate) => {
@@ -46,8 +43,6 @@ const MainPage = () => {
   const mainWidth = `calc(100vw - ${sidebarWidth}px)`;
   const mainMarginLeft = `${sidebarWidth / 2}px`;
 
-  // 예제: 사용된 금액
-
   return (
     <div className="main-wrapper">
       <div
@@ -70,7 +65,10 @@ const MainPage = () => {
                   suffix="원"
                 />
               ) : (
-                '목표 금액을 설정하세요!'
+                <>
+                  <p>목표 금액을 설정하세요!</p>
+                  <button onClick={fetchBudget}>📌 목표 금액 가져오기</button>
+                </>
               )}
             </p>
           </div>
@@ -98,6 +96,11 @@ const MainPage = () => {
           </div>
         </div>
 
+        {/* 예산 조회 에러 메시지 */}
+        {error && (
+          <p className="error-message">❌ 오류 발생: {error.message}</p>
+        )}
+
         {/* 달력 */}
         <div className="calendar-container">
           <Calendar
@@ -123,7 +126,6 @@ const MainPage = () => {
         onClose={handleCloseModal}
         budgetData={{
           id: 1, // 예제 ID (실제 API 호출 시 변경 필요)
-          user_id: 5, // 예제 user_id (실제 API 호출 시 변경 필요)
           goalAmount: goalAmount || 0, // 목표 금액이 없으면 0으로 설정
           date: moment().format('YYYY-MM'), // 현재 연월로 설정
         }}

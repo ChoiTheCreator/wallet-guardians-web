@@ -1,20 +1,36 @@
 import React, { createContext, useState } from 'react';
+import { getBudget } from '../api/budgetApi'; // ✅ 예산 조회 API 가져오기
 
 export const GoalContext = createContext();
 
 export const GoalProvider = ({ children }) => {
-  //전역 상태관리 : 10000
-  const [goalAmount, setGoalAmount] = useState(); // 전역 상태로 목표 금액 관리
+  const [goalAmount, setGoalAmount] = useState(null); // ✅ 목표 금액 상태
+  const [error, setError] = useState(null); // ✅ 오류 상태 추가
+
+  // ✅ 예산 데이터 가져오는 함수
+  const fetchBudget = async () => {
+    try {
+      const budget = await getBudget(); // ✅ API 호출
+      console.log('📌 예산 조회 성공:', budget);
+
+      if (budget && budget.data && budget.data.amount !== undefined) {
+        setGoalAmount(budget.data.amount); // ✅ 목표 금액 상태 업데이트
+      } else {
+        setGoalAmount(null); // ✅ 목표 금액이 없으면 초기화
+      }
+    } catch (error) {
+      console.error('🚨 예산 조회 실패:', error);
+      setError(error);
+    }
+  };
 
   return (
-    //GoalContext는 createContext()를 통해 생성된 Context 객체임 -> 공유공간
-    //Provider 컴포넌트를 제공하는데, 이는 전역 상태 관리를 위한 것
-    //value 속성에 전역으로 관리할, 상태와 함수를 담아 "children"에게 제공한다.
-
-    //App,jsx에 가보면 GoalProvider로 감싸진 모든 컴포넌트들을 렌더링 할 수 있다.
-    //그 감싸진 녀석들이 바로 children임
-    <GoalContext.Provider value={{ goalAmount, setGoalAmount }}>
+    <GoalContext.Provider
+      value={{ goalAmount, setGoalAmount, fetchBudget, error }}
+    >
       {children}
     </GoalContext.Provider>
   );
 };
+
+export default GoalProvider;

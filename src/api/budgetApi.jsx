@@ -3,33 +3,14 @@ import apiClient from './apiClient';
 // 예산 설정 (POST) 처음 예산 설정하는 곳에서 사용하면 됨
 export const setBudget = async (goalAmount) => {
   try {
-    const userId = localStorage.getItem('userId');
     const accessToken = localStorage.getItem('token');
-    if (!userId) throw new Error('사용자 ID가 없습니다.');
+    console.log(accessToken);
     if (!accessToken) throw new Error('인증 토큰이 없습니다.');
-
-    // ✅ 먼저 기존 예산이 있는지 확인
-    const existingBudget = await apiClient.get(`/api/budget/${userId}`, {
-      headers: {
-        'ACCESS-AUTH-KEY': `BEARER ${accessToken}`,
-      },
-    });
-
-    if (existingBudget?.data) {
-      // ✅ 기존 예산이 존재하면, 업데이트 요청 보내기
-      console.log('📌 기존 예산이 존재하여 업데이트 진행');
-      return await updateBudget(
-        existingBudget.data.id,
-        userId,
-        goalAmount,
-        new Date()
-      );
-    }
 
     // ✅ 기존 예산이 없으면 새로 생성
     const response = await apiClient.post(
       `/budget`,
-      { user_id: userId, amount: goalAmount },
+      { amount: goalAmount },
       { headers: { 'ACCESS-AUTH-KEY': `BEARER ${accessToken}` } }
     );
 
@@ -40,18 +21,41 @@ export const setBudget = async (goalAmount) => {
   }
 };
 
-// 예산 조회 (GET) 전역 상태관리로 사용하면 될 듯함
-export const getBudget = async (date) => {
+export const getBudget = async () => {
   try {
-    const response = await apiClient.get(`/api/budget/${date}`, {
+    const accessToken = localStorage.getItem('accessToken');
+    const refreshToken = localStorage.getItem('refreshToken');
+
+    if (!accessToken) {
+      throw new Error('🔑 Access Token이 없습니다. 로그인 상태를 확인하세요.');
+    }
+
+    console.log('📌 getBudget 요청 시작');
+
+    const response = await apiClient.get(`/api/budget`, {
       headers: {
-        'ACCESS-AUTH-KEY': `BEARER ${localStorage.getItem('accessToken')}`,
-        'REFRESH-AUTH-KEY': `BEARER ${localStorage.getItem('refreshToken')}`,
+        'ACCESS-AUTH-KEY': `BEARER ${accessToken}`,
+        'REFRESH-AUTH-KEY': `BEARER ${refreshToken || ''}`,
       },
     });
-    return response.data;
+
+    console.log('✅ getBudget 응답 데이터:', response.data);
+
+    if (
+      response.data &&
+      response.data.data &&
+      typeof response.data.data.amount !== 'undefined'
+    ) {
+      return response.data.data.amount; // ✅ 목표 금액 반환
+    } else {
+      console.warn('⚠ 목표 금액 데이터가 없습니다:', response.data);
+      return null; // 목표 금액이 없을 경우 `null` 반환
+    }
   } catch (error) {
-    console.error('예산 조회 실패:', error.response?.data || error.message);
+    console.error(
+      '🚨 getBudget 호출 실패:',
+      error.response?.data || error.message
+    );
     throw error;
   }
 };
