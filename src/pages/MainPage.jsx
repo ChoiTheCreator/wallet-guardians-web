@@ -6,6 +6,7 @@ import { SidebarContext } from '../context/SidebarContext';
 import CountUp from 'react-countup';
 import moment from 'moment';
 import BudgetEditModal from './BudgetEditModal';
+
 import '../style/MainPage.scss';
 
 const MainPage = () => {
@@ -13,6 +14,7 @@ const MainPage = () => {
   const { isSidebarOpen } = useContext(SidebarContext);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [isModalOpen, setIsModalOpen] = useState(false);
+
   const navigate = useNavigate();
 
   const handleDateClick = (newDate) => {

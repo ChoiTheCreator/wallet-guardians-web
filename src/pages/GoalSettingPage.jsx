@@ -44,9 +44,13 @@ const GoalSettingPage = () => {
   };
 
   return (
-    <div className="goal-setting-container">
+    <div className="goal-setting-page">
+      {' '}
+      {/* ✅ 기존 `goal-setting-container` → `goal-setting-page`로 변경 */}
       <h2>목표 금액 설정</h2>
-      <form onSubmit={handleSubmit}>
+      <form className="goal-form" onSubmit={handleSubmit}>
+        {' '}
+        {/* ✅ 클래스 추가 */}
         <input
           type="number"
           placeholder="목표 금액 입력"
@@ -54,7 +58,10 @@ const GoalSettingPage = () => {
           onChange={(e) => setBudgetAmount(e.target.value)}
           required
         />
-        <button type="submit">설정 완료</button>
+        <button type="submit" className="submit-btn">
+          설정 완료
+        </button>{' '}
+        {/* ✅ 스타일 적용 */}
       </form>
       {errorMessage && <p className="error-message">{errorMessage}</p>}
     </div>

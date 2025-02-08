@@ -13,10 +13,14 @@ import '../style/Navbar.scss';
 import { useContext } from 'react';
 import { logout } from '../api/authApi';
 
+//유저 정보 navbar에 표기하기 위한 컴포넌트 (use getuserInfo API)
+import UserInfoComponent from './userInfo';
+
 const Navbar = () => {
   const { isSidebarOpen } = useContext(SidebarContext);
   const navigate = useNavigate();
 
+  //로그아웃 하는 로직은 navbar에 존재.
   const handleLogout = async () => {
     try {
       await logout();
@@ -44,6 +48,7 @@ const Navbar = () => {
             WalletGuardians
           </span>
         </div>
+        <UserInfoComponent></UserInfoComponent>
         <ul className="nav-menu">
           <li onClick={() => navigate('/main')}>
             <FaHome className="nav-icon" />

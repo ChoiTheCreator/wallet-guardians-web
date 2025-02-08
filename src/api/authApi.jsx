@@ -27,7 +27,6 @@ export const signup = async (username, email, password) => {
 export const logout = async () => {
   try {
     await apiClient.delete('/auth/logout');
-
     localStorage.removeItem('accesstoken');
     localStorage.removeItem('refreshToken');
     window.location.href = '/login';
@@ -62,5 +61,22 @@ export const login = async (email, password) => {
       error.response?.data || error.message
     );
     throw error;
+  }
+};
+
+//유저 본인 정보 조회
+export const getUserInfo = async () => {
+  try {
+    const response = await apiClient.get('/auth/info');
+    console.log('🛠 유저 정보 조회 API 응답:', response.data); // 응답 디버깅용
+
+    //비밀번호를 제외한 나머지 데이터 Fetching
+    const { id, username, email, title, defenseRate, role } =
+      response.data.data;
+    const { success } = response.data.success;
+  } catch (e) {
+    alert('서버 문제로 인한 에러발생');
+    console.log('에러발생' + e);
+    throw e;
   }
 };
