@@ -23,40 +23,18 @@ export const setBudget = async (goalAmount) => {
 
 export const getBudget = async () => {
   try {
-    const accessToken = localStorage.getItem('accessToken');
-    const refreshToken = localStorage.getItem('refreshToken');
+    const response = await apiClient.get('/budget');
+    console.log('🛠 유저 설정예산 조회 API 응답:', response.data); // 응답 디버깅용
+    console.log(
+      '🛠 유저 설정 내각 데이터 예산 조회 API 응답:',
+      response.data.data
+    ); // 응답 디버깅용
 
-    if (!accessToken) {
-      throw new Error('🔑 Access Token이 없습니다. 로그인 상태를 확인하세요.');
-    }
-
-    console.log('📌 getBudget 요청 시작');
-
-    const response = await apiClient.get(`/api/budget`, {
-      headers: {
-        'ACCESS-AUTH-KEY': `BEARER ${accessToken}`,
-        'REFRESH-AUTH-KEY': `BEARER ${refreshToken || ''}`,
-      },
-    });
-
-    console.log('✅ getBudget 응답 데이터:', response.data);
-
-    if (
-      response.data &&
-      response.data.data &&
-      typeof response.data.data.amount !== 'undefined'
-    ) {
-      return response.data.data.amount; // ✅ 목표 금액 반환
-    } else {
-      console.warn('⚠ 목표 금액 데이터가 없습니다:', response.data);
-      return null; // 목표 금액이 없을 경우 `null` 반환
-    }
-  } catch (error) {
-    console.error(
-      '🚨 getBudget 호출 실패:',
-      error.response?.data || error.message
-    );
-    throw error;
+    return response.data.data;
+  } catch (e) {
+    alert('서버 문제로 인한 에러발생');
+    console.log('에러발생' + e);
+    throw e;
   }
 };
 
