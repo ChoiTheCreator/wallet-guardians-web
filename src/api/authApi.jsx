@@ -70,10 +70,8 @@ export const getUserInfo = async () => {
     const response = await apiClient.get('/auth/info');
     console.log('🛠 유저 정보 조회 API 응답:', response.data); // 응답 디버깅용
 
-    //비밀번호를 제외한 나머지 데이터 Fetching
-    const { id, username, email, title, defenseRate, role } =
-      response.data.data;
-    const { success } = response.data.success;
+    //비밀번호를 제외한 나머지 데이터 Fetching 의도
+    return response.data.data;
   } catch (e) {
     alert('서버 문제로 인한 에러발생');
     console.log('에러발생' + e);
