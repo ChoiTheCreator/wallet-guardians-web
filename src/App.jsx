@@ -15,6 +15,7 @@ import Layout from './components/Layout'; // Layout import
 import './style/MainPage.scss';
 import InputEntryPage from './pages/InputEntryPage'; // inputentry 페이지 추가
 import ReceiptPicPage from './pages/ReceiptPicPage';
+import AuthenticatedComponent from './auth/AuthenticatedComponent';
 import { SidebarProvider } from './context/SidebarContext';
 import { FriendProvider } from './context/FriendContext';
 import FriendModal from './components/FriendModal';
@@ -25,10 +26,17 @@ const App = () => {
       <GoalProvider>
         <FriendProvider>
           {' '}
-          {/* GoalProvide, r로 전체 라우트 감싸기 */}
+          {/* GoalProvide로 전체 라우트 감싸기 */}
           <Routes>
             {/* 공통 레이아웃 적용되는 페이지 */}
-            <Route element={<Layout />}>
+            {/* 왜 공통컴포넌트인 auth에만 보안장치를 감싸는가? ->  공통 레이아웃 컴포넌트가 적용되는 부분만 보안 처리를 하면 돼기때문*/}
+            <Route
+              element={
+                <AuthenticatedComponent>
+                  <Layout />
+                </AuthenticatedComponent>
+              }
+            >
               <Route path="/main" element={<MainPage />} />
               <Route path="/profile" element={<ProfilePage />} />
               <Route path="/income" element={<IncomePage />} />

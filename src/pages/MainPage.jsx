@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Calendar from 'react-calendar';
 import { GoalContext } from '../context/GoalContext';
@@ -45,6 +45,11 @@ const MainPage = () => {
   const mainWidth = `calc(100vw - ${sidebarWidth}px)`;
   const mainMarginLeft = `${sidebarWidth / 2}px`;
 
+  //goalContext (예산설정여부 관리하는 컨텍스트) 사용자가 갖고왔는지 안왔는지를 확인하는 useEffect
+  useEffect(() => {
+    fetchBudget();
+  }, []);
+
   return (
     <div className="main-wrapper">
       <div
@@ -69,7 +74,6 @@ const MainPage = () => {
               ) : (
                 <>
                   <p>목표 금액을 설정하세요!</p>
-                  <button onClick={fetchBudget}>📌 목표 금액 가져오기</button>
                 </>
               )}
             </p>

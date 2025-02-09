@@ -1,10 +1,4 @@
 import apiClient from './apiClient';
-// const apiClient = axios.create({
-//   baseURL: import.meta.env.VITE_API_URL, // 환경 변수에서 API URL 설정
-//   headers: {
-//     'Content-Type': 'application/json',
-//   },
-// });
 
 export const signup = async (username, email, password) => {
   try {
@@ -72,7 +66,6 @@ export const getUserInfo = async () => {
     //비밀번호를 제외한 나머지 데이터 Fetching 의도
     return response.data.data;
   } catch (e) {
-    alert('서버 문제로 인한 에러발생');
     console.log('에러발생' + e);
     throw e;
   }
