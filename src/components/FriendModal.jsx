@@ -40,9 +40,9 @@ const FriendModal = () => {
       const receivedData = await getReceivedFriendRequests();
       const sentData = await getSentFriendRequests();
 
-      setFriends(friendsData);
-      setReceivedRequests(receivedData);
-      setSentRequests(sentData);
+      setFriends(friendsData || []); // ⬅ undefined 방지
+      setReceivedRequests(receivedData || []);
+      setSentRequests(sentData || []);
     } catch (error) {
       console.error('🚨 친구 데이터 로드 실패:', error);
     }

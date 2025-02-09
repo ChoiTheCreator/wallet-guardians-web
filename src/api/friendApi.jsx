@@ -1,26 +1,18 @@
 import apiClient from './apiClient';
 
-// ✅ 공통 헤더
-const getAuthHeaders = () => {
-  const accessToken = localStorage.getItem('accessToken');
-  const refreshToken = localStorage.getItem('refreshToken');
-
-  if (!accessToken) throw new Error('🔑 Access Token이 없습니다.');
-
-  return {
-    'ACCESS-AUTH-KEY': `BEARER ${accessToken}`,
-    'REFRESH-AUTH-KEY': `BEARER ${refreshToken || ''}`,
-    'Content-Type': 'application/json',
-  };
-};
-
-// ✅ 친구 추가 요청 (POST)
+// ✅ 친구 추가 요청 (POST) 완료
 export const sendFriendRequest = async (receiverEmail) => {
   try {
     const response = await apiClient.post(
       '/api/friends/requests',
       { receiverEmail },
-      { headers: getAuthHeaders() }
+      {
+        headers: {
+          'ACCESS-AUTH-KEY': `BEARER ${localStorage.getItem('accessToken')}`,
+          'REFRESH-AUTH-KEY': `BEARER ${localStorage.getItem('refreshToken')}`,
+          'Content-Type': 'application/json',
+        },
+      }
     );
     return response.data;
   } catch (error) {
@@ -29,39 +21,50 @@ export const sendFriendRequest = async (receiverEmail) => {
   }
 };
 
-// ✅ 보낸 친구 요청 목록 조회 (GET)
-export const getSentFriendRequests = async () => {
-  try {
-    const response = await apiClient.get('/api/friends/requests?status=pending', {
-      headers: getAuthHeaders(),
-    });
-    return response.data.data;
-  } catch (error) {
-    console.error('🚨 보낸 친구 요청 조회 실패:', error.response?.data || error.message);
-    throw error;
-  }
-};
-
-// ✅ 받은 친구 요청 목록 조회 (GET)
+// ✅ 받은 친구 요청 목록 조회 (GET) 완
 export const getReceivedFriendRequests = async () => {
   try {
     const response = await apiClient.get('/api/friends/requests?status=requested', {
-      headers: getAuthHeaders(),
+      headers: {
+        'ACCESS-AUTH-KEY': `BEARER ${localStorage.getItem('accessToken')}`,
+        'REFRESH-AUTH-KEY': `BEARER ${localStorage.getItem('refreshToken')}`,
+      },
     });
-    return response.data.data;
+    console.log('📌 받은 친구 요청:', response.data);
+    return response.data;
   } catch (error) {
     console.error('🚨 받은 친구 요청 조회 실패:', error.response?.data || error.message);
     throw error;
   }
 };
 
-// ✅ 친구 목록 조회 (GET)
+// ✅ 보낸 친구 요청 목록 조회 (GET) 완
+export const getSentFriendRequests = async () => {
+  try {
+    const response = await apiClient.get('/api/friends/requests?status=pending', {
+      headers: {
+        'ACCESS-AUTH-KEY': `BEARER ${localStorage.getItem('accessToken')}`,
+        'REFRESH-AUTH-KEY': `BEARER ${localStorage.getItem('refreshToken')}`,
+      },
+    });
+    console.log('📌 보낸 친구 요청:', response.data);
+    return response.data;
+  } catch (error) {
+    console.error('🚨 보낸 친구 요청 조회 실패:', error.response?.data || error.message);
+    throw error;
+  }
+};
+
+// ✅ 친구 목록 조회 (GET) 완
 export const getFriendsList = async () => {
   try {
     const response = await apiClient.get('/api/friends/requests?status=accepted', {
-      headers: getAuthHeaders(),
+      headers: {
+        'ACCESS-AUTH-KEY': `BEARER ${localStorage.getItem('accessToken')}`,
+        'REFRESH-AUTH-KEY': `BEARER ${localStorage.getItem('refreshToken')}`,
+      },
     });
-    return response.data.data;
+    return response.data;
   } catch (error) {
     console.error('🚨 친구 목록 조회 실패:', error.response?.data || error.message);
     throw error;
@@ -69,12 +72,18 @@ export const getFriendsList = async () => {
 };
 
 // ✅ 친구 요청 수락 (PUT)
-export const acceptFriendRequest = async (friendId) => {
+export const acceptFriendRequest = async (senderEmail) => {
   try {
     const response = await apiClient.put(
-      '/api/friends/managements',
-      { friendId, status: 'Accepted' },
-      { headers: getAuthHeaders() }
+      '/api/friends/accept',
+      { senderEmail },
+      {
+        headers: {
+          'ACCESS-AUTH-KEY': `BEARER ${localStorage.getItem('accessToken')}`,
+          'REFRESH-AUTH-KEY': `BEARER ${localStorage.getItem('refreshToken')}`,
+          'Content-Type': 'application/json',
+        },
+      }
     );
     return response.data;
   } catch (error) {
@@ -84,12 +93,18 @@ export const acceptFriendRequest = async (friendId) => {
 };
 
 // ✅ 친구 요청 거절 (PUT)
-export const rejectFriendRequest = async (friendId) => {
+export const rejectFriendRequest = async (senderEmail) => {
   try {
-    const response = await apiClient.put(
-      '/api/friends/managements',
-      { friendId, status: 'Rejected' },
-      { headers: getAuthHeaders() }
+    const response = await apiClient.delete(
+      '/api/friends/reject',
+      { senderEmail, status: 'Rejected' },
+      {
+        headers: {
+          'ACCESS-AUTH-KEY': `BEARER ${localStorage.getItem('accessToken')}`,
+          'REFRESH-AUTH-KEY': `BEARER ${localStorage.getItem('refreshToken')}`,
+          'Content-Type': 'application/json',
+        },
+      }
     );
     return response.data;
   } catch (error) {
@@ -99,12 +114,17 @@ export const rejectFriendRequest = async (friendId) => {
 };
 
 // ✅ 친구 삭제 (DELETE)
-export const deleteFriend = async (friendEmail) => {
+export const deleteFriend = async (deleteEmail) => {
   try {
-    const response = await apiClient.delete('/api/friends/delete', {
-      headers: getAuthHeaders(),
-      data: { senderEmail: friendEmail },
-    });
+    const response = await apiClient.delete('/api/friends/delete', 
+        { deleteEmail },
+        {headers: {
+        'ACCESS-AUTH-KEY': `BEARER ${localStorage.getItem('accessToken')}`,
+        'REFRESH-AUTH-KEY': `BEARER ${localStorage.getItem('refreshToken')}`,
+        'Content-Type': 'application/json',
+      }},
+    
+    );
     return response.data;
   } catch (error) {
     console.error('🚨 친구 삭제 실패:', error.response?.data || error.message);
@@ -113,18 +133,24 @@ export const deleteFriend = async (friendEmail) => {
 };
 
 // ✅ 친구 요청 취소 (DELETE)
-export const cancelFriendRequest = async (friendEmail) => {
+export const cancelFriendRequest = async (deleteEmail) => {
   try {
-    const response = await apiClient.delete('/api/friends/cancel-request', {
-      headers: getAuthHeaders(),
-      data: { senderEmail: friendEmail },
-    });
-    return response.data;
+    const response = await apiClient.delete('/api/friends/cancel-request',
+      { deleteEmail }, 
+      {headers: {
+        'ACCESS-AUTH-KEY': `BEARER ${localStorage.getItem('accessToken')}`,
+        'REFRESH-AUTH-KEY': `BEARER ${localStorage.getItem('refreshToken')}`,
+        'Content-Type': 'application/json',
+      }},
+      
+    );
+    return response.data[0];
   } catch (error) {
     console.error('🚨 친구 요청 취소 실패:', error.response?.data || error.message);
     throw error;
   }
 };
+
 
 
 

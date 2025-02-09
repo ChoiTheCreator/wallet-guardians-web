@@ -3,15 +3,22 @@ import apiClient from './apiClient';
 // 예산 설정 (POST) 처음 예산 설정하는 곳에서 사용하면 됨
 export const setBudget = async (goalAmount) => {
   try {
-    const accessToken = localStorage.getItem('token');
+    const accessToken = localStorage.getItem('accessToken'); // token--> accessToken, refreshToken 원래는 'token'으로 되어 있었음 그러니까 못 불러오더라..
+    const refreshToken = localStorage.getItem('refreshToken');
+
     console.log(accessToken);
     if (!accessToken) throw new Error('인증 토큰이 없습니다.');
 
-    // ✅ 기존 예산이 없으면 새로 생성
+    //  기존 예산이 없으면 새로 생성
     const response = await apiClient.post(
-      `/budget`,
+      `/api/budget`,
       { amount: goalAmount },
-      { headers: { 'ACCESS-AUTH-KEY': `BEARER ${accessToken}` } }
+      {
+        headers: {
+          'ACCESS-AUTH-KEY': `BEARER ${accessToken}`,
+          'REFRESH-AUTH-KEY': `BEARER ${refreshToken || ''}`, //  refreshToken 추가
+        },
+      }
     );
 
     return response.data;
@@ -23,7 +30,7 @@ export const setBudget = async (goalAmount) => {
 
 export const getBudget = async () => {
   try {
-    const response = await apiClient.get('/budget');
+    const response = await apiClient.get('/api/budget');
     console.log('🛠 유저 설정예산 조회 API 응답:', response.data); // 응답 디버깅용
     console.log(
       '🛠 유저 설정 내각 데이터 예산 조회 API 응답:',
