@@ -11,7 +11,7 @@ export const setBudget = async (goalAmount) => {
 
     //  기존 예산이 없으면 새로 생성
     const response = await apiClient.post(
-      `/api/budget`,
+      `/budget`,
       { amount: goalAmount },
       {
         headers: {
@@ -30,7 +30,7 @@ export const setBudget = async (goalAmount) => {
 
 export const getBudget = async () => {
   try {
-    const response = await apiClient.get('/api/budget');
+    const response = await apiClient.get('/budget');
     console.log('🛠 유저 설정예산 조회 API 응답:', response.data); // 응답 디버깅용
     console.log(
       '🛠 유저 설정 내각 데이터 예산 조회 API 응답:',
@@ -49,7 +49,7 @@ export const getBudget = async () => {
 export const updateBudget = async (id, userId, goalAmount, date) => {
   try {
     const response = await apiClient.put(
-      `/api/budget/${id}`,
+      `/budget/${id}`,
       { id, user_id: userId, budget_amount: goalAmount, date },
       {
         headers: {

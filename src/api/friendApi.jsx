@@ -4,7 +4,7 @@ import apiClient from './apiClient';
 export const sendFriendRequest = async (receiverEmail) => {
   try {
     const response = await apiClient.post(
-      '/api/friends/requests',
+      '/friends/requests',
       { receiverEmail },
       {
         headers: {
@@ -24,7 +24,7 @@ export const sendFriendRequest = async (receiverEmail) => {
 // ✅ 받은 친구 요청 목록 조회 (GET) 완
 export const getReceivedFriendRequests = async () => {
   try {
-    const response = await apiClient.get('/api/friends/requests?status=requested', {
+    const response = await apiClient.get('/friends/requests?status=requested', {
       headers: {
         'ACCESS-AUTH-KEY': `BEARER ${localStorage.getItem('accessToken')}`,
         'REFRESH-AUTH-KEY': `BEARER ${localStorage.getItem('refreshToken')}`,
@@ -41,7 +41,7 @@ export const getReceivedFriendRequests = async () => {
 // ✅ 보낸 친구 요청 목록 조회 (GET) 완
 export const getSentFriendRequests = async () => {
   try {
-    const response = await apiClient.get('/api/friends/requests?status=pending', {
+    const response = await apiClient.get('/friends/requests?status=pending', {
       headers: {
         'ACCESS-AUTH-KEY': `BEARER ${localStorage.getItem('accessToken')}`,
         'REFRESH-AUTH-KEY': `BEARER ${localStorage.getItem('refreshToken')}`,
@@ -58,7 +58,7 @@ export const getSentFriendRequests = async () => {
 // ✅ 친구 목록 조회 (GET) 완
 export const getFriendsList = async () => {
   try {
-    const response = await apiClient.get('/api/friends/requests?status=accepted', {
+    const response = await apiClient.get('/friends/requests?status=accepted', {
       headers: {
         'ACCESS-AUTH-KEY': `BEARER ${localStorage.getItem('accessToken')}`,
         'REFRESH-AUTH-KEY': `BEARER ${localStorage.getItem('refreshToken')}`,
@@ -75,7 +75,7 @@ export const getFriendsList = async () => {
 export const acceptFriendRequest = async (senderEmail) => {
   try {
     const response = await apiClient.put(
-      '/api/friends/accept',
+      '/friends/accept',
       { senderEmail },
       {
         headers: {
@@ -96,7 +96,7 @@ export const acceptFriendRequest = async (senderEmail) => {
 export const rejectFriendRequest = async (senderEmail) => {
   try {
     const response = await apiClient.delete(
-      '/api/friends/reject',
+      '/friends/reject',
       { senderEmail, status: 'Rejected' },
       {
         headers: {
@@ -116,7 +116,7 @@ export const rejectFriendRequest = async (senderEmail) => {
 // ✅ 친구 삭제 (DELETE)
 export const deleteFriend = async (deleteEmail) => {
   try {
-    const response = await apiClient.delete('/api/friends/delete', 
+    const response = await apiClient.delete('/friends/delete', 
         { deleteEmail },
         {headers: {
         'ACCESS-AUTH-KEY': `BEARER ${localStorage.getItem('accessToken')}`,
@@ -135,7 +135,7 @@ export const deleteFriend = async (deleteEmail) => {
 // ✅ 친구 요청 취소 (DELETE)
 export const cancelFriendRequest = async (deleteEmail) => {
   try {
-    const response = await apiClient.delete('/api/friends/cancel-request',
+    const response = await apiClient.delete('/friends/cancel-request',
       { deleteEmail }, 
       {headers: {
         'ACCESS-AUTH-KEY': `BEARER ${localStorage.getItem('accessToken')}`,
