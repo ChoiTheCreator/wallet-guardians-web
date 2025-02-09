@@ -3,7 +3,7 @@ import apiClient from './apiClient';
 export const signup = async (username, email, password) => {
   try {
     const response = await apiClient.post(
-      '/auth/signup', // api 명세서 대로 변경 나는 이렇게 안하면 안되더라..
+      '/auth/signup',
       { username, email, password } // 요청 본문
     );
     // ✅ 회원가입 후 기존 로그인 정보 삭제 ( 이렇게 하면 로컬스토리지를 이용해도 고유하게 저장이 가능함)
@@ -19,9 +19,10 @@ export const signup = async (username, email, password) => {
 //로그아웃
 export const logout = async () => {
   try {
-    await apiClient.delete('/auth/logout'); // 여기도
+    await apiClient.delete('/auth/logout');
     localStorage.removeItem('accesstoken');
     localStorage.removeItem('refreshToken');
+    localStorage.removeItem('goalAmount');
     window.location.href = '/login';
   } catch (e) {
     console.log('에러발생' + e);
@@ -31,7 +32,8 @@ export const logout = async () => {
 // 로그인 요청
 export const login = async (email, password) => {
   try {
-    const response = await apiClient.post('/auth/login', { // 여기도
+    const response = await apiClient.post('/auth/login', {
+      // 여기도
       email,
       password,
     });

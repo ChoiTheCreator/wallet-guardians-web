@@ -45,11 +45,6 @@ const MainPage = () => {
   const mainWidth = `calc(100vw - ${sidebarWidth}px)`;
   const mainMarginLeft = `${sidebarWidth / 2}px`;
 
-  //goalContext (예산설정여부 관리하는 컨텍스트) 사용자가 갖고왔는지 안왔는지를 확인하는 useEffect
-  useEffect(() => {
-    fetchBudget();
-  }, []);
-
   return (
     <div className="main-wrapper">
       <div
