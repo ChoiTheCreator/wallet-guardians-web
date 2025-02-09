@@ -3,7 +3,7 @@ import apiClient from './apiClient';
 export const signup = async (username, email, password) => {
   try {
     const response = await apiClient.post(
-      '/auth/signup',
+      'api/auth/signup', // api 명세서 대로 변경 나는 이렇게 안하면 안되더라..
       { username, email, password } // 요청 본문
     );
     // ✅ 회원가입 후 기존 로그인 정보 삭제 ( 이렇게 하면 로컬스토리지를 이용해도 고유하게 저장이 가능함)
@@ -19,7 +19,7 @@ export const signup = async (username, email, password) => {
 //로그아웃
 export const logout = async () => {
   try {
-    await apiClient.delete('/auth/logout');
+    await apiClient.delete('api/auth/logout'); // 여기도
     localStorage.removeItem('accesstoken');
     localStorage.removeItem('refreshToken');
     window.location.href = '/login';
@@ -31,7 +31,7 @@ export const logout = async () => {
 // 로그인 요청
 export const login = async (email, password) => {
   try {
-    const response = await apiClient.post('/auth/login', {
+    const response = await apiClient.post('api/auth/login', { // 여기도
       email,
       password,
     });
@@ -60,7 +60,7 @@ export const login = async (email, password) => {
 //유저 본인 정보 조회
 export const getUserInfo = async () => {
   try {
-    const response = await apiClient.get('/auth/info');
+    const response = await apiClient.get('api/auth/info'); // 여기도
     console.log('🛠 유저 정보 조회 API 응답:', response.data); // 응답 디버깅용
 
     //비밀번호를 제외한 나머지 데이터 Fetching 의도
