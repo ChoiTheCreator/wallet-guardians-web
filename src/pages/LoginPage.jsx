@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from 'react';
+import { useContext, useState } from 'react';
 import '../style/LoginPage.scss';
 import SignupPage from './SignupPage';
 import { useNavigate } from 'react-router-dom';
@@ -31,11 +31,7 @@ const LoginPage = () => {
   const [modalMessage, setModalMessage] = useState({ type: '', message: '' });
   const [fetchingBudget, setFetchingBudget] = useState(false); //예산 데이터 불러오고있는지?
   const navigate = useNavigate();
-  const { goalAmount, fetchBudget } = useContext(GoalContext); //get하는 함수도 가져오자.
-
-  // 회원가입 모달 여닫기
-  const openSignupModal = () => setIsSignupOpen(true);
-  const closeSignupModal = () => setIsSignupOpen(false);
+  const { fetchBudget } = useContext(GoalContext); //get하는 함수도 가져오자.
 
   // 로그인 처리 함수
   const handleLogin = async (e) => {
