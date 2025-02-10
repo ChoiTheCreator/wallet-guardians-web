@@ -8,9 +8,9 @@ import { css, keyframes } from '@emotion/react';
 
 // 로딩 시 필요한
 const spin = keyframes`
-from { transform: rotate(0deg); }
-to { transform: rotate(360deg); }
-`;
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+  `;
 
 const spinnerStyle = css`
   display: inline-block;
