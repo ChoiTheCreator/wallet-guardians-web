@@ -54,17 +54,18 @@ const FriendModal = () => {
       setModalMessage({ type: 'error', message: '이메일을 입력하세요!' });
       return;
     }
+  
     try {
       await sendFriendRequest(friendEmail);
       setModalMessage({ type: 'success', message: '친구 요청이 전송되었습니다!' });
+  
       setFriendEmail('');
       setIsAddingFriend(false);
-      loadFriends();
+      loadFriends(); // 📌 요청 후 목록 다시 로드
     } catch (error) {
       setModalMessage({ type: 'error', message: '친구 요청 실패! 다시 시도하세요.' });
     }
   };
-
   // 친구 요청 수락
   const handleAcceptRequest = async (senderEmail) => {
     try {

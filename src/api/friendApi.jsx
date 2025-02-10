@@ -5,7 +5,7 @@ export const sendFriendRequest = async (receiverEmail) => {
   try {
     const response = await apiClient.post(
       '/friends/requests',
-      { receiverEmail },
+      JSON.stringify({ receiverEmail }), // 📌 JSON.stringify() 추가
       {
         headers: {
           'ACCESS-AUTH-KEY': `BEARER ${localStorage.getItem('accessToken')}`,
@@ -14,12 +14,15 @@ export const sendFriendRequest = async (receiverEmail) => {
         },
       }
     );
+
+    console.log('✅ 친구 요청 성공:', response.data);
     return response.data;
   } catch (error) {
     console.error('🚨 친구 요청 실패:', error.response?.data || error.message);
     throw error;
   }
 };
+
 
 
 // ✅ 받은 친구 요청 목록 조회 (GET) - 항상 배열 반환
