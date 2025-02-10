@@ -6,28 +6,28 @@ $background-color: #f5f7fa; // 전체 페이지 배경색
 $card-bg-color: #ffffff; // 카드 배경색
 $font-family: 'Noto Sans KR', sans-serif;
 $shadow-color: rgba(0, 0, 0, 0.15); // 그림자 색상
-$box-size-left: 420px; // 📌 왼쪽 박스 크기 (고정)
-$box-size-right: 600px; // 📌 오른쪽 박스 크기 (확대)
+$box-size-left: 420px; // 📌 왼쪽 박스 크기
+$box-size-right: 650px; // 📌 오른쪽 박스 크기 확장
 
 .profile-wrapper {
   display: flex;
-  flex-direction: row; // 가로 정렬
+  flex-direction: row;
   justify-content: center;
-  align-items: stretch; // 양쪽 박스 높이 맞춤
+  align-items: stretch;
   padding: 60px;
   max-width: 1400px;
   margin: 0 auto;
-  gap: 60px; // 가로 간격 추가
+  gap: 60px;
 
   .profile-left,
   .profile-right {
-    min-height: 550px; // 📌 양쪽 높이 동일하게 설정
-    box-sizing: border-box; // 📌 내부 요소 크기 조절 (border 포함)
+    min-height: 600px; // 📌 높이 동일하게 유지
+    box-sizing: border-box;
   }
 
   .profile-left {
     width: 100%;
-    max-width: $box-size-left; // 왼쪽 패널 크기
+    max-width: $box-size-left;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -63,18 +63,11 @@ $box-size-right: 600px; // 📌 오른쪽 박스 크기 (확대)
         color: $primary-color;
         margin-bottom: 10px;
       }
-
-      .profile-title {
-        font-size: 1.3rem;
-        font-weight: 500;
-        color: #555;
-        margin-bottom: 30px;
-      }
     }
   }
 
   .profile-right {
-    flex: 1.5; // 📌 크기 비율 확장
+    flex: 1.7;
     max-width: $box-size-right;
     background-color: $card-bg-color;
     padding: 50px;
@@ -82,14 +75,15 @@ $box-size-right: 600px; // 📌 오른쪽 박스 크기 (확대)
     box-shadow: 0 8px 16px $shadow-color;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
 
+    // 📌 프로필 정보 제목을 최상단으로 이동
     .profile-header {
       font-size: 2.5rem;
       font-weight: 700;
       color: $primary-color;
-      margin-bottom: 35px;
       text-align: center;
+      margin-bottom: 100px;
     }
 
     .profile-details {
@@ -97,17 +91,18 @@ $box-size-right: 600px; // 📌 오른쪽 박스 크기 (확대)
       display: flex;
       flex-direction: column;
       gap: 20px;
+      padding-top: 0px; // 📌 프로필 정보만 위로 올리고 나머지는 유지
 
       .details-item {
         display: flex;
-        justify-content: space-between; // 📌 가로 정렬 (이메일 등)
+        justify-content: space-between;
         align-items: center;
         padding: 18px 30px;
         background-color: #f9f9f9;
         border-radius: 12px;
-        font-size: 1.4rem; // 글씨 크기 증가
+        font-size: 1.4rem;
         width: 100%;
-        box-sizing: border-box; // 📌 내부 요소 크기 자동 조절
+        box-sizing: border-box;
         transition: background-color 0.2s ease-in-out;
 
         &:hover {
@@ -117,20 +112,63 @@ $box-size-right: 600px; // 📌 오른쪽 박스 크기 (확대)
         .details-label {
           font-weight: 600;
           color: #666;
-          white-space: nowrap; // 📌 줄바꿈 방지
-          margin-right: 10px; // 라벨과 값 사이 여백
+          white-space: nowrap;
+          margin-right: 10px;
         }
 
         .details-value {
           color: #333;
-          flex: 1; // 📌 내용이 길어지면 자동 확장
+          flex: 1;
         }
       }
     }
   }
 }
 
-// 반응형 스타일 (모바일에서는 세로 정렬)
+// 📌 로딩 애니메이션 유지
+.loading {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: $primary-color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px;
+  opacity: 0.8;
+  animation: fadeIn 1s ease-in-out infinite alternate;
+
+  &::after {
+    content: '';
+    width: 30px;
+    height: 30px;
+    margin-left: 10px;
+    border: 4px solid $primary-color;
+    border-top: 4px solid transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0.5;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+// 반응형 스타일
 @media (max-width: 768px) {
   .profile-wrapper {
     flex-direction: column;
@@ -156,3 +194,65 @@ $box-size-right: 600px; // 📌 오른쪽 박스 크기 (확대)
     padding: 18px 25px;
   }
 }
+.profile-left {
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: $card-bg-color;
+  padding: 50px;
+  border-radius: 20px;
+  box-shadow: 0 8px 16px $shadow-color;
+  transition: transform 0.3s ease-in-out;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px $shadow-color;
+  }
+
+  .profile-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .profile-image {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 20px;
+      border: 5px solid $primary-color;
+    }
+
+    .profile-name {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: $primary-color;
+      margin-bottom: 10px;
+    }
+
+    // 📌 아이콘 버튼 스타일
+    .profile-actions {
+      display: flex;
+      gap: 15px;
+      margin-top: 15px;
+
+      .icon-button {
+        background-color: transparent;
+        color: $primary-color;
+        padding: 10px;
+        font-size: 2rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+
+        &:hover {
+          background-color: rgba(0, 31, 92, 0.1);
+          transform: scale(1.1);
+        }
+      }
+    }
+  }
+}
+
