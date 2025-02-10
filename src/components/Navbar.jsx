@@ -14,7 +14,7 @@ import { useContext } from 'react';
 import { logout } from '../api/authApi';
 
 //유저 정보 navbar에 표기하기 위한 컴포넌트 (use getuserInfo API)
-import UserInfoComponent from './userInfo';
+import UserInfoComponent from './UserInfo.jsx';
 
 const Navbar = () => {
   const { isSidebarOpen } = useContext(SidebarContext);
