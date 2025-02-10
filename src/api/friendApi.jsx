@@ -147,7 +147,7 @@ export const deleteFriend = async (deleteEmail) => {
 
 
 // ✅ 친구 요청 취소 (DELETE)
-export const cancelFriendRequest = async (deleteEmail) => {
+export const cancelFriendRequest = async (receiverEmail) => {
   try {
     const response = await apiClient.delete('/friends/cancel-request', {
       headers: {
@@ -155,7 +155,7 @@ export const cancelFriendRequest = async (deleteEmail) => {
         'REFRESH-AUTH-KEY': `BEARER ${localStorage.getItem('refreshToken')}`,
         'Content-Type': 'application/json',
       },
-      data: { deleteEmail }, // 📌 DELETE 요청의 Body에 데이터 포함
+      data: { receiverEmail }, // 📌 DELETE 요청의 Body에 데이터 포함
     });
 
     return response.data;
