@@ -108,17 +108,15 @@ export const acceptFriendRequest = async (senderEmail) => {
 // ✅ 친구 요청 거절 (delete)
 export const rejectFriendRequest = async (senderEmail) => {
   try {
-    const response = await apiClient.delete(
-      '/friends/reject',
-      { senderEmail, status: 'Rejected' },
-      {
-        headers: {
-          'ACCESS-AUTH-KEY': `BEARER ${localStorage.getItem('accessToken')}`,
-          'REFRESH-AUTH-KEY': `BEARER ${localStorage.getItem('refreshToken')}`,
-          'Content-Type': 'application/json',
-        },
-      }
-    );
+    const response = await apiClient.delete('/friends/reject', {
+      headers: {
+        'ACCESS-AUTH-KEY': `BEARER ${localStorage.getItem('accessToken')}`,
+        'REFRESH-AUTH-KEY': `BEARER ${localStorage.getItem('refreshToken')}`,
+        'Content-Type': 'application/json',
+      },
+      data: { senderEmail }, // 📌 DELETE 요청의 Body에 데이터 포함
+    });
+
     return response.data;
   } catch (error) {
     console.error('🚨 친구 요청 거절 실패:', error.response?.data || error.message);
@@ -126,18 +124,20 @@ export const rejectFriendRequest = async (senderEmail) => {
   }
 };
 
+
+
 // ✅ 친구 삭제 (DELETE)
 export const deleteFriend = async (deleteEmail) => {
   try {
-    const response = await apiClient.delete('/friends/delete', 
-        { deleteEmail },
-        {headers: {
+    const response = await apiClient.delete('/friends/delete', {
+      headers: {
         'ACCESS-AUTH-KEY': `BEARER ${localStorage.getItem('accessToken')}`,
         'REFRESH-AUTH-KEY': `BEARER ${localStorage.getItem('refreshToken')}`,
         'Content-Type': 'application/json',
-      }},
-    
-    );
+      },
+      data: { deleteEmail }, // 📌 DELETE 요청의 Body에 데이터 포함
+    });
+
     return response.data;
   } catch (error) {
     console.error('🚨 친구 삭제 실패:', error.response?.data || error.message);
@@ -145,24 +145,27 @@ export const deleteFriend = async (deleteEmail) => {
   }
 };
 
+
 // ✅ 친구 요청 취소 (DELETE)
 export const cancelFriendRequest = async (deleteEmail) => {
   try {
-    const response = await apiClient.delete('/friends/cancel-request',
-      { deleteEmail }, 
-      {headers: {
+    const response = await apiClient.delete('/friends/cancel-request', {
+      headers: {
         'ACCESS-AUTH-KEY': `BEARER ${localStorage.getItem('accessToken')}`,
         'REFRESH-AUTH-KEY': `BEARER ${localStorage.getItem('refreshToken')}`,
         'Content-Type': 'application/json',
-      }},
-      
-    );
-    return response.data[0];
+      },
+      data: { deleteEmail }, // 📌 DELETE 요청의 Body에 데이터 포함
+    });
+
+    return response.data;
   } catch (error) {
     console.error('🚨 친구 요청 취소 실패:', error.response?.data || error.message);
     throw error;
   }
 };
+
+
 
 
 

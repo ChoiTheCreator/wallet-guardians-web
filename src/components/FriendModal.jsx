@@ -21,6 +21,8 @@ const FriendModal = () => {
   const [selectedFriend, setSelectedFriend] = useState(null);
   const [friendEmail, setFriendEmail] = useState('');
 
+  const [modalMessage, setModalMessage] = useState(null);
+
   // 상태 관리
   const [friends, setFriends] = useState([]);
   const [receivedRequests, setReceivedRequests] = useState([]);
@@ -66,6 +68,11 @@ const FriendModal = () => {
       setModalMessage({ type: 'error', message: '친구 요청 실패! 다시 시도하세요.' });
     }
   };
+
+  const closeModalMessage = () => {
+    setModalMessage(null);
+  };
+
   // 친구 요청 수락
   const handleAcceptRequest = async (senderEmail) => {
     try {
@@ -118,6 +125,14 @@ const FriendModal = () => {
         <button className="close-btn" onClick={toggleFriendModal}>
           x
         </button>
+
+        {/* ✅ 메시지 모달 (성공/실패 알림) */}
+        {modalMessage && (
+          <div className={`modal-message ${modalMessage.type}`}>
+            <p>{modalMessage.message}</p>
+            <button onClick={closeModalMessage}>확인</button>
+          </div>
+        )}
 
         {/* 🔹 친구 상세 정보 화면 */}
         {selectedFriend ? (
