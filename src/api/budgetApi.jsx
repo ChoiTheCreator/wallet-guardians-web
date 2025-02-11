@@ -44,7 +44,7 @@ export const getBudget = async () => {
     //일반적으로 데이터가 없으면 404이긴함
     if (e.response?.status == 409 || e.response?.status == 404) {
       console.warn(` 예산 데이터가 없음 (${e.response?.status}), 기본값 반환.`);
-      return null;
+      return 0;
     }
     alert('서버 문제로 인한 에러발생');
     console.log('에러발생' + e);

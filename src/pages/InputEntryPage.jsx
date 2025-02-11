@@ -82,7 +82,10 @@ const InputEntryPage = () => {
         </div>
         <div>
           <InputEntryModal isOpen={isAddModalOpen} onClose={closeAddModal} />
-          <ReceiptModal isOpen={isReceiptModalOpen} onClose={closeReceiptModal} />
+          <ReceiptModal
+            isOpen={isReceiptModalOpen}
+            onClose={closeReceiptModal}
+          />
         </div>
       </div>
     </div>

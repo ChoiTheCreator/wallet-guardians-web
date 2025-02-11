@@ -1,56 +1,78 @@
-import { TbWashDryP } from 'react-icons/tb';
 import apiClient from './apiClient';
 
-// 지출 수동으로 입력했을 때 포스트 하는 함수 지출 추가 모달에서 사용
-
-//POST /api/expense/day: 사용 금액 기록
-export const saveExpense = async (
-  date,
-  expenseData,
-  accessToken,
-  refreshToken
-) => {
+//
+// 지출을 수동으로 입력했을 때 (POST 요청)
+//InputEntryModal.jsx의 핸들러 (지출 수동 입력 인풋 메서드)에 바디 data 주입을 떠넘기 따라서 args가 확 주는 효과
+//핸들러에서 바디값을 만들어서 주기때문에 확 편해짐 -> 포스팅함요
+export const saveExpense = async (expenseData) => {
   try {
-    //api 명세서에는 endPoint가 day로 바뀜
-    await apiClient.post(`/expense/receipt/${date}`, expenseData, {
-      headers: {
-        'Content-Type': 'application/json', // JSON 데이터 전송
-        'ACCESS-AUTH-KEY': `BEARER ${accessToken}`,
-        'REFRESH-AUTH-KEY': `BEARER ${refreshToken}`,
-      },
-    });
+    const response = await apiClient.post(`/expense`, expenseData);
+
+    //디버깅 코드 ; post 잘 되었니
+    console.log(`✅ [saveExpense] 지출 저장 성공! 응답:`, response.data);
   } catch (error) {
-    console.error('📌 지출 저장 실패:', error.response?.data || error.message);
+    console.error(
+      `❌ [saveExpense] 실패!`,
+      error.response?.data || error.message
+    );
     throw error;
   }
 };
 
-//DELETE /api/expense/{expense_Id}: 지출 삭제 - 완
+//추가한 지출 내역을 가져오는 기능 (day) -> api 파라미터의 매개변수 date
+export const getExpenseByDate = async (date) => {
+  try {
+    //디버깅
+    console.log(`🟢 [getExpenseByDate] ${date}의 지출 내역 요청`);
+    const response = apiClient.get(`/expense/day?date=${date}`);
 
-//GET /api/expense/month: 해당 월의 지출 내역 조회 - 완
-// export const getMonthlyExpense = async(year,month) =>{
-//   try{
-//     await apiClient.get('')
-//   }
-// }
+    console.log(`✅ [getExpenseByDate] 지출 조회 성공! 응답:`, response.data);
+    return response.data;
+  } catch (error) {
+    console.error(
+      `❌ [getExpenseByDate] 지출 조회 실패!`,
+      error.response?.data || error.message
+    );
+    throw error;
+  }
+};
 
-//지출 페이지에서 사용할 함수로 지출페이지에 로직 추가 예정
+// 지출 조회 (GET 요청)
 export const getExpense = async (date, accessToken, refreshToken) => {
   try {
+    console.log(`🟢 [getExpense] 지출 조회 요청: 날짜: ${date}`);
+    console.log(
+      `🔑 [getExpense] 액세스 토큰 확인:`,
+      accessToken ? '✅ 있음' : '❌ 없음'
+    );
+    console.log(
+      `🔑 [getExpense] 리프레시 토큰 확인:`,
+      refreshToken ? '✅ 있음' : '❌ 없음'
+    );
+
+    if (!accessToken) {
+      throw new Error('❌ 액세스 토큰이 없습니다. 로그인을 확인하세요.');
+    }
+
     const response = await apiClient.get(`/api/expense/${date}`, {
       headers: {
         'ACCESS-AUTH-KEY': `BEARER ${accessToken}`,
-        'REFRESH-AUTH-KEY': `BEARER ${refreshToken}`,
+        'REFRESH-AUTH-KEY': `BEARER ${refreshToken || ''}`,
       },
     });
+
+    console.log(`✅ [getExpense] 지출 조회 성공! 응답:`, response.data);
     return response.data;
   } catch (error) {
-    console.error('📌 지출 조회 실패:', error.response?.data || error.message);
+    console.error(
+      `❌ [getExpense] 지출 조회 실패!`,
+      error.response?.data || error.message
+    );
     throw error;
   }
 };
 
-// 마찬가지로 지출페이지에서 사용할 함수로 수정할 수 있는 함수
+// 지출 수정 (PUT 요청)
 export const updateExpense = async (
   expenseId,
   expenseData,
@@ -58,15 +80,42 @@ export const updateExpense = async (
   refreshToken
 ) => {
   try {
-    await apiClient.put(`/api/expense/${expenseId}`, expenseData, {
-      headers: {
-        'Content-Type': 'application/json',
-        'ACCESS-AUTH-KEY': `BEARER ${accessToken}`,
-        'REFRESH-AUTH-KEY': `BEARER ${refreshToken}`,
-      },
-    });
+    console.log(
+      `🟢 [updateExpense] 지출 수정 요청: ID: ${expenseId}, 데이터:`,
+      expenseData
+    );
+    console.log(
+      `🔑 [updateExpense] 액세스 토큰 확인:`,
+      accessToken ? '✅ 있음' : '❌ 없음'
+    );
+    console.log(
+      `🔑 [updateExpense] 리프레시 토큰 확인:`,
+      refreshToken ? '✅ 있음' : '❌ 없음'
+    );
+
+    if (!accessToken) {
+      throw new Error('❌ 액세스 토큰이 없습니다. 로그인을 확인하세요.');
+    }
+
+    const response = await apiClient.put(
+      `/api/expense/${expenseId}`,
+      expenseData,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'ACCESS-AUTH-KEY': `BEARER ${accessToken}`,
+          'REFRESH-AUTH-KEY': `BEARER ${refreshToken || ''}`,
+        },
+      }
+    );
+
+    console.log(`✅ [updateExpense] 지출 수정 성공! 응답:`, response.data);
+    return response.data;
   } catch (error) {
-    console.error('📌 지출 수정 실패:', error.response?.data || error.message);
+    console.error(
+      `❌ [updateExpense] 지출 수정 실패!`,
+      error.response?.data || error.message
+    );
     throw error;
   }
 };

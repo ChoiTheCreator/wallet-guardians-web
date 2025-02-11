@@ -13,6 +13,7 @@ const InputEntryModal = ({ isOpen, onClose }) => {
   const navigate = useNavigate();
 
   const handleSave = async () => {
+    //기타랑 원래 설정해둔 Option을 나눈 거임
     const selectedCategory = category === '기타' ? customCategory : category;
 
     if (!selectedCategory || !amount) {
@@ -21,14 +22,15 @@ const InputEntryModal = ({ isOpen, onClose }) => {
     }
 
     const expenseData = {
+      date: date, //date 함께 바디에 보냄
       category: selectedCategory, // ✅ 필드명 수정
       amount: parseInt(amount, 10),
-      storename: storename, // ✅ 필드명 수정
+      storeName: storename, // ✅ 필드명 수정
       description: description,
     };
 
     try {
-      await saveExpense(date, expenseData); // ✅ 수정된 API 호출
+      await saveExpense(expenseData); // ✅ 수정된 API 호출
       alert('지출이 성공적으로 저장되었습니다!');
       navigate('/main');
     } catch (error) {

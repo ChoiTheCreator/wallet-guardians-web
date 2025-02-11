@@ -18,8 +18,8 @@ export const GoalProvider = ({ children }) => {
           '예산 데이터가 없는 초기회원이므로 목표금액을 일단 0으로 설정한다.'
         );
         setGoalAmount(0);
-        //여기서 함수를 빠르게 리턴시켜야햐했음
         return;
+        //여기서 함수를 빠르게 리턴시켜야햐했음
       }
       console.log('✅ 유저 외곽오카네 정보:', data);
       console.log('✅ 유저 오카네 정보:', data.amount);
