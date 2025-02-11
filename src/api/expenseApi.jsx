@@ -37,6 +37,19 @@ export const getExpenseByDate = async (date) => {
   }
 };
 
+//추가한 지출 내역을 가져오는 기능 (month) -> api 파라미터의 매개변수 year & month
+export const getExpenseByMonth = async (year, month) => {
+  try {
+    console.log(`🟢 [getExpenseByMonth] ${year}년 ${month}월 지출 조회 요청`);
+
+    const response = await apiClient.get(
+      `/expense/month?year=${year}&month=${month}`
+    );
+    console.log(`✅ [getExpenseByMonth] 응답 데이터:`, response.data);
+    return response.data;
+  } catch (error) {}
+};
+
 // 지출 조회 (GET 요청)
 export const getExpense = async (date, accessToken, refreshToken) => {
   try {
