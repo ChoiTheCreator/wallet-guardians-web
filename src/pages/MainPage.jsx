@@ -15,9 +15,9 @@ const MainPage = () => {
   const { isSidebarOpen } = useContext(SidebarContext);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [expensesByDate, setExpensesByDate] = useState({}); // ✅ 날짜별 지출 데이터 저장
-  const [totalSpent, setTotalSpent] = useState(0); // ✅ 전체 사용된 예산
-  const [isOverBudget, setIsOverBudget] = useState(false); // ✅ 예산 초과 여부 검증
+  const [expensesByDate, setExpensesByDate] = useState({}); // 날짜별 지출 데이터 저장
+  const [totalSpent, setTotalSpent] = useState(0); // 전체 사용된 예산
+  const [isOverBudget, setIsOverBudget] = useState(false); // 예산 초과 여부 검증
 
   const navigate = useNavigate();
 

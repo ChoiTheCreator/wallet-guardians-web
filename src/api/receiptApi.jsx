@@ -1,44 +1,73 @@
-// api/receiptApi.jsx
 import apiClient from './apiClient';
 
-// 영수증 이미지 업로드 함수 (토큰은 인터셉터에서 자동 추가)
-export const uploadReceiptImage = async (
-  image,
-  category,
-  description,
-  date
-) => {
-  const formData = new FormData();
-  formData.append('file', image);
+/** 목표
+ *  영수증 저장 (POST 요청)
+ * - 멀티파트 폼데이터로 전송
+ * - JSON 데이터를 별도로 포함
+ */
 
-  const info = JSON.stringify({ category, description });
-  formData.append('info', new Blob([info], { type: 'application/json' }));
-
+//매개변수 하나로 통일. at API 함수 로직
+export const uploadReceiptImage = async (receiptData) => {
   try {
-    const response = await apiClient.post(
-      `/expense/receipt/${date}`, // 날짜가 포함된 URL
-      formData,
-      {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          // 토큰은 인터셉터가 자동 추가합니다.
-        },
-      }
+    console.log(
+      `🟢 [uploadReceiptImage] 요청: ${receiptData.date}, ${receiptData.category}`
     );
-    return response.data;
   } catch (error) {
-    console.error('📌 이미지 업로드 실패:', error);
+    console.error(
+      `❌ [uploadReceiptImage] 업로드 실패!`,
+      error.response?.data || error.message
+    );
     throw error;
   }
 };
+// export const uploadReceiptImage = async (file, category, description, date) => {
+//   try {
+//     console.log(
+//       `🟢 [uploadReceiptImage] 영수증 업로드 요청: ${date}, ${category}`
+//     );
 
-// 영수증 데이터 조회 함수 (토큰은 인터셉터에서 자동 추가)
-export const fetchReceiptResult = async () => {
+//     const formData = new FormData();
+//     formData.append('file', file);
+//     formData.append(
+//       'info',
+//       JSON.stringify({
+//         date: date,
+//         category: category,
+//         description: description,
+//       })
+//     );
+
+//     const response = await apiClient.post('/expense/receipt', formData, {
+//       headers: {
+//         'Content-Type': 'multipart/form-data',
+//       },
+//     });
+
+//     console.log(`✅ [uploadReceiptImage] 업로드 성공! 응답:`, response.data);
+//     return response.data;
+//   } catch (error) {
+//     console.error(
+//       `❌ [uploadReceiptImage] 업로드 실패!`,
+//       error.response?.data || error.message
+//     );
+//     throw error;
+//   }
+// };
+
+/**
+ * ✅ 영수증 전체 조회 (GET 요청)
+ */
+export const getAllReceipts = async () => {
   try {
+    console.log(`🟢 [getAllReceipts] 영수증 전체 조회 요청`);
     const response = await apiClient.get('/receipt');
+    console.log(`✅ [getAllReceipts] 조회 성공! 응답:`, response.data);
     return response.data;
   } catch (error) {
-    console.error('📌 결과 조회 실패:', error);
+    console.error(
+      `❌ [getAllReceipts] 조회 실패!`,
+      error.response?.data || error.message
+    );
     throw error;
   }
 };
