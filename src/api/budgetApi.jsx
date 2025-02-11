@@ -1,3 +1,4 @@
+import { a } from 'framer-motion/client';
 import apiClient from './apiClient';
 
 // 예산 설정 (POST) 처음 예산 설정하는 곳에서 사용하면 됨
@@ -27,7 +28,7 @@ export const setBudget = async (goalAmount) => {
     throw error;
   }
 };
-
+//만약 회원가입을 처음해서 예산정보가 없으면 409 에러가 뜰거임
 export const getBudget = async () => {
   try {
     const response = await apiClient.get('/budget');
@@ -39,6 +40,12 @@ export const getBudget = async () => {
 
     return response.data.data;
   } catch (e) {
+    //회원가입을 처음하는 사용자 입장에선 getBudget을 하면 없는 값이 때문에 409 에러가 뜸 (서버의 흐름과 달라서)
+    //일반적으로 데이터가 없으면 404이긴함
+    if (e.response?.status == 409 || e.response?.status == 404) {
+      console.warn(` 예산 데이터가 없음 (${e.response?.status}), 기본값 반환.`);
+      return null;
+    }
     alert('서버 문제로 인한 에러발생');
     console.log('에러발생' + e);
     throw e;
