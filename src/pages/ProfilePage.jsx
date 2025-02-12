@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { getUserInfo } from '../api/authApi';
 import { FaCamera, FaCog } from 'react-icons/fa'; 
+import ProfileImgModal from '../components/profileImgModal';
+import ProfilePwModal from '../components/ProfilePwModal';
 import '../style/ProfilePage.scss';
 
 const ProfilePage = () => {
   const [profileData, setProfileData] = useState(null);
+  const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
+  const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -17,16 +21,6 @@ const ProfilePage = () => {
     };
     fetchProfile();
   }, []);
-
-  // 📌 프로필 사진 업로드 핸들러 (나중에 실제 업로드 기능 추가 가능)
-  const handleProfileUpload = () => {
-    alert('📷 프로필 사진을 변경할 수 있는 기능을 추가하세요!');
-  };
-
-  // 📌 비밀번호 변경 핸들러
-  const handleChangePassword = () => {
-    alert('🔑 비밀번호 변경 기능을 추가하세요!');
-  };
 
   if (!profileData) {
     return <div className="loading">프로필 로딩 중...</div>;
@@ -44,12 +38,11 @@ const ProfilePage = () => {
           />
           <h2 className="profile-name">{profileData.username}</h2>
 
-          {/* 📌 아이콘 버튼 추가 */}
           <div className="profile-actions">
-            <button className="icon-button" onClick={handleProfileUpload}>
+            <button className="icon-button" onClick={() => setIsProfileModalOpen(true)}>
               <FaCamera />
             </button>
-            <button className="icon-button" onClick={handleChangePassword}>
+            <button className="icon-button" onClick={() => setIsPasswordModalOpen(true)}>
               <FaCog />
             </button>
           </div>
@@ -74,6 +67,12 @@ const ProfilePage = () => {
           </div>
         </div>
       </div>
+
+      {/* 📌 프로필 사진 변경 모달 */}
+      <ProfileImgModal isOpen={isProfileModalOpen} onClose={() => setIsProfileModalOpen(false)} />
+
+      {/* 📌 비밀번호 변경 모달 */}
+      <ProfilePwModal isOpen={isPasswordModalOpen} onClose={() => setIsPasswordModalOpen(false)} />
     </div>
   );
 };
