@@ -4,14 +4,7 @@ export const sendFriendRequest = async (receiverEmail) => {
   try {
     const response = await apiClient.post(
       '/friends/requests',
-      { receiverEmail },
-      {
-        headers: {
-          'ACCESS-AUTH-KEY': `BEARER ${localStorage.getItem('accessToken')}`,
-          'REFRESH-AUTH-KEY': `BEARER ${localStorage.getItem('refreshToken') || ''}`,
-          'Content-Type': 'application/json',
-        },
-      }
+      { receiverEmail }, //헤더 제거해도 되는구만~
     );
 
     console.log('✅ 친구 요청 성공:', response.data);
@@ -26,10 +19,6 @@ export const sendFriendRequest = async (receiverEmail) => {
 export const getFriendsList = async () => {
   try {
     const response = await apiClient.get('/friends', {
-      headers: {
-        'ACCESS-AUTH-KEY': `BEARER ${localStorage.getItem('accessToken')}`,
-        'REFRESH-AUTH-KEY': `BEARER ${localStorage.getItem('refreshToken') || ''}`,
-      },
     });
 
     console.log('📌 친구 목록 (API 응답):', response.data.data);
@@ -45,10 +34,6 @@ export const getFriendsList = async () => {
 export const getSentFriendRequests = async () => {
   try {
     const response = await apiClient.get('/friends/requests/sent', {
-      headers: {
-        'ACCESS-AUTH-KEY': `BEARER ${localStorage.getItem('accessToken')}`,
-        'REFRESH-AUTH-KEY': `BEARER ${localStorage.getItem('refreshToken') || ''}`,
-      },
     });
 
     console.log('📌 보낸 친구 요청 (API 응답):', response.data.data);
@@ -63,10 +48,6 @@ export const getSentFriendRequests = async () => {
 export const getReceivedFriendRequests = async () => {
   try {
     const response = await apiClient.get('/friends/requests/received', {
-      headers: {
-        'ACCESS-AUTH-KEY': `BEARER ${localStorage.getItem('accessToken')}`,
-        'REFRESH-AUTH-KEY': `BEARER ${localStorage.getItem('refreshToken') || ''}`,
-      },
     });
 
     console.log('📌 받은 친구 요청 (API 응답):', response.data.data);
@@ -84,13 +65,6 @@ export const acceptFriendRequest = async (friendStatusId) => {
     const response = await apiClient.patch(
       `/friends/requests/${friendStatusId}/accept`,
       {},
-      {
-        headers: {
-          'ACCESS-AUTH-KEY': `BEARER ${localStorage.getItem('accessToken')}`,
-          'REFRESH-AUTH-KEY': `BEARER ${localStorage.getItem('refreshToken') || ''}`,
-          'Content-Type': 'application/json',
-        },
-      }
     );
     return response.data;
   } catch (error) {
@@ -106,13 +80,6 @@ export const rejectFriendRequest = async (friendStatusId) => {
     const response = await apiClient.patch(
       `/friends/requests/${friendStatusId}/reject`,
       {},
-      {
-        headers: {
-          'ACCESS-AUTH-KEY': `BEARER ${localStorage.getItem('accessToken')}`,
-          'REFRESH-AUTH-KEY': `BEARER ${localStorage.getItem('refreshToken') || ''}`,
-          'Content-Type': 'application/json',
-        },
-      }
     );
     return response.data;
   } catch (error) {
@@ -126,11 +93,6 @@ export const rejectFriendRequest = async (friendStatusId) => {
 export const deleteFriend = async (friendListId) => {
   try {
     const response = await apiClient.delete(`/friends/${friendListId}`, {
-      headers: {
-        'ACCESS-AUTH-KEY': `BEARER ${localStorage.getItem('accessToken')}`,
-        'REFRESH-AUTH-KEY': `BEARER ${localStorage.getItem('refreshToken') || ''}`,
-        'Content-Type': 'application/json',
-      },
     });
 
     return response.data;
@@ -145,11 +107,6 @@ export const deleteFriend = async (friendListId) => {
 export const cancelFriendRequest = async (friendStatusId) => {
   try {
     const response = await apiClient.delete(`/friends/requests/${friendStatusId}/cancel`, {
-      headers: {
-        'ACCESS-AUTH-KEY': `BEARER ${localStorage.getItem('accessToken')}`,
-        'REFRESH-AUTH-KEY': `BEARER ${localStorage.getItem('refreshToken') || ''}`,
-        'Content-Type': 'application/json',
-      },
     });
 
     return response.data;

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getUserInfo } from '../api/authApi';
-import { FaCamera, FaCog } from 'react-icons/fa'; 
+import { FaCamera, FaCog, FaUserTimes } from 'react-icons/fa'; 
 import ProfileImgModal from '../components/profileImgModal';
 import ProfilePwModal from '../components/ProfilePwModal';
 import '../style/ProfilePage.scss';
@@ -44,6 +44,9 @@ const ProfilePage = () => {
             </button>
             <button className="icon-button" onClick={() => setIsPasswordModalOpen(true)}>
               <FaCog />
+            </button>
+            <button className="icon-button">
+              <FaUserTimes />
             </button>
           </div>
         </div>
