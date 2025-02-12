@@ -98,6 +98,7 @@ const FriendModal = () => {
   
 
   // 친구 삭제
+  // ✅ 친구 삭제
   const handleDeleteFriend = async (friendListId) => {
     try {
       await deleteFriend(friendListId);
@@ -107,6 +108,7 @@ const FriendModal = () => {
       alert('친구 삭제 실패: ' + error.message);
     }
   };
+
   
 
   // 친구 요청 취소
@@ -144,10 +146,10 @@ const FriendModal = () => {
             <button className="back-btn" onClick={() => setSelectedFriend(null)}>
               <FaArrowLeft /> 뒤로가기
             </button>
-            <h2>{selectedFriend.senderEmail}</h2>
-            <p><strong>이메일:</strong> {selectedFriend.senderEmail}</p>
+            <h2>{selectedFriend.friendName}</h2> {/* 🔹 친구 이름 표시 */}
+            <p><strong>이메일:</strong> {selectedFriend.friendEmail}</p> {/* 🔹 이메일 표시 */}
             <div className="modal-buttons">
-              <button className="delete-btn" onClick={() => handleDeleteFriend(selectedFriend.senderEmail)}>
+              <button className="delete-btn" onClick={() => handleDeleteFriend(selectedFriend.friendListId)}>
                 친구 삭제
               </button>
             </div>
