@@ -47,7 +47,11 @@ export const getExpenseByMonth = async (year, month) => {
     );
     console.log(`✅ [getExpenseByMonth] 응답 데이터:`, response.data);
     return response.data;
-  } catch (error) {}
+  } catch (error) {
+    //디버깅 함수 추가
+    console.error(`❌ [getExpenseByMonth] 지출 조회 실패!`, error.response?.data || error.message);
+    throw error;
+  }
 };
 
 // 지출 조회 (GET 요청)

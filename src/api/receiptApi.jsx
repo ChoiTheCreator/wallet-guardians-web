@@ -4,9 +4,10 @@ import apiClient from './apiClient';
  *  영수증 저장 (POST 요청)
  * - 멀티파트 폼데이터로 전송
  * - JSON 데이터를 별도로 포함
+ * 
  */
 
-//매개변수 하나로 통일. at API 함수 로직
+//매개변수 하나로 통일. at API 함수 로직 -> 여기 구현해야함
 export const uploadReceiptImage = async (receiptData) => {
   try {
     console.log(

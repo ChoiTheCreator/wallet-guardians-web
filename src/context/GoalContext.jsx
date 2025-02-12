@@ -8,7 +8,7 @@ export const GoalProvider = ({ children }) => {
   const [error, setError] = useState(null);
 
   // ✅ 예산 데이터 가져오는 함수 -> getBudget에서 409 에러처리를 해놨기 때문에 return null if 409
-  //null 값에 대한 처리만 하면 됌
+  //null 값에 대한 처리 필요 및 fetching 할때
   const fetchBudget = async () => {
     try {
       const data = await getBudget();

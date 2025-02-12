@@ -8,7 +8,7 @@ const ReceiptModal = ({ isOpen, onClose }) => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
-  // ✅ receiptData 상태를 하나로 통합하여 관리
+  //  receiptData 상태를 하나로 통합하여 관리
   const [receiptData, setReceiptData] = useState({
     image: null,
     category: '',
@@ -16,7 +16,7 @@ const ReceiptModal = ({ isOpen, onClose }) => {
     date: date,
   });
 
-  // ✅ 이미지 선택 핸들러 (receiptData 상태 업데이트)
+  //  이미지 선택 핸들러 (receiptData 상태 업데이트)
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file && (file.type === 'image/jpeg' || file.type === 'image/png')) {
