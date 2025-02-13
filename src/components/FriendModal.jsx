@@ -98,7 +98,6 @@ const FriendModal = () => {
   
 
   // 친구 삭제
-  // ✅ 친구 삭제
   const handleDeleteFriend = async (friendListId) => {
     try {
       await deleteFriend(friendListId);
@@ -108,8 +107,6 @@ const FriendModal = () => {
       alert('친구 삭제 실패: ' + error.message);
     }
   };
-
-  
 
   // 친구 요청 취소
   const handleCancelRequest = async (friendStatusId) => {
@@ -121,12 +118,18 @@ const FriendModal = () => {
       alert('친구 요청 취소 실패: ' + error.message);
     }
   };
-  
+
+  // 모달 외부 클릭 시 모달 닫기
+  const handleOverlayClick = (e) => {
+    if (e.target === e.currentTarget) {
+      toggleFriendModal();
+    }
+  };
 
   if (!isFriendModalOpen) return null;
 
   return (
-    <div className="modal-overlay">
+    <div className="modal-overlay" onClick={handleOverlayClick}>
       <div className="modal-container">
         <button className="close-btn" onClick={toggleFriendModal}>
           x
@@ -179,7 +182,6 @@ const FriendModal = () => {
                 </button>
               </div>
             </div>
-
           </>
         ) : isManagingRequests ? (
           <>
@@ -188,12 +190,16 @@ const FriendModal = () => {
             </button>
             <h3>보낸 친구 요청 목록</h3>
             <ul className="friend-list">
-              {sentRequests.map((request) => (
-                <li key={request.friendStatusId}>
-                  {request.receiverUsername} ({request.receiverEmail})
-                  <button className="cancel-request-btn" onClick={() => handleCancelRequest(request.friendStatusId)}>취소</button>
-                </li>
-              ))}
+              {sentRequests.length > 0 ? (
+                sentRequests.map((request) => (
+                  <li key={request.friendStatusId}>
+                    {request.receiverUsername} ({request.receiverEmail})
+                    <button className="cancel-request-btn" onClick={() => handleCancelRequest(request.friendStatusId)}>취소</button>
+                  </li>
+                ))
+              ) : (
+                <p className="no-data-message">보낸 친구 요청이 없습니다.</p>
+              )}
             </ul>
           </>
         ) : (
@@ -216,26 +222,35 @@ const FriendModal = () => {
               <div className="request-list">
                 <h3>받은 친구 요청</h3>
                 <ul>
-                  {receivedRequests.map((request) => (
-                    <li key={request.friendStatusId} className="request-item">
-                      {request.senderUsername} ({request.senderEmail})
-                      <div className="request-buttons">
-                        <button className="accept-btn" onClick={() => handleAcceptRequest(request.friendStatusId)}>수락</button>
-                        <button className="reject-btn" onClick={() => handleRejectRequest(request.friendStatusId)}>거절</button>
-                      </div>
-                    </li>
-                  ))}
+                  {receivedRequests.length > 0 ? (
+                    receivedRequests.map((request) => (
+                      <li key={request.friendStatusId} className="request-item">
+                        {request.senderUsername} ({request.senderEmail})
+                        <div className="request-buttons">
+                          <button className="accept-btn" onClick={() => handleAcceptRequest(request.friendStatusId)}>수락</button>
+                          <button className="reject-btn" onClick={() => handleRejectRequest(request.friendStatusId)}>거절</button>
+                        </div>
+                      </li>
+                    ))
+                  ) : (
+                    <p className="no-data-request-message">받은 친구 요청이 없습니다.</p>
+                  )}
                 </ul>
               </div>
             )}
+
             {/* 친구 목록 */}
             <h2>친구 목록</h2>
             <ul className="friend-list">
-              {friends.map((friend) => (
-                <li key={friend.friendListId} className="friend-item" onClick={() => setSelectedFriend(friend)}>
-                  {friend.friendName} ({friend.friendEmail})
-                </li>
-              ))}
+              {friends.length > 0 ? (
+                friends.map((friend) => (
+                  <li key={friend.friendListId} className="friend-item" onClick={() => setSelectedFriend(friend)}>
+                    {friend.friendName} ({friend.friendEmail})
+                  </li>
+                ))
+              ) : (
+                <p className="no-data-message">친구가 아직 없습니다.</p>
+              )}
             </ul>
           </>
         )}
