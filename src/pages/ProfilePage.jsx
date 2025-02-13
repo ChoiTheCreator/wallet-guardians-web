@@ -3,13 +3,15 @@ import { getUserInfo } from '../api/authApi';
 import { FaCamera, FaCog, FaUserTimes } from 'react-icons/fa'; 
 import ProfileImgModal from '../components/profileImgModal';
 import ProfilePwModal from '../components/ProfilePwModal';
+import ProfileDeleteModal from '../components/ProfileDeleteModal';
 import '../style/ProfilePage.scss';
 
 const ProfilePage = () => {
   const [profileData, setProfileData] = useState(null);
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
   const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
-
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  
   useEffect(() => {
     const fetchProfile = async () => {
       try {
@@ -45,7 +47,7 @@ const ProfilePage = () => {
             <button className="icon-button" onClick={() => setIsPasswordModalOpen(true)}>
               <FaCog />
             </button>
-            <button className="icon-button">
+            <button className="icon-button" onClick={() => setIsDeleteModalOpen(true)}>
               <FaUserTimes />
             </button>
           </div>
@@ -76,6 +78,9 @@ const ProfilePage = () => {
 
       {/* 📌 비밀번호 변경 모달 */}
       <ProfilePwModal isOpen={isPasswordModalOpen} onClose={() => setIsPasswordModalOpen(false)} />
+      
+      {/* 📌 회원 탈퇴 모달 */}
+      <ProfileDeleteModal isOpen={isDeleteModalOpen} onClose={() => setIsDeleteModalOpen(false)} />
     </div>
   );
 };
