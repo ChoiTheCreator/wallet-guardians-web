@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useFriendContext } from '../context/FriendContext';
 import { FaChevronDown, FaChevronUp, FaUserPlus, FaUserCheck, FaArrowLeft } from 'react-icons/fa';
+import GlobalModalMessage from './GlobalModalMesaage';
 import '../style/FriendModal.scss';
 import {
   sendFriendRequest,
@@ -20,13 +21,22 @@ const FriendModal = () => {
   const [isManagingRequests, setIsManagingRequests] = useState(false);
   const [selectedFriend, setSelectedFriend] = useState(null);
   const [friendEmail, setFriendEmail] = useState('');
-
-  const [modalMessage, setModalMessage] = useState(null);
+  const [modalMessage, setModalMessage] = useState(null); // ✅ 모달 메시지 상태 추가
 
   // 상태 관리
   const [friends, setFriends] = useState([]);
   const [receivedRequests, setReceivedRequests] = useState([]);
   const [sentRequests, setSentRequests] = useState([]);
+
+  // ✅ 모달 메시지 자동 삭제 (3초 후 사라짐)
+  useEffect(() => {
+    if (modalMessage) {
+      const timer = setTimeout(() => {
+        setModalMessage(null);
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [modalMessage]);
 
   // 모달이 열릴 때 데이터 로드
   useEffect(() => {
@@ -56,55 +66,49 @@ const FriendModal = () => {
       setModalMessage({ type: 'error', message: '이메일을 입력하세요!' });
       return;
     }
-  
+
     try {
       await sendFriendRequest(friendEmail);
-      setModalMessage({ type: 'success', message: '친구 요청이 전송되었습니다!' });
-  
+      setModalMessage({ type: 'request', message: '친구 요청이 전송되었습니다!' });
+
       setFriendEmail('');
       setIsAddingFriend(false);
-      loadFriends(); // 📌 요청 후 목록 다시 로드
+      loadFriends();
     } catch (error) {
       setModalMessage({ type: 'error', message: '친구 요청 실패! 다시 시도하세요.' });
     }
-  };
-
-  const closeModalMessage = () => {
-    setModalMessage(null);
   };
 
   // 친구 요청 수락
   const handleAcceptRequest = async (friendStatusId) => {
     try {
       await acceptFriendRequest(friendStatusId);
-      alert('친구 요청을 수락했습니다.');
+      setModalMessage({ type: 'accept', message: '친구 요청을 수락했습니다!' });
       loadFriends();
     } catch (error) {
-      alert('친구 요청 수락 실패: ' + error.message);
+      setModalMessage({ type: 'error', message: '친구 요청 수락 실패!' });
     }
   };
-  
 
   // 친구 요청 거절
   const handleRejectRequest = async (friendStatusId) => {
     try {
       await rejectFriendRequest(friendStatusId);
-      alert('친구 요청을 거절했습니다.');
+      setModalMessage({ type: 'reject', message: '친구 요청을 거절했습니다.' });
       loadFriends();
     } catch (error) {
-      alert('친구 요청 거절 실패: ' + error.message);
+      setModalMessage({ type: 'error', message: '친구 요청 거절 실패!' });
     }
   };
-  
 
   // 친구 삭제
   const handleDeleteFriend = async (friendListId) => {
     try {
       await deleteFriend(friendListId);
-      alert('친구를 삭제했습니다.');
+      setModalMessage({ type: 'delete', message: '친구를 삭제했습니다.' });
       loadFriends();
     } catch (error) {
-      alert('친구 삭제 실패: ' + error.message);
+      setModalMessage({ type: 'error', message: '친구 삭제 실패!' });
     }
   };
 
@@ -112,10 +116,10 @@ const FriendModal = () => {
   const handleCancelRequest = async (friendStatusId) => {
     try {
       await cancelFriendRequest(friendStatusId);
-      alert('보낸 친구 요청을 취소했습니다.');
+      setModalMessage({ type: 'reject', message: '보낸 친구 요청을 취소했습니다.' });
       loadFriends();
     } catch (error) {
-      alert('친구 요청 취소 실패: ' + error.message);
+      setModalMessage({ type: 'error', message: '친구 요청 취소 실패!' });
     }
   };
 
@@ -130,18 +134,13 @@ const FriendModal = () => {
 
   return (
     <div className="modal-overlay" onClick={handleOverlayClick}>
+      {/* ✅ 모달 메시지 추가 (자동 사라짐) */}
+      {modalMessage && <GlobalModalMessage type={modalMessage.type} message={modalMessage.message} />}
+
       <div className="modal-container">
         <button className="close-btn" onClick={toggleFriendModal}>
           x
         </button>
-
-        {/* ✅ 메시지 모달 (성공/실패 알림) */}
-        {modalMessage && (
-          <div className={`modal-message ${modalMessage.type}`}>
-            <p>{modalMessage.message}</p>
-            <button onClick={closeModalMessage}>확인</button>
-          </div>
-        )}
 
         {/* 🔹 친구 상세 정보 화면 */}
         {selectedFriend ? (
@@ -149,8 +148,8 @@ const FriendModal = () => {
             <button className="back-btn" onClick={() => setSelectedFriend(null)}>
               <FaArrowLeft /> 뒤로가기
             </button>
-            <h2>{selectedFriend.friendName}</h2> {/* 🔹 친구 이름 표시 */}
-            <p><strong>이메일:</strong> {selectedFriend.friendEmail}</p> {/* 🔹 이메일 표시 */}
+            <h2>{selectedFriend.friendName}</h2>
+            <p><strong>이메일:</strong> {selectedFriend.friendEmail}</p>
             <div className="modal-buttons">
               <button className="delete-btn" onClick={() => handleDeleteFriend(selectedFriend.friendListId)}>
                 친구 삭제
