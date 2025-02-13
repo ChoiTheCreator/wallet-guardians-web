@@ -67,7 +67,7 @@ const ReceiptPicPage = () => {
   const [selectedMonth, setSelectedMonth] = useState('01');
   const [receipts, setReceipts] = useState([]);
 
-  const baseURL = 'https://wallet-guardians.store:443/api/';
+  const baseURL = 'https://storage.googleapis.com/wallet_guardians_bucket/';
 
   const years = ['2023', '2024', '2025', '2026'];
   const months = [
