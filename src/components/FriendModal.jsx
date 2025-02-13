@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useFriendContext } from '../context/FriendContext';
-import { FaChevronDown, FaChevronUp, FaUserPlus, FaUserCog, FaArrowLeft } from 'react-icons/fa';
+import { FaChevronDown, FaChevronUp, FaUserPlus, FaUserCheck, FaArrowLeft } from 'react-icons/fa';
 import '../style/FriendModal.scss';
 import {
   sendFriendRequest,
@@ -74,31 +74,34 @@ const FriendModal = () => {
   };
 
   // 친구 요청 수락
-  const handleAcceptRequest = async (senderEmail) => {
+  const handleAcceptRequest = async (friendStatusId) => {
     try {
-      await acceptFriendRequest(senderEmail);
+      await acceptFriendRequest(friendStatusId);
       alert('친구 요청을 수락했습니다.');
       loadFriends();
     } catch (error) {
       alert('친구 요청 수락 실패: ' + error.message);
     }
   };
+  
 
   // 친구 요청 거절
-  const handleRejectRequest = async (senderEmail) => {
+  const handleRejectRequest = async (friendStatusId) => {
     try {
-      await rejectFriendRequest(senderEmail);
+      await rejectFriendRequest(friendStatusId);
       alert('친구 요청을 거절했습니다.');
       loadFriends();
     } catch (error) {
       alert('친구 요청 거절 실패: ' + error.message);
     }
   };
+  
 
   // 친구 삭제
-  const handleDeleteFriend = async (deleteEmail) => {
+  // ✅ 친구 삭제
+  const handleDeleteFriend = async (friendListId) => {
     try {
-      await deleteFriend(deleteEmail);
+      await deleteFriend(friendListId);
       alert('친구를 삭제했습니다.');
       loadFriends();
     } catch (error) {
@@ -106,16 +109,19 @@ const FriendModal = () => {
     }
   };
 
+  
+
   // 친구 요청 취소
-  const handleCancelRequest = async (receiverEmail) => {
+  const handleCancelRequest = async (friendStatusId) => {
     try {
-      await cancelFriendRequest(receiverEmail);
+      await cancelFriendRequest(friendStatusId);
       alert('보낸 친구 요청을 취소했습니다.');
       loadFriends();
     } catch (error) {
       alert('친구 요청 취소 실패: ' + error.message);
     }
   };
+  
 
   if (!isFriendModalOpen) return null;
 
@@ -140,10 +146,10 @@ const FriendModal = () => {
             <button className="back-btn" onClick={() => setSelectedFriend(null)}>
               <FaArrowLeft /> 뒤로가기
             </button>
-            <h2>{selectedFriend.senderEmail}</h2>
-            <p><strong>이메일:</strong> {selectedFriend.senderEmail}</p>
+            <h2>{selectedFriend.friendName}</h2> {/* 🔹 친구 이름 표시 */}
+            <p><strong>이메일:</strong> {selectedFriend.friendEmail}</p> {/* 🔹 이메일 표시 */}
             <div className="modal-buttons">
-              <button className="delete-btn" onClick={() => handleDeleteFriend(selectedFriend.senderEmail)}>
+              <button className="delete-btn" onClick={() => handleDeleteFriend(selectedFriend.friendListId)}>
                 친구 삭제
               </button>
             </div>
@@ -183,9 +189,9 @@ const FriendModal = () => {
             <h3>보낸 친구 요청 목록</h3>
             <ul className="friend-list">
               {sentRequests.map((request) => (
-                <li key={request.id}>
+                <li key={request.friendStatusId}>
                   {request.receiverUsername} ({request.receiverEmail})
-                  <button className="cancel-request-btn" onClick={() => handleCancelRequest(request.receiverEmail)}>취소</button>
+                  <button className="cancel-request-btn" onClick={() => handleCancelRequest(request.friendStatusId)}>취소</button>
                 </li>
               ))}
             </ul>
@@ -201,34 +207,33 @@ const FriendModal = () => {
                 <FaUserPlus />
               </button>
               <button className="icon-btn" onClick={() => setIsManagingRequests(true)}>
-                <FaUserCog />
+                <FaUserCheck />
               </button>
             </div>
 
-            {/* 🔹 받은 친구 요청 목록 */}
+            {/* 받은 친구 요청 목록 */}
             {isRequestListVisible && (
               <div className="request-list">
                 <h3>받은 친구 요청</h3>
                 <ul>
                   {receivedRequests.map((request) => (
-                    <li key={request.id} className="request-item">
-                      {request.senderEmail}
+                    <li key={request.friendStatusId} className="request-item">
+                      {request.senderUsername} ({request.senderEmail})
                       <div className="request-buttons">
-                        <button className="accept-btn" onClick={() => handleAcceptRequest(request.senderEmail)}>수락</button>
-                        <button className="reject-btn" onClick={() => handleRejectRequest(request.senderEmail)}>거절</button>
+                        <button className="accept-btn" onClick={() => handleAcceptRequest(request.friendStatusId)}>수락</button>
+                        <button className="reject-btn" onClick={() => handleRejectRequest(request.friendStatusId)}>거절</button>
                       </div>
                     </li>
                   ))}
                 </ul>
               </div>
             )}
-
-            {/* 🔹 친구 목록 */}
+            {/* 친구 목록 */}
             <h2>친구 목록</h2>
             <ul className="friend-list">
               {friends.map((friend) => (
-                <li key={friend.id} className="friend-item" onClick={() => setSelectedFriend(friend)}>
-                  {friend.senderEmail}
+                <li key={friend.friendListId} className="friend-item" onClick={() => setSelectedFriend(friend)}>
+                  {friend.friendName} ({friend.friendEmail})
                 </li>
               ))}
             </ul>
