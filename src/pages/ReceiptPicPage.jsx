@@ -5,7 +5,7 @@ import { fetchReceipt } from '../api/receiptApi';
 
 // 📌 스타일 정의
 const pageStyle = css`
-  max-width: 800px;
+  max-width: 900px;
   margin: 40px auto;
   padding: 20px;
   text-align: center;
@@ -25,32 +25,32 @@ const selectBox = css`
   border: 1px solid #ccc;
   background-color: white;
   cursor: pointer;
-
   &:hover {
     border-color: #555;
   }
 `;
 
-const galleryStyle = css`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 15px;
-`;
+const tableStyle = css`
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  text-align: left;
 
-const receiptItem = css`
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease-in-out;
+  th,
+  td {
+    border: 1px solid #ddd;
+    padding: 12px;
+  }
 
-  &:hover {
-    transform: scale(1.05);
+  th {
+    background-color: #f4f4f4;
+    font-weight: bold;
   }
 
   img {
-    width: 100%;
+    width: 100px;
     height: auto;
-    display: block;
+    border-radius: 6px;
   }
 `;
 
@@ -66,6 +66,8 @@ const ReceiptPicPage = () => {
   const [selectedYear, setSelectedYear] = useState('2025');
   const [selectedMonth, setSelectedMonth] = useState('01');
   const [receipts, setReceipts] = useState([]);
+
+  const baseURL = 'https://wallet-guardians.store:443/api/';
 
   const years = ['2023', '2024', '2025', '2026'];
   const months = [
@@ -86,11 +88,18 @@ const ReceiptPicPage = () => {
   useEffect(() => {
     const loadReceipts = async () => {
       try {
+        console.log(
+          `🔄 Fetching receipts for ${selectedYear}-${selectedMonth}`
+        );
         const data = await fetchReceipt(selectedYear, selectedMonth);
-        setReceipts(data.receipts || []);
+        console.log('✅ 서버 응답:', data);
+
+        // ✅ 날짜 기준 정렬 (가장 최신 날짜가 위로 가도록)
+        const sortedReceipts = [...data.data].sort((a, b) => a.id - b.id);
+        setReceipts(sortedReceipts);
       } catch (error) {
-        console.error('영수증 데이터를 불러오는 중 오류 발생:', error);
-        setReceipts([]); // 오류 발생 시 빈 배열로 설정
+        console.error('❌ 영수증 데이터를 불러오는 중 오류 발생:', error);
+        setReceipts([]);
       }
     };
 
@@ -128,18 +137,39 @@ const ReceiptPicPage = () => {
         </select>
       </div>
 
-      {/* 영수증 이미지 갤러리 */}
-      <div css={galleryStyle}>
-        {receipts.length > 0 ? (
-          receipts.map((receipt) => (
-            <div key={receipt.id} css={receiptItem}>
-              <img src={receipt.imageUrl} alt={`영수증-${receipt.id}`} />
-            </div>
-          ))
-        ) : (
-          <p css={noReceiptMessage}>😢 해당 월에 업로드된 영수증이 없습니다.</p>
-        )}
-      </div>
+      {/* 영수증 테이블 */}
+      {receipts.length > 0 ? (
+        <table css={tableStyle}>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>업로드된 날짜</th>
+              <th>해당 월</th>
+              <th>영수증</th>
+            </tr>
+          </thead>
+          <tbody>
+            {receipts.map((receipt) => (
+              <tr key={receipt.id}>
+                <td>{receipt.id}</td>
+                <td>{receipt.date}</td> {/* ✅ 업로드된 날짜 추가 */}
+                <td>
+                  {selectedYear}-{selectedMonth}
+                </td>{' '}
+                {/* ✅ 해당 월 추가 */}
+                <td>
+                  <img
+                    src={baseURL + receipt.imageUrl}
+                    alt={`영수증-${receipt.id}`}
+                  />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      ) : (
+        <p css={noReceiptMessage}>😢 해당 월에 업로드된 영수증이 없습니다.</p>
+      )}
     </div>
   );
 };
