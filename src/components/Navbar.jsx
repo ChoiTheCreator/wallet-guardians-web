@@ -58,10 +58,7 @@ const Navbar = () => {
             <FaUser className="nav-icon" />
             내정보
           </li>
-          <li onClick={() => navigate('/income')}>
-            <FaMoneyBill className="nav-icon" />
-            수입내역
-          </li>
+
           <li onClick={() => navigate('/expenses')}>
             <FaMoneyBill className="nav-icon" />
             지출내역
