@@ -24,7 +24,7 @@ apiClient.interceptors.request.use(
       config.headers['REFRESH-AUTH-KEY'] = `BEARER ${refreshToken}`;
     }
     if (config.data instanceof FormData) {
-      config.headers['Content-Type'] = 'multipart/form-data';
+      delete config.headers['Content-Type']; //  axios가 자동으로 설정하도록 수정
     }
     return config;
   },

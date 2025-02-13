@@ -15,20 +15,31 @@ export const uploadReceiptImage = async (receiptData) => {
     );
 
     const formData = new FormData();
-    //서버에서 제공해준 request body는 file 속성 : IMG파일 + info 속성 " 내부의 JSON 객체임"
-    formData.append('file', receiptData.image);
-    formData.append(
-      'info',
-      //프론트 측에서 서버에 값을 보낼때는 stringify에서
-      JSON.stringify({
-        date: receiptData.date,
-        category: receiptData.category,
-        description: receiptData.description,
-      })
-    );
 
+    // ✅ 이미지 파일 추가
+    formData.append('file', receiptData.image);
+
+    // 🚀 **info를 Blob 대신 File 객체로 추가 (Spring 처리 문제 해결)**
+    const json = JSON.stringify({
+      date: receiptData.date,
+      category: receiptData.category,
+      description: receiptData.description,
+    });
+
+    const jsonFile = new File([json], 'info.json', {
+      type: 'application/json',
+    }); // ✅ `File` 객체로 변환
+    formData.append('info', jsonFile);
+
+    // ✅ FormData 내용 출력 (디버깅)
+    console.log('📌 [FormData 디버깅] 전송 데이터:');
+    for (let [key, value] of formData.entries()) {
+      console.log(`🔹 ${key}:`, value);
+    }
+
+    // ✅ API 요청 보내기 (Content-Type 자동 설정)
     const response = await apiClient.post('/expense/receipt', formData);
-    //Response 디버깅용 코드
+
     console.log(`✅ [uploadReceiptImage] 업로드 성공! 응답:`, response.data);
     return response.data;
   } catch (error) {
