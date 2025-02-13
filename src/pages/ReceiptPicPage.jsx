@@ -1,18 +1,71 @@
-import '../style/ReceiptPicPage.scss';
-import receiptimg1 from '../IMG/receipt1.jpg';
-import { useState } from 'react';
-import receiptimg2 from '../IMG/receipt2.jpg';
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
+import { useState, useEffect } from 'react';
+import { fetchReceipt } from '../api/receiptApi';
+
+// 📌 스타일 정의
+const pageStyle = css`
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  text-align: center;
+`;
+
+const filterContainer = css`
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 20px;
+`;
+
+const selectBox = css`
+  padding: 8px 12px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background-color: white;
+  cursor: pointer;
+
+  &:hover {
+    border-color: #555;
+  }
+`;
+
+const galleryStyle = css`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+`;
+
+const receiptItem = css`
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+`;
+
+const noReceiptMessage = css`
+  font-size: 16px;
+  font-weight: 500;
+  color: #777;
+  text-align: center;
+  margin-top: 20px;
+`;
 
 const ReceiptPicPage = () => {
   const [selectedYear, setSelectedYear] = useState('2025');
   const [selectedMonth, setSelectedMonth] = useState('01');
-
-  // 실제 이미지 경로를 배열에 저장
-  const receiptImages = {
-    '2025-01': [receiptimg1], // 객체 {} 대신 직접 경로 배열 사용
-    '2025-02': [receiptimg2],
-    '2025-03': [],
-  };
+  const [receipts, setReceipts] = useState([]);
 
   const years = ['2023', '2024', '2025', '2026'];
   const months = [
@@ -30,56 +83,61 @@ const ReceiptPicPage = () => {
     { value: '12', label: '12월' },
   ];
 
-  const handleYearChange = (event) => {
-    setSelectedYear(event.target.value);
-  };
+  useEffect(() => {
+    const loadReceipts = async () => {
+      try {
+        const data = await fetchReceipt(selectedYear, selectedMonth);
+        setReceipts(data.receipts || []);
+      } catch (error) {
+        console.error('영수증 데이터를 불러오는 중 오류 발생:', error);
+        setReceipts([]); // 오류 발생 시 빈 배열로 설정
+      }
+    };
 
-  const handleMonthChange = (event) => {
-    setSelectedMonth(event.target.value);
-  };
-
-  const selectedKey = `${selectedYear}-${selectedMonth}`;
-  const imagesToShow = receiptImages[selectedKey] || [];
+    loadReceipts();
+  }, [selectedYear, selectedMonth]);
 
   return (
-    <div className="receipt-pic-page">
-      <h1> 영수증 사진 모음</h1>
+    <div css={pageStyle}>
+      <h1>📸 영수증 사진 모음</h1>
 
-      {/* 연도 및 월 선택 */}
-      <div className="filter-container">
-        <div className="year-selector">
-          <label>📆 연도 선택:</label>
-          <select value={selectedYear} onChange={handleYearChange}>
-            {years.map((year) => (
-              <option key={year} value={year}>
-                {year}년
-              </option>
-            ))}
-          </select>
-        </div>
+      {/* 필터 (연도 & 월 선택) */}
+      <div css={filterContainer}>
+        <select
+          css={selectBox}
+          value={selectedYear}
+          onChange={(e) => setSelectedYear(e.target.value)}
+        >
+          {years.map((year) => (
+            <option key={year} value={year}>
+              {year}년
+            </option>
+          ))}
+        </select>
 
-        <div className="month-selector">
-          <label>📅 월 선택:</label>
-          <select value={selectedMonth} onChange={handleMonthChange}>
-            {months.map((month) => (
-              <option key={month.value} value={month.value}>
-                {month.label}
-              </option>
-            ))}
-          </select>
-        </div>
+        <select
+          css={selectBox}
+          value={selectedMonth}
+          onChange={(e) => setSelectedMonth(e.target.value)}
+        >
+          {months.map((month) => (
+            <option key={month.value} value={month.value}>
+              {month.label}
+            </option>
+          ))}
+        </select>
       </div>
 
-      {/* 영수증 갤러리 */}
-      <div className="receipt-gallery">
-        {imagesToShow.length > 0 ? (
-          imagesToShow.map((image, index) => (
-            <div key={index} className="receipt-item">
-              <img src={image} alt={`영수증-${index}`} />
+      {/* 영수증 이미지 갤러리 */}
+      <div css={galleryStyle}>
+        {receipts.length > 0 ? (
+          receipts.map((receipt) => (
+            <div key={receipt.id} css={receiptItem}>
+              <img src={receipt.imageUrl} alt={`영수증-${receipt.id}`} />
             </div>
           ))
         ) : (
-          <p className="no-receipt">😢 해당 월에 업로드된 영수증이 없습니다.</p>
+          <p css={noReceiptMessage}>😢 해당 월에 업로드된 영수증이 없습니다.</p>
         )}
       </div>
     </div>

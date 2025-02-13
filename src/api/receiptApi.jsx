@@ -52,12 +52,13 @@ export const uploadReceiptImage = async (receiptData) => {
   }
 };
 
-//서버에 있는 영수증을 가지고오는 로직 -> query parameter : year & month
-export const fetchReceiept = async (year, month) => {
+//서버에 있는 영수증을 가지고오는 로직 -> query parameter : year & month params를 url 파라미터 (최신형)
+export const fetchReceipt = async (year, month) => {
   try {
     const response = await apiClient.get('/expense/receipt', {
       params: { year, month },
     });
+    console.log(response.data);
     return response.data;
   } catch (error) {
     console.log('영수중을 서버에서 가져오는것에서 오류가 생겼습니다', error);
