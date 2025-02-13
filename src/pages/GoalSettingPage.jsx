@@ -1,6 +1,7 @@
 import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { GoalContext } from '../context/GoalContext'; // Context import
+import GlobalModalMessage from '../components/GlobalModalMesaage'; //성공시 띄워주는 모달메시지
 import { setBudget } from '../api/budgetApi';
 import '../style/GoalSettingPage.scss';
 
@@ -8,7 +9,7 @@ const GoalSettingPage = () => {
   const [errorMessage, setErrorMessage] = useState(''); // 에러 메시지만 로컬 상태
   const { setGoalAmount: setGlobalGoalAmount } = useContext(GoalContext); // 전역 상태 사용
   const navigate = useNavigate();
-
+  const [modalMessage, setModalMessage] = useState({ type: '', message: '' });
   const [budgetAmount, setBudgetAmount] = useState('');
 
   const handleSubmit = async (e) => {
@@ -29,11 +30,22 @@ const GoalSettingPage = () => {
       if (response.success) {
         // ✅ 전역 상태 업데이트
         setGlobalGoalAmount(response.data.amount);
+        setModalMessage({
+          type: 'success',
+          message: '목표 금액 설정에 성공했습니다!',
+        });
 
-        alert('목표 금액이 성공적으로 저장되었습니다!');
-        navigate('/main'); // 저장 후 메인 페이지로 이동
+        setTimeout(() => {
+          navigate('/main'); // 저장 후 메인 페이지로 이동 (setTimeout이 비동기함수라서 )
+        }, 1300);
       } else {
-        alert('목표 금액 설정에 실패하였습니다.');
+        setModalMessage({
+          type: 'error',
+          message: '목표 금액 설정에 실패했습니다.',
+        });
+        setTimeout(() => {
+          setModalMessage({ type: '', message: '' });
+        }, 1300);
       }
     } catch (error) {
       console.error('🚨 목표 금액 설정 오류:', error);
@@ -46,6 +58,10 @@ const GoalSettingPage = () => {
   return (
     <div className="goal-setting-page">
       {' '}
+      <GlobalModalMessage
+        type={modalMessage.type}
+        message={modalMessage.message}
+      ></GlobalModalMessage>
       {/* ✅ 기존 `goal-setting-container` → `goal-setting-page`로 변경 */}
       <h2>목표 금액 설정</h2>
       <form className="goal-form" onSubmit={handleSubmit}>

@@ -1,3 +1,4 @@
+import Year from 'react-calendar/dist/esm/DecadeView/Year.js';
 import apiClient from './apiClient';
 
 /** 목표
@@ -51,20 +52,14 @@ export const uploadReceiptImage = async (receiptData) => {
   }
 };
 
-/**
- * ✅ 영수증 전체 조회 (GET 요청)
- */
-export const getAllReceipts = async () => {
+//서버에 있는 영수증을 가지고오는 로직 -> query parameter : year & month
+export const fetchReceiept = async (year, month) => {
   try {
-    console.log(`🟢 [getAllReceipts] 영수증 전체 조회 요청`);
-    const response = await apiClient.get('/receipt');
-    console.log(`✅ [getAllReceipts] 조회 성공! 응답:`, response.data);
+    const response = await apiClient.get('/expense/receipt', {
+      params: { year, month },
+    });
     return response.data;
   } catch (error) {
-    console.error(
-      `❌ [getAllReceipts] 조회 실패!`,
-      error.response?.data || error.message
-    );
-    throw error;
+    console.log('영수중을 서버에서 가져오는것에서 오류가 생겼습니다', error);
   }
 };

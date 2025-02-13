@@ -111,7 +111,7 @@ const ReceiptModal = ({ isOpen, onClose }) => {
                 onClick={handleUpload}
                 disabled={loading}
               >
-                <span>{loading ? '업로드 중...' : '영수증 업로드 하기'}</span>
+                {loading ? '업로드 중...' : '영수증 업로드'}
               </button>
               <button className="close-button" onClick={onClose}>
                 취소

@@ -1,4 +1,3 @@
-import { a } from 'framer-motion/client';
 import apiClient from './apiClient';
 
 // 예산 설정 (POST) 처음 예산 설정하는 곳에서 사용하면 됨

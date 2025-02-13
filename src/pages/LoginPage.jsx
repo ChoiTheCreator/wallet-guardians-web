@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { GoalContext } from '../context/GoalContext';
 import { login } from '../api/authApi.jsx';
 import { css, keyframes } from '@emotion/react';
+import GlobalModalMessage from '../components/GlobalModalMesaage.jsx';
 
 // 로딩 시 필요한
 const spin = keyframes`
@@ -28,7 +29,7 @@ const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false); // 로딩 상태 추가
-  const [modalMessage, setModalMessage] = useState({ type: '', message: '' });
+  const [modalMessage, setModalMessage] = useState({ type: '', message: '' }); //글로벌 모달메세지기 객체를 매개하는 녀석
   const [fetchingBudget, setFetchingBudget] = useState(false); //예산 데이터 불러오고있는지?
   const navigate = useNavigate();
   const { fetchBudget } = useContext(GoalContext); //get하는 함수도 가져오자.
@@ -58,10 +59,8 @@ const LoginPage = () => {
       setFetchingBudget(true);
       const budgetAmount = await fetchBudget(); //로그인 성공하면 갖고 있는 예산 있는지 확인
       setFetchingBudget(false);
-
       console.log('🏦 로그인 후 받은 예산 금액:', budgetAmount); // 디버깅용 코드임
 
-      //  goalAmount가 업데이트되기 전에 budgetAmount를 기반으로 페이지 이동 (성능 개선 가능성? )
       setTimeout(() => {
         if (budgetAmount !== null && budgetAmount > 0) {
           navigate('/main');
@@ -118,6 +117,7 @@ const LoginPage = () => {
             <span css={spinnerStyle} />
           </div>
         )}
+
         {modalMessage.message && (
           <div className={`modal-message ${modalMessage.type}`}>
             {modalMessage.message}
