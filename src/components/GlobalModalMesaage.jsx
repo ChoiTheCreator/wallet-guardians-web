@@ -11,7 +11,7 @@ const fadeInOut = keyframes`
 
 // 🔹 모달 색상 스타일 (요청/수락: 초록, 에러/거절/삭제: 빨강, 전송: 파랑)
 const modalColors = {
-  request: "#f8f9fa", // 🔵 파란색 (전송)
+  request: "#28a745", // 🔵 파란색 (전송)
   accept: "#28a745", // 🟢 초록색 (수락)
   success: "#28a745", // 🟢 초록색 (성공)
   reject: "#dc3545", // 🔴 빨간색 (거절)
