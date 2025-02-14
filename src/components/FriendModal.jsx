@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useFriendContext } from '../context/FriendContext';
-import { FaChevronDown, FaChevronUp, FaUserPlus, FaUserCheck, FaArrowLeft } from 'react-icons/fa';
+import { FaChevronDown, FaChevronUp, FaUserPlus, FaUserClock, FaArrowLeft } from 'react-icons/fa';
 import GlobalModalMessage from './GlobalModalMesaage';
 import '../style/FriendModal.scss';
 import {
@@ -212,7 +212,7 @@ const FriendModal = () => {
                 <FaUserPlus />
               </button>
               <button className="icon-btn" onClick={() => setIsManagingRequests(true)}>
-                <FaUserCheck />
+                <FaUserClock />
               </button>
             </div>
 
@@ -248,7 +248,8 @@ const FriendModal = () => {
                   </li>
                 ))
               ) : (
-                <p className="no-data-message">친구가 아직 없습니다.</p>
+                <p className="no-data-message">친구가 아직 없습니다. 친구를 추가해 보세요!</p>
+                
               )}
             </ul>
           </>
