@@ -71,11 +71,8 @@ const UserInfoComponent = () => {
     <div css={userInfoStyles}>
       {loading ? (
         //로딩 인디케이터 컴포넌트는 3개의 props를 강제함 loading, error, onRetry
-        <LoadingIndicator
-          loading={loading}
-          error={error}
-          onRetry={fetchUserData}
-        ></LoadingIndicator>
+        //3개를 넣어주면 로딩일동안은 뻉글뻉글 도는 스피너 (LoadingIndicator 추가)
+        <LoadingIndicator loading={loading} error={error}></LoadingIndicator>
       ) : error ? (
         <p>❌ 유저 정보를 불러올 수 없습니다.</p>
       ) : (

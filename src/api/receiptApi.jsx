@@ -17,10 +17,11 @@ export const uploadReceiptImage = async (receiptData) => {
 
     const formData = new FormData();
 
-    // ✅ 이미지 파일 추가
+    //  이미지 파일 추가
     formData.append('file', receiptData.image);
 
-    // 🚀 **info를 Blob 대신 File 객체로 추가 (Spring 처리 문제 해결)**
+    // **info를 Blob 대신 File 객체로 추가 (Spring 처리 문제 해결)**
+
     const json = JSON.stringify({
       date: receiptData.date,
       category: receiptData.category,
@@ -29,16 +30,16 @@ export const uploadReceiptImage = async (receiptData) => {
 
     const jsonFile = new File([json], 'info.json', {
       type: 'application/json',
-    }); // ✅ `File` 객체로 변환
+    }); //  `File` 객체로 변환 -> 폼데이터 형식으로만 보내달라했거덩? 그래서 이렇게했는데 나도 왜그런지 모르곘네
     formData.append('info', jsonFile);
 
-    // ✅ FormData 내용 출력 (디버깅)
+    //  FormData 내용 출력 (디버깅)
     console.log('📌 [FormData 디버깅] 전송 데이터:');
     for (let [key, value] of formData.entries()) {
       console.log(`🔹 ${key}:`, value);
     }
 
-    // ✅ API 요청 보내기 (Content-Type 자동 설정)
+    //  API 요청 보내기 (Content-Type 자동 설정)
     const response = await apiClient.post('/expense/receipt', formData);
 
     console.log(`✅ [uploadReceiptImage] 업로드 성공! 응답:`, response.data);
@@ -58,6 +59,7 @@ export const fetchReceipt = async (year, month) => {
     const response = await apiClient.get('/expense/receipt', {
       params: { year, month },
     });
+    //디버깅용
     console.log(response.data);
     return response.data;
   } catch (error) {
