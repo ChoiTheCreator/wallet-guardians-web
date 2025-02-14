@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import { getUserInfo } from '../api/authApi';
 import { css } from '@emotion/react';
+import LoadingIndicator from './LoadingIndicator';
 import { getBudget } from '../api/budgetApi';
 
 const userInfoStyles = css`
@@ -69,7 +70,12 @@ const UserInfoComponent = () => {
   return (
     <div css={userInfoStyles}>
       {loading ? (
-        <p>로딩 중...</p>
+        //로딩 인디케이터 컴포넌트는 3개의 props를 강제함 loading, error, onRetry
+        <LoadingIndicator
+          loading={loading}
+          error={error}
+          onRetry={fetchUserData}
+        ></LoadingIndicator>
       ) : error ? (
         <p>❌ 유저 정보를 불러올 수 없습니다.</p>
       ) : (
