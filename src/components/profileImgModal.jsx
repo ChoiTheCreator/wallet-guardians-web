@@ -24,7 +24,9 @@ const ProfileImgModal = ({ isOpen, onClose }) => {
   return (
     <div className="modal-overlay">
       <div className="modal-container">
-        <button className="modal-close-btn" onClick={onClose}>×</button>
+        <button className="modal-close-btn" onClick={onClose}>
+          ×
+        </button>
         <h2 className="modal-title">프로필 사진 변경</h2>
 
         <div className="file-upload-box">
@@ -36,7 +38,7 @@ const ProfileImgModal = ({ isOpen, onClose }) => {
 
           {/* 파일명 표시 */}
           <span className="file-name">
-            {selectedFile ? selectedFile.name : "선택된 파일 없음"}
+            {selectedFile ? selectedFile.name : '선택된 파일 없음'}
           </span>
 
           {/* 파일 미리보기 */}
