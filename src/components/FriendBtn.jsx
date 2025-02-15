@@ -1,19 +1,30 @@
-import { FaUserFriends } from 'react-icons/fa';
+import { useEffect, useState } from 'react';
 import { useFriendContext } from '../context/FriendContext';
+import { FaUserFriends } from 'react-icons/fa';
 import '../style/FriendIcon.scss';
 
 const FriendIcon = () => {
-  const { toggleFriendModal, receivedRequests = [] } = useFriendContext(); // 🔹 receivedRequests 추가
+  const { receivedRequests, refreshFriendRequests, toggleFriendModal } = useFriendContext();
+  const [showNotification, setShowNotification] = useState(receivedRequests.length > 0);
 
-  console.log("📌 현재 받은 친구 요청 개수:", receivedRequests.length);
+  // ✅ 친구 요청이 변경될 때마다 빨간 점 상태 업데이트
+  useEffect(() => {
+    setShowNotification(receivedRequests.length > 0);
+  }, [receivedRequests]);
+
+  // ✅ 모달을 열 때마다 친구 요청 상태 갱신 + 모달 열기
+  const handleIconClick = () => {
+    refreshFriendRequests(); // 최신 친구 요청 데이터 불러오기
+    toggleFriendModal(); // 모달 열기/닫기
+  };
 
   return (
-    <div className="friend-icon-container" onClick={toggleFriendModal}>
+    <div className="friend-icon-container" onClick={handleIconClick}>
       <FaUserFriends className="friend-icon" />
-      {/* 🔹 받은 친구 요청이 있을 경우 빨간 점 표시 */}
-      {receivedRequests.length > 0 && <div className="notification-dot"></div>}
+      {showNotification && <div className="notification-dot"></div>}
     </div>
   );
 };
 
 export default FriendIcon;
+
