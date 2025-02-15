@@ -53,8 +53,6 @@ const ProfilePage = () => {
           )}
 
           <h2 className="profile-name">{profileData.username}</h2>
-          <h2 className="profile-title">칭호: {profileData.title}</h2>
-          <h2 className="profile-defense">방어율: {profileData.defense}</h2>
 
           <div className="profile-actions">
             <button className="icon-button" onClick={() => setIsProfileModalOpen(true)}>
@@ -84,7 +82,10 @@ const ProfilePage = () => {
           </div>
           <div className="details-item">
             <span className="details-label">칭호:</span>
-            <span className="details-value">{profileData.title}칭호</span>
+            <span className="details-value">{profileData.expenseTitle}이건 꼭 사야해...?</span>
+          </div><div className="details-item">
+            <span className="details-label">방어율:</span>
+            <span className="details-value">{profileData.defense}</span>
           </div>
         </div>
       </div>
