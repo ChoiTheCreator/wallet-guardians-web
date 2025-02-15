@@ -1,12 +1,21 @@
-import { createContext, useState } from 'react';
-import { getBudget } from '../api/budgetApi';
+import { createContext, useState, useEffect, useContext } from "react"; // ✅ useContext 추가
+import { getBudget } from "../api/budgetApi";
 
 export const GoalContext = createContext();
 
+// ✅ GoalContext 사용을 위한 Custom Hook
+export const useGoalContext = () => {
+  const context = useContext(GoalContext);
+  if (!context) {
+    throw new Error("useGoalContext must be used within a GoalProvider");
+  }
+  return context;
+};
+
 export const GoalProvider = ({ children }) => {
   const [goalAmount, setGoalAmount] = useState(
-    localStorage.getItem('goalAmount')
-      ? parseInt(localStorage.getItem('goalAmount'), 10)
+    localStorage.getItem("goalAmount")
+      ? parseInt(localStorage.getItem("goalAmount"), 10)
       : null
   );
   const [error, setError] = useState(null);
@@ -16,20 +25,20 @@ export const GoalProvider = ({ children }) => {
     try {
       const data = await getBudget();
       if (data !== null) {
-        console.log('✅ 서버에서 가져온 목표 금액:', data.amount);
+        console.log("✅ 서버에서 가져온 목표 금액:", data.amount);
 
         // ✅ 기존 값과 서버에서 가져온 값이 다를 경우만 업데이트
         if (goalAmount === null || goalAmount !== data.amount) {
           setGoalAmount(data.amount);
-          localStorage.setItem('goalAmount', data.amount);
+          localStorage.setItem("goalAmount", data.amount);
         }
         return data.amount;
       } else {
-        console.log('🚨 예산 데이터 없음, 기존 목표 금액 유지');
+        console.log("🚨 예산 데이터 없음, 기존 목표 금액 유지");
         return goalAmount;
       }
     } catch (error) {
-      console.error('🚨 예산 조회 실패:', error);
+      console.error("🚨 예산 조회 실패:", error);
       setError(error);
     }
   };
@@ -40,20 +49,10 @@ export const GoalProvider = ({ children }) => {
   }, []);
 
   return (
-    <GoalContext.Provider
-      value={{ goalAmount, setGoalAmount, fetchBudget, error }}
-    >
+    <GoalContext.Provider value={{ goalAmount, setGoalAmount, fetchBudget, error }}>
       {children}
     </GoalContext.Provider>
   );
 };
 
 export default GoalProvider;
-
-export const useGoalContext = () => {
-  const context = useContext(GoalContext);
-  if (!context) {
-    throw new Error("useGoalContext must be used within a GoalProvider");
-  }
-  return context;
-};
