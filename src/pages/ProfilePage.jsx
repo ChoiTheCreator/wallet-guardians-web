@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getUserInfo } from '../api/authApi';
-import { FaCamera, FaCog, FaUserTimes } from 'react-icons/fa'; 
+import { FaCamera, FaCog, FaUserTimes, FaUserCircle } from 'react-icons/fa';
 import ProfileImgModal from '../components/profileImgModal';
 import ProfilePwModal from '../components/ProfilePwModal';
 import ProfileDeleteModal from '../components/ProfileDeleteModal';
@@ -33,11 +33,17 @@ const ProfilePage = () => {
       {/* 좌측 섹션 */}
       <div className="profile-left">
         <div className="profile-card">
-          <img 
-            className="profile-image" 
-            src={profileData.profileImageUrl || "https://via.placeholder.com/100"}  // ✅ 프로필 이미지 연동
-            alt="Profile" 
-          />
+          {/* ✅ 프로필 이미지 없을 경우 기본 아이콘 표시 */}
+          {profileData.profileImageUrl ? (
+            <img 
+              className="profile-image" 
+              src={profileData.profileImageUrl}  
+              alt="Profile" 
+            />
+          ) : (
+            <FaUserCircle className="profile-image-icon" />
+          )}
+
           <h2 className="profile-name">{profileData.username}</h2>
 
           <div className="profile-actions">
@@ -59,6 +65,10 @@ const ProfilePage = () => {
         <h2 className="profile-header">프로필 정보</h2>
         <div className="profile-details">
           <div className="details-item">
+            <span className="details-label">이름:</span>
+            <span className="details-value">{profileData.username}</span>
+          </div>
+          <div className="details-item">
             <span className="details-label">이메일:</span>
             <span className="details-value">{profileData.email}</span>
           </div>
@@ -66,15 +76,17 @@ const ProfilePage = () => {
             <span className="details-label">칭호:</span>
             <span className="details-value">{profileData.role}</span>
           </div>
-          <div className="details-item">
-            <span className="details-label">전화번호:</span>
-            <span className="details-value">010-1234-5678</span>
-          </div>
         </div>
       </div>
 
-      {/* 📌 프로필 사진 변경 모달 */}
-      <ProfileImgModal isOpen={isProfileModalOpen} onClose={() => setIsProfileModalOpen(false)} />
+      {/* 📌 프로필 사진 변경 모달 - ✅ 프로필 변경 후 UI 업데이트 기능 추가 */}
+      <ProfileImgModal 
+        isOpen={isProfileModalOpen} 
+        onClose={() => setIsProfileModalOpen(false)} 
+        onProfileUpdate={(newImageUrl) => 
+          setProfileData(prev => ({ ...prev, profileImageUrl: newImageUrl }))
+        }
+      />
 
       {/* 📌 비밀번호 변경 모달 */}
       <ProfilePwModal isOpen={isPasswordModalOpen} onClose={() => setIsPasswordModalOpen(false)} />
