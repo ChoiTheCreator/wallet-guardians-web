@@ -81,7 +81,7 @@ const UserInfoComponent = () => {
         <div>
           <h3 css={userNameStyles}>🙋‍♂️ {userInfo?.username} 님</h3>
           <p css={userInfoTextStyles}>📧 {userInfo?.email}</p>
-          <p css={userInfoTextStyles}>🎖️ {userInfo?.role}</p>
+          <p css={userInfoTextStyles}>🎖️ {userInfo?.title}칭호</p>
           <p css={userInfoTextStyles}>
             💰 {goalAmount !== null ? `${goalAmount.toLocaleString()} 원` : "정보 없음"}
           </p>
