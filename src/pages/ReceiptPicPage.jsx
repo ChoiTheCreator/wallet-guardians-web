@@ -117,15 +117,15 @@ const closeButton = css`
   position: absolute;
   top: 10px;
   right: 10px;
-  background: red;
-  color: white;
+  background: transparent;
+  color: navy;
   border: none;
   padding: 5px 10px;
   border-radius: 5px;
-  font-size: 16px;
+  font-size: 30px;
   cursor: pointer;
   &:hover {
-    background: darkred;
+    background: white;
   }
 `;
 
@@ -137,7 +137,8 @@ const enlargedImage = css`
 
 const ReceiptPicPage = () => {
   const [selectedYear, setSelectedYear] = useState('2025');
-  const [selectedMonth, setSelectedMonth] = useState('01');
+  //현재 월로 유지
+  const [selectedMonth, setSelectedMonth] = useState('02');
   const [receipts, setReceipts] = useState([]);
   const [selectedImage, setSelectedImage] = useState(null); // ✅ 모달에 띄울 이미지 상태 추가
 
@@ -252,7 +253,7 @@ const ReceiptPicPage = () => {
         <div css={modalOverlay} onClick={() => setSelectedImage(null)}>
           <div css={modalContent} onClick={(e) => e.stopPropagation()}>
             <button css={closeButton} onClick={() => setSelectedImage(null)}>
-              닫기
+              x
             </button>
             <img css={enlargedImage} src={selectedImage} alt="확대된 영수증" />
           </div>
