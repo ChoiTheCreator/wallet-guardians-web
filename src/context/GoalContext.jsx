@@ -1,36 +1,43 @@
-import { createContext, useState } from 'react';
+import { createContext, useState, useEffect } from 'react';
 import { getBudget } from '../api/budgetApi';
 
 export const GoalContext = createContext();
 
 export const GoalProvider = ({ children }) => {
-  const [goalAmount, setGoalAmount] = useState(null);
+  const [goalAmount, setGoalAmount] = useState(
+    localStorage.getItem('goalAmount')
+      ? parseInt(localStorage.getItem('goalAmount'), 10)
+      : null
+  );
   const [error, setError] = useState(null);
 
-  // ✅ 예산 데이터 가져오는 함수 -> getBudget에서 409 에러처리를 해놨기 때문에 return null if 409
-  //null 값에 대한 처리 필요 및 fetching 할때
+  // ✅ 예산 데이터 가져오는 함수
   const fetchBudget = async () => {
     try {
       const data = await getBudget();
-      //가져오는 값이 만약에 null (나의 409 에러처리로 인해)
-      if (!data) {
-        console.log(
-          '예산 데이터가 없는 초기회원이므로 목표금액을 일단 0으로 설정한다.'
-        );
-        setGoalAmount(0);
-        return;
-        //여기서 함수를 빠르게 리턴시켜야햐했음
+      if (data !== null) {
+        console.log('✅ 서버에서 가져온 목표 금액:', data.amount);
+
+        // ✅ 기존 값과 서버에서 가져온 값이 다를 경우만 업데이트
+        if (goalAmount === null || goalAmount !== data.amount) {
+          setGoalAmount(data.amount);
+          localStorage.setItem('goalAmount', data.amount);
+        }
+        return data.amount;
+      } else {
+        console.log('🚨 예산 데이터 없음, 기존 목표 금액 유지');
+        return goalAmount;
       }
-      console.log('✅ 유저 외곽오카네 정보:', data);
-      console.log('✅ 유저 오카네 정보:', data.amount);
-      setGoalAmount(data.amount);
-      return data.amount;
-      //`${userBudget.toLocaleString()} 원` -> 콤마 찍히는거임
     } catch (error) {
       console.error('🚨 예산 조회 실패:', error);
       setError(error);
     }
   };
+
+  // ✅ 앱이 로드될 때 목표 금액을 서버 & 로컬 스토리지에서 가져오기
+  useEffect(() => {
+    fetchBudget();
+  }, []);
 
   return (
     <GoalContext.Provider
