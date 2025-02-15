@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import "../style/ProfileImgModal.scss";
-import { saveProfilePicture } from "../api/userImgApi";
-import GlobalModalMessage from "./GlobalModalMesaage"; 
+import { uploadProfilePicture, updateProfilePicture, deleteProfilePicture } from "../api/userImgApi";
+import GlobalModalMessage from "./GlobalModalMesaage";
 
-const ProfileImgModal = ({ isOpen, onClose, onProfileUpdate }) => {
+const ProfileImgModal = ({ isOpen, onClose, onProfileUpdate, hasProfileImage }) => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [preview, setPreview] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -32,11 +32,16 @@ const ProfileImgModal = ({ isOpen, onClose, onProfileUpdate }) => {
     setLoading(true);
 
     try {
-      const response = await saveProfilePicture(selectedFile);
-      
+      let response;
+      if (hasProfileImage) {
+        response = await updateProfilePicture(selectedFile); // ✅ 기존 이미지 변경(PATCH)
+      } else {
+        response = await uploadProfilePicture(selectedFile); // ✅ 새 이미지 업로드(POST)
+      }
+
       setModalMessage({ type: "success", message: "프로필 사진이 업데이트되었습니다!" });
-      
-      //  프로필 사진 변경 후 UI 업데이트
+
+      // 프로필 사진 변경 후 UI 업데이트
       if (response.data) {
         onProfileUpdate(response.data);
       }
@@ -47,6 +52,26 @@ const ProfileImgModal = ({ isOpen, onClose, onProfileUpdate }) => {
       }, 2000);
     } catch (error) {
       setModalMessage({ type: "error", message: "업로드에 실패했습니다. 다시 시도해주세요." });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleDeleteProfilePicture = async () => {
+    setLoading(true);
+    try {
+      await deleteProfilePicture();
+      setModalMessage({ type: "success", message: "기본 이미지로 변경되었습니다!" });
+
+      // 프로필 이미지 초기화
+      onProfileUpdate(null);
+
+      setTimeout(() => {
+        setModalMessage(null);
+        onClose();
+      }, 2000);
+    } catch (error) {
+      setModalMessage({ type: "error", message: "이미지 삭제 실패!" });
     } finally {
       setLoading(false);
     }
@@ -67,7 +92,7 @@ const ProfileImgModal = ({ isOpen, onClose, onProfileUpdate }) => {
             파일 선택
           </label>
           <span className="file-name">
-            {selectedFile ? selectedFile.name : '선택된 파일 없음'}
+            {selectedFile ? selectedFile.name : "선택된 파일 없음"}
           </span>
 
           <div className="image-preview">
@@ -79,9 +104,16 @@ const ProfileImgModal = ({ isOpen, onClose, onProfileUpdate }) => {
           </div>
         </div>
 
-        <button className="modal-btn" onClick={handleUpload} disabled={loading}>
-          {loading ? "업로드 중..." : "업로드"}
-        </button>
+        {/* 버튼 영역 */}
+        <div className="modal-buttons">
+          <button className="modal-btn upload-btn" onClick={handleUpload} disabled={loading}>
+            {loading ? "업로드 중..." : "업로드"}
+          </button>
+          
+          <button className="modal-btn default-btn" onClick={handleDeleteProfilePicture} disabled={loading}>
+            {loading ? "변경 중..." : "기본 이미지로 변경"}
+          </button>
+        </div>
       </div>
     </div>
   );
