@@ -60,12 +60,12 @@ const Navbar = () => {
           </li>
 
           <li onClick={() => navigate('/expenses')}>
-            <FaMoneyBill className="nav-icon" />
-            지출내역
+            <FaChartPie className="nav-icon" />
+            지출 현황 그래프
           </li>
           <li onClick={() => navigate('/graph')}>
             <FaChartPie className="nav-icon" />
-            용도별 그래프
+            통계 그래프
           </li>
           <li onClick={() => navigate('/receipt-picture')}>
             <FaFileImage className="nav-icon" />
