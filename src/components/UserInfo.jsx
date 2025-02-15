@@ -4,6 +4,7 @@ import { getUserInfo } from '../api/authApi';
 import { css } from '@emotion/react';
 import LoadingIndicator from './LoadingIndicator';
 import { getBudget } from '../api/budgetApi';
+import { useGoalContext } from '../context/GoalContext';
 
 const userInfoStyles = css`
   text-align: center;
@@ -30,11 +31,11 @@ const userInfoTextStyles = css`
   opacity: 0.9;
 `;
 
-const UserInfoComponent = ({ updatedBudget }) => {
+const UserInfoComponent = () => {
   const [userInfo, setUserInfo] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [userBudget, setUserBudget] = useState(null);
+  const { goalAmount, setGoalAmount } = useGoalContext();
 
   const fetchUserData = async () => {
     try {
@@ -53,7 +54,7 @@ const UserInfoComponent = ({ updatedBudget }) => {
     try {
       const data = await getBudget();
       console.log('✅ 유저 외곽오카네 정보:', data);
-      setUserBudget(data.amount);
+      setGoalAmount(data.amount);
       console.log('✅ 유저 오카네 정보:', data.amount);
     } catch (err) {
       console.error('🚨 유저 설정 예산 가져오기 실패:', err);
@@ -67,11 +68,6 @@ const UserInfoComponent = ({ updatedBudget }) => {
     fetchUserBudget();
   }, []);
 
-  useEffect(() => {
-    if (updatedBudget !== undefined) {
-      setUserBudget(updatedBudget);
-    }
-  }, [updatedBudget]);
 
   return (
     <div css={userInfoStyles}>
@@ -87,7 +83,7 @@ const UserInfoComponent = ({ updatedBudget }) => {
           <p css={userInfoTextStyles}>📧 {userInfo?.email}</p>
           <p css={userInfoTextStyles}>🎖️ {userInfo?.role}</p>
           <p css={userInfoTextStyles}>
-            💰 {userBudget ? `${userBudget.toLocaleString()} 원` : '정보 없음'}
+            💰 {goalAmount !== null ? `${goalAmount.toLocaleString()} 원` : "정보 없음"}
           </p>
         </div>
       )}
