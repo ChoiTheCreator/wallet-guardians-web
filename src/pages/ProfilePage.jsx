@@ -11,12 +11,20 @@ const ProfilePage = () => {
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
   const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  
+
   useEffect(() => {
     const fetchProfile = async () => {
       try {
         const data = await getUserInfo();
-        setProfileData(data);
+        console.log('✅ 가져온 유저 데이터:', data);
+
+        // 🔹 profileImagePath가 있다면 profileImageUrl에 저장하고, 없으면 null
+        setProfileData({
+          ...data,
+          profileImageUrl: data.profileImagePath
+            ? `${data.profileImagePath}?timestamp=${new Date().getTime()}`
+            : null,
+        });
       } catch (error) {
         console.error('🚨 프로필 불러오기 실패:', error);
       }
@@ -33,12 +41,12 @@ const ProfilePage = () => {
       {/* 좌측 섹션 */}
       <div className="profile-left">
         <div className="profile-card">
-          {/* ✅ 프로필 이미지 없을 경우 기본 아이콘 표시 */}
+          {/* ✅ profileImageUrl이 있으면 이미지, 없으면 기본 아이콘 표시 */}
           {profileData.profileImageUrl ? (
-            <img 
-              className="profile-image" 
-              src={profileData.profileImageUrl}  
-              alt="Profile" 
+            <img
+              className="profile-image"
+              src={profileData.profileImageUrl}
+              alt="Profile"
             />
           ) : (
             <FaUserCircle className="profile-image-icon" />
@@ -79,18 +87,21 @@ const ProfilePage = () => {
         </div>
       </div>
 
-      {/* 📌 프로필 사진 변경 모달 - ✅ 프로필 변경 후 UI 업데이트 기능 추가 */}
-      <ProfileImgModal 
-        isOpen={isProfileModalOpen} 
-        onClose={() => setIsProfileModalOpen(false)} 
-        onProfileUpdate={(newImageUrl) => 
-          setProfileData(prev => ({ ...prev, profileImageUrl: newImageUrl }))
+      {/* 📌 프로필 사진 변경 모달 */}
+      <ProfileImgModal
+        isOpen={isProfileModalOpen}
+        onClose={() => setIsProfileModalOpen(false)}
+        onProfileUpdate={(newImageUrl) =>
+          setProfileData((prev) => ({
+            ...prev,
+            profileImageUrl: newImageUrl ? `${newImageUrl}?timestamp=${new Date().getTime()}` : null,
+          }))
         }
       />
 
       {/* 📌 비밀번호 변경 모달 */}
       <ProfilePwModal isOpen={isPasswordModalOpen} onClose={() => setIsPasswordModalOpen(false)} />
-      
+
       {/* 📌 회원 탈퇴 모달 */}
       <ProfileDeleteModal isOpen={isDeleteModalOpen} onClose={() => setIsDeleteModalOpen(false)} />
     </div>

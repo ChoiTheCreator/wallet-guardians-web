@@ -94,15 +94,15 @@ const ProfileImgModal = ({ isOpen, onClose, onProfileUpdate, hasProfileImage }) 
           <span className="file-name">
             {selectedFile ? selectedFile.name : "선택된 파일 없음"}
           </span>
-
-          <div className="image-preview">
-            {preview ? (
+          {preview && (
+            <div className="image-preview">
               <img src={preview} alt="미리보기" className="preview-image" />
-            ) : (
-              <div className="placeholder">미리보기 없음</div>
-            )}
-          </div>
+            </div>
+          )}
         </div>
+
+        {/* ✅ 사진 용량 제한 문구 추가 */}
+        <p className="file-size-info">사진 용량은 5MB 이내로 제한합니다.</p>
 
         {/* 버튼 영역 */}
         <div className="modal-buttons">
