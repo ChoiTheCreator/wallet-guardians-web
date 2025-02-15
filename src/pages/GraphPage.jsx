@@ -87,7 +87,11 @@ const GraphPage = () => {
     fetchExpenses();
   }, []);
 
-  // ✅ 카테고리별로 지출 데이터 그룹화 (reduce() 활용)
+  // 카테고리별로 지출 데이터 그룹화 (reduce() 활용) -> 초깃값을 객체로 했음. 객체 하나가 딱 생김.
+
+  //객체의 키는 '카테고리' 이며 value는 객체 (키 : 카테고리, 값 : 숫자값)
+  //객체의 value는 현재 4개인데, 이 4래를 배열화 시키는 함수가 Object.Values임
+  //이걸 새로운 배열
   const groupedExpenses = expenseItems.reduce((acc, cur) => {
     if (!acc[cur.category]) {
       acc[cur.category] = { category: cur.category, totalAmount: 0 };
@@ -96,7 +100,7 @@ const GraphPage = () => {
     return acc;
   }, {});
 
-  // 객체를 배열로 변환하여 렌더링 가능하도록 정리
+  // 분류화 된 객체들을 배열화 시켜서 아래에서 이 배열로 렌덕링.
   const groupedExpenseArray = Object.values(groupedExpenses);
 
   return (

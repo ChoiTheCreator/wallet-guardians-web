@@ -65,7 +65,7 @@ const Navbar = () => {
           </li>
           <li onClick={() => navigate('/graph')}>
             <FaChartPie className="nav-icon" />
-            용도별 그래프
+            통계 그래프
           </li>
           <li onClick={() => navigate('/receipt-picture')}>
             <FaFileImage className="nav-icon" />
