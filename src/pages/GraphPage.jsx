@@ -153,7 +153,7 @@ const GraphPage = () => {
                 <thead>
                   <tr>
                     <th>카테고리</th>
-                    <th>총 금액 (₩)</th>
+                    <th>총 금액</th>
                   </tr>
                 </thead>
                 <tbody>
