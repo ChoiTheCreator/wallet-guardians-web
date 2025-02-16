@@ -1,4 +1,4 @@
-# 📌 WalletGuardians - 거지나기
+# 📌 WalletGuardians - 거지나기 프로젝트
 
 ## 🏆 가계부 관리 & 절약 챌린지 플랫폼
 
@@ -81,31 +81,31 @@
 
 ---
 
-![2.gif](attachment:1c2050eb-9ca0-4f99-a522-733b4fa3bd20:2.gif)
+![Image](https://github.com/user-attachments/assets/80033cde-ca02-4de9-b0d8-7100c3096476)
 
 ### 지출 추가 (영수증 및 직접 추가)
 
 ---
 
-![3.gif](attachment:6390ab40-1cae-41a7-9e3c-82e2692c1589:3.gif)
+![Image](https://github.com/user-attachments/assets/143e0721-9b89-4b5e-b1b9-1ec2315fb953)
 
 ### 목표 금액 수정
 
 ---
 
-![4.gif](attachment:3da2ab5d-edf8-4e6e-be3b-e62b777085c8:4.gif)
+![Image](https://github.com/user-attachments/assets/873ecf00-96d7-4d36-ac16-eac5a456ee0b)
 
 ### 통계 그래프
 
 ---
 
-![5.gif](attachment:7d8a733c-b299-4571-a036-dfd78a3d3a0b:5.gif)
+![Image](https://github.com/user-attachments/assets/52274234-7506-4858-bc65-38f87b200c0f)
 
 ### 친구 추가하기 기능
 
 ---
 
-![6.gif](attachment:28d3eaa9-643f-4d29-9cbe-c8d5e88177ff:6.gif)
+![Image](https://github.com/user-attachments/assets/a1539d49-2026-48d8-a8ca-fc397662b3cb)
 
 ## **🛠️ 기술 스택**
 
