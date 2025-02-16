@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from 'react';
+import { createContext, useState, useEffect, useContext } from 'react';
 import { getBudget } from '../api/budgetApi';
 
 export const GoalContext = createContext();
@@ -49,3 +49,11 @@ export const GoalProvider = ({ children }) => {
 };
 
 export default GoalProvider;
+
+export const useGoalContext = () => {
+  const context = useContext(GoalContext);
+  if (!context) {
+    throw new Error("useGoalContext must be used within a GoalProvider");
+  }
+  return context;
+};
