@@ -182,6 +182,7 @@
 
 | **역할**           | **이름** | **GitHub**                        |
 | ------------------ | -------- | --------------------------------- |
+| 🧑🏻‍💻 Project Manager | 최원빈   | https://github.com/ChoiTheCreator |
 | 🏗 백엔드 개발      | 서아영   | https://github.com/Seooooo24      |
 | 🏗 백엔드 개발      | 김시온   | https://github.com/enohs          |
 | 🏗 백엔드 개발      | 정석우   | https://github.com/Jungsukwoo     |
