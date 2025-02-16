@@ -1,4 +1,3 @@
-import Year from 'react-calendar/dist/esm/DecadeView/Year.js';
 import apiClient from './apiClient';
 
 /** 목표
@@ -28,6 +27,7 @@ export const uploadReceiptImage = async (receiptData) => {
       description: receiptData.description,
     });
 
+    //멀티파트 / 폼데이터로 보내달라할때 아무리 Json객체라도 파일 형태로 append 해버리면 문제없이 해결가능
     const jsonFile = new File([json], 'info.json', {
       type: 'application/json',
     }); //  `File` 객체로 변환 -> 폼데이터 형식으로만 보내달라했거덩? 그래서 이렇게했는데 나도 왜그런지 모르곘네
