@@ -341,7 +341,14 @@ h2, h3 {
     padding-right: 35px;
     color: #666;
   }
-
+  .loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    font-size: 1.5rem;
+    color: #333;
+  }
 
 
 

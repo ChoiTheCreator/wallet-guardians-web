@@ -21,14 +21,13 @@ const FriendModal = () => {
   const [isManagingRequests, setIsManagingRequests] = useState(false);
   const [selectedFriend, setSelectedFriend] = useState(null);
   const [friendEmail, setFriendEmail] = useState('');
-  const [modalMessage, setModalMessage] = useState(null); // ✅ 모달 메시지 상태 추가
+  const [modalMessage, setModalMessage] = useState(null);
+  const [isLoading, setIsLoading] = useState(false); // 로딩 상태 추가
 
-  // 상태 관리
   const [friends, setFriends] = useState([]);
   const [receivedRequests, setReceivedRequests] = useState([]);
   const [sentRequests, setSentRequests] = useState([]);
 
-  // ✅ 모달 메시지 자동 삭제 (3초 후 사라짐)
   useEffect(() => {
     if (modalMessage) {
       const timer = setTimeout(() => {
@@ -38,15 +37,14 @@ const FriendModal = () => {
     }
   }, [modalMessage]);
 
-  // 모달이 열릴 때 데이터 로드
   useEffect(() => {
     if (isFriendModalOpen) {
       loadFriends();
     }
   }, [isFriendModalOpen]);
 
-  // 데이터 로드 함수
   const loadFriends = async () => {
+    setIsLoading(true); // 로딩 시작
     try {
       const friendsData = await getFriendsList();
       const receivedData = await getReceivedFriendRequests();
@@ -57,10 +55,11 @@ const FriendModal = () => {
       setSentRequests(sentData || []);
     } catch (error) {
       console.error('🚨 친구 데이터 로드 실패:', error);
+    } finally {
+      setIsLoading(false); // 로딩 종료
     }
   };
 
-  // 친구 추가 요청
   const handleSendRequest = async () => {
     if (!friendEmail) {
       setModalMessage({ type: 'error', message: '이메일을 입력하세요!' });
@@ -79,7 +78,6 @@ const FriendModal = () => {
     }
   };
 
-  // 친구 요청 수락
   const handleAcceptRequest = async (friendStatusId) => {
     try {
       await acceptFriendRequest(friendStatusId);
@@ -90,7 +88,6 @@ const FriendModal = () => {
     }
   };
 
-  // 친구 요청 거절
   const handleRejectRequest = async (friendStatusId) => {
     try {
       await rejectFriendRequest(friendStatusId);
@@ -101,7 +98,6 @@ const FriendModal = () => {
     }
   };
 
-  // 친구 삭제
   const handleDeleteFriend = async (friendListId) => {
     try {
       await deleteFriend(friendListId);
@@ -112,7 +108,6 @@ const FriendModal = () => {
     }
   };
 
-  // 친구 요청 취소
   const handleCancelRequest = async (friendStatusId) => {
     try {
       await cancelFriendRequest(friendStatusId);
@@ -123,7 +118,6 @@ const FriendModal = () => {
     }
   };
 
-  // 모달 외부 클릭 시 모달 닫기
   const handleOverlayClick = (e) => {
     if (e.target === e.currentTarget) {
       toggleFriendModal();
@@ -132,9 +126,18 @@ const FriendModal = () => {
 
   if (!isFriendModalOpen) return null;
 
+  if (isLoading) {
+    return (
+      <div className="modal-overlay">
+        <div className="modal-container">
+          <div className="loading">로딩 중...</div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="modal-overlay" onClick={handleOverlayClick}>
-      {/* ✅ 모달 메시지 추가 (자동 사라짐) */}
       {modalMessage && <GlobalModalMessage type={modalMessage.type} message={modalMessage.message} />}
 
       <div className="modal-container">
@@ -142,7 +145,6 @@ const FriendModal = () => {
           x
         </button>
 
-        {/* 🔹 친구 상세 정보 화면 */}
         {selectedFriend ? (
           <>
             <button className="back-btn" onClick={() => setSelectedFriend(null)}>
@@ -203,7 +205,6 @@ const FriendModal = () => {
           </>
         ) : (
           <>
-            {/* 🔹 아이콘 버튼 */}
             <div className="icon-buttons">
               <button className="icon-btn" onClick={() => setIsRequestListVisible(!isRequestListVisible)}>
                 {isRequestListVisible ? <FaChevronUp /> : <FaChevronDown />}
@@ -216,7 +217,6 @@ const FriendModal = () => {
               </button>
             </div>
 
-            {/* 받은 친구 요청 목록 */}
             {isRequestListVisible && (
               <div className="request-list">
                 <h3>받은 친구 요청</h3>
@@ -238,7 +238,6 @@ const FriendModal = () => {
               </div>
             )}
 
-            {/* 친구 목록 */}
             <h2>친구 목록</h2>
             <ul className="friend-list">
               {friends.length > 0 ? (
@@ -249,7 +248,6 @@ const FriendModal = () => {
                 ))
               ) : (
                 <p className="no-data-message">친구가 아직 없습니다. 친구를 추가해 보세요!</p>
-                
               )}
             </ul>
           </>
