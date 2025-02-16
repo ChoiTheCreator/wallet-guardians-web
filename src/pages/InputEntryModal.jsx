@@ -2,40 +2,52 @@ import { useState } from 'react';
 import '../style/InputEntryModal.scss';
 import { saveExpense } from '../api/expenseApi';
 import { useNavigate, useParams } from 'react-router-dom';
+import GlobalModalMessage from '../components/GlobalModalMesaage';
 
 const InputEntryModal = ({ isOpen, onClose }) => {
-  const { date } = useParams(); // URL에서 날짜 가져오기
+  const { date } = useParams();
   const [category, setCategory] = useState('');
   const [customCategory, setCustomCategory] = useState('');
   const [amount, setAmount] = useState('');
-  const [storename, setStorename] = useState(''); // API 명세에 맞게 필드명 변경
+  const [storename, setStorename] = useState('');
   const [description, setDescription] = useState('');
+  const [modalMessage, setModalMessage] = useState({ type: '', message: '' });
   const navigate = useNavigate();
 
   const handleSave = async () => {
-    //기타랑 원래 설정해둔 Option을 나눈 거임
     const selectedCategory = category === '기타' ? customCategory : category;
 
     if (!selectedCategory || !amount) {
-      alert('카테고리와 금액을 모두 입력해주세요!');
+      setModalMessage({
+        type: 'error',
+        message: '카테고리와 금액을 입력해주세요!',
+      });
+      setTimeout(() => setModalMessage({ type: '', message: '' }), 1300);
       return;
     }
 
     const expenseData = {
-      date: date, //date 함께 바디에 보냄
-      category: selectedCategory, // ✅ 필드명 수정
+      date: date,
+      category: selectedCategory,
       amount: parseInt(amount, 10),
-      storeName: storename, // ✅ 필드명 수정
+      storeName: storename,
       description: description,
     };
 
     try {
-      await saveExpense(expenseData); // ✅ 수정된 API 호출
-      alert('지출이 성공적으로 저장되었습니다!');
-      navigate('/main');
+      await saveExpense(expenseData);
+      setModalMessage({
+        type: 'success',
+        message: '지출이 성공적으로 저장되었습니다!',
+      });
+      setTimeout(() => {
+        setModalMessage({ type: '', message: '' });
+        navigate('/main');
+      }, 1300);
     } catch (error) {
       console.log(error);
-      alert('📌 지출 저장에 실패했습니다.');
+      setModalMessage({ type: 'error', message: '지출 저장에 실패했습니다.' });
+      setTimeout(() => setModalMessage({ type: '', message: '' }), 1300);
     }
   };
 
@@ -100,6 +112,10 @@ const InputEntryModal = ({ isOpen, onClose }) => {
           </div>
         </div>
       )}
+      <GlobalModalMessage
+        type={modalMessage.type}
+        message={modalMessage.message}
+      />
     </>
   );
 };

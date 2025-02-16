@@ -2,13 +2,14 @@ import { useState } from 'react';
 import '../style/InputEntryModal.scss'; // 스타일 재사용
 import { uploadReceiptImage } from '../api/receiptApi';
 import { useParams, useNavigate } from 'react-router-dom';
+import GlobalModalMessage from '../components/GlobalModalMesaage';
 
 const ReceiptModal = ({ isOpen, onClose }) => {
   const { date } = useParams();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [modalMessage, setModalMessage] = useState({ type: '', message: '' });
 
-  //  receiptData 상태를 하나로 통합하여 관리
   const [receiptData, setReceiptData] = useState({
     image: null,
     category: '',
@@ -16,7 +17,6 @@ const ReceiptModal = ({ isOpen, onClose }) => {
     date: date,
   });
 
-  //  이미지 선택 핸들러 (receiptData 상태 업데이트)
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file && (file.type === 'image/jpeg' || file.type === 'image/png')) {
@@ -26,17 +26,14 @@ const ReceiptModal = ({ isOpen, onClose }) => {
     }
   };
 
-  // ✅ 카테고리 선택 핸들러
   const handleCategoryChange = (e) => {
     setReceiptData((prev) => ({ ...prev, category: e.target.value }));
   };
 
-  // ✅ 메모 입력 핸들러
   const handleDescriptionChange = (e) => {
     setReceiptData((prev) => ({ ...prev, description: e.target.value }));
   };
 
-  // 영수증 업로드 핸들러
   const handleUpload = async () => {
     if (!receiptData.image) {
       alert('이미지를 먼저 선택하세요.');
@@ -49,12 +46,24 @@ const ReceiptModal = ({ isOpen, onClose }) => {
 
     setLoading(true);
     try {
-      await uploadReceiptImage(receiptData); // ✅ receiptData 객체 하나로 전달
-      alert('영수증이 성공적으로 업로드되었습니다!');
-      navigate('/main');
+      await uploadReceiptImage(receiptData);
+      setModalMessage({
+        type: 'success',
+        message: '영수증이 성공적으로 업로드되었습니다!',
+      });
+      setTimeout(() => {
+        setModalMessage({ type: '', message: '' });
+        navigate('/main');
+      }, 2000);
     } catch (error) {
       console.error('영수증 업로드 실패:', error);
-      alert('업로드 중 오류가 발생했습니다.');
+      setModalMessage({
+        type: 'error',
+        message: '업로드 중 오류가 발생했습니다.',
+      });
+      setTimeout(() => {
+        setModalMessage({ type: '', message: '' });
+      }, 2000);
     } finally {
       setLoading(false);
     }
@@ -62,12 +71,15 @@ const ReceiptModal = ({ isOpen, onClose }) => {
 
   return (
     <>
+      <GlobalModalMessage
+        type={modalMessage.type}
+        message={modalMessage.message}
+      />
       {isOpen && (
         <div className="modal-overlay">
           <div className="modal-container">
             <h2>{date} 영수증 추가</h2>
             <div className="entry-form">
-              {/* 이미지 업로드 */}
               <input
                 type="file"
                 accept="image/jpeg, image/png"
@@ -82,7 +94,6 @@ const ReceiptModal = ({ isOpen, onClose }) => {
                 </div>
               )}
 
-              {/* 카테고리 선택 */}
               <select
                 value={receiptData.category}
                 style={{ marginBottom: '20px' }}
@@ -97,7 +108,6 @@ const ReceiptModal = ({ isOpen, onClose }) => {
                 <option value="기타">✏️ 기타</option>
               </select>
 
-              {/* 메모 입력 */}
               <input
                 type="text"
                 placeholder="메모를 추가하세요"
@@ -105,7 +115,6 @@ const ReceiptModal = ({ isOpen, onClose }) => {
                 onChange={handleDescriptionChange}
               />
 
-              {/* 버튼 */}
               <button
                 className="save-button"
                 onClick={handleUpload}
