@@ -86,7 +86,7 @@
 
 ---
 
-![소개영상2.gif](attachment:0150f509-2263-4187-bc33-845a49853eb0:소개영상2.gif)
+![Image](https://github.com/user-attachments/assets/f11d8fee-12f0-4fe4-ab1f-517c16302e3c)
 
 ### 지출 추가 (영수증 및 직접 추가)
 
@@ -97,7 +97,7 @@
 
 ---
 
-![소개영상3.gif](attachment:8991f6d9-bac0-49ff-a539-969ba1a7cb6d:소개영상3.gif)
+![Image](https://github.com/user-attachments/assets/da0c075e-ba90-41a2-bc76-00bd8d3b901d)
 
 ### 목표 금액 수정 , 프로필 페이지 수정
 
@@ -110,7 +110,7 @@
 
 ---
 
-![소개영상4.gif](attachment:87b8a10b-d431-467c-9506-e2cd51f5eabf:소개영상4.gif)
+![Image](https://github.com/user-attachments/assets/4fe50722-27d0-4334-9c4c-9f28c42b3e1e)
 
 ### 통계 그래프 , 제출한 영수증 사진 모음
 
@@ -119,7 +119,7 @@
 
 ---
 
-![소개영상5.gif](attachment:4e53df1d-fbf3-41eb-b43e-a0f33e073010:소개영상5.gif)
+![Image](https://github.com/user-attachments/assets/633e70f7-88bf-45aa-b7f0-f146d9349f55)
 
 ### 친구 추가하기 기능
 
@@ -127,7 +127,7 @@
 
 ---
 
-![소개영상6.gif](attachment:9ecefe96-7c81-405c-9bbc-74f0e7492db7:소개영상6.gif)
+![Image](https://github.com/user-attachments/assets/87c774b3-0088-4ff7-bb7b-8550a038db26)
 
 ## **🛠️ 기술 스택**
 
