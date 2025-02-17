@@ -46,6 +46,8 @@ export const getExpenseByMonth = async (year, month) => {
       `/expense/month?year=${year}&month=${month}`
     );
     console.log(`✅ [getExpenseByMonth] 응답 데이터:`, response.data);
+
+    //객체담긴 배열 드림요 (amount 속성이 value임)
     return response.data;
   } catch (error) {
     //디버깅 함수 추가
@@ -58,7 +60,7 @@ export const getExpenseByMonth = async (year, month) => {
 export const getExpense = async (date, accessToken, refreshToken) => {
   try {
     console.log(`🟢 [getExpense] 지출 조회 요청: 날짜: ${date}`);
-    console.log(
+    console.log(e
       `🔑 [getExpense] 액세스 토큰 확인:`,
       accessToken ? '✅ 있음' : '❌ 없음'
     );

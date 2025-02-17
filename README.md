@@ -209,6 +209,8 @@
 
 - **기획서**: https://www.notion.so/b3d1ed8180c14c539a8b2a81c955ad4f
 
+- **촤원빈의 고민**: https://wonbin109.tistory.com/107
+
 ---
 
 ## 📌 문의 및 피드백

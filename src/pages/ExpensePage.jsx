@@ -160,7 +160,7 @@ const ExpensePage = () => {
 
   return (
     <div css={pageWrapper}>
-      {/*  로딩 화면 추가 */}
+      {/*  로딩 화면 추가 */} 
       {loading ? (
         <LoadingIndicator loading={loading} error={error} />
       ) : (
