@@ -40,6 +40,7 @@ const LoginPage = () => {
     setLoading(true); // 로그인 시작 시 로딩 상태 활성화
 
     try {
+      //api함수 비동기 쓰는곳
       const data = await login(email, password);
       // const { token, refreshToken } = data; (토큰 key명 바꿈)
       const { accessToken, refreshToken } = data.data;
@@ -50,6 +51,7 @@ const LoginPage = () => {
       //로그인 성공시 로컬스토리지에서 받아온 토큰들 저장.
       localStorage.setItem('accessToken', accessToken);
       localStorage.setItem('refreshToken', refreshToken);
+      
 
       setModalMessage({
         type: 'success',

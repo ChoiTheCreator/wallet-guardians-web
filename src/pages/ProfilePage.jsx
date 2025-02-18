@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getUserInfo } from '../api/authApi';
 import { FaCamera, FaCog, FaUserTimes } from 'react-icons/fa'; 
-import ProfileImgModal from '../components/ProfileImgModal';
+import ProfileImgModal from '../components/ㅖrofileImgModal';
 import ProfilePwModal from '../components/ProfilePwModal';
 import ProfileDeleteModal from '../components/ProfileDeleteModal';
 import '../style/ProfilePage.scss';
