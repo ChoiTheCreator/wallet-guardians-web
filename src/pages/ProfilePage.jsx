@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getUserInfo } from '../api/authApi';
-import { FaCamera, FaCog, FaUserTimes } from 'react-icons/fa'; 
-import ProfileImgModal from '../components/ㅖrofileImgModal';
+import { FaCamera, FaCog, FaUserTimes } from 'react-icons/fa';
+import ProfileImgModal from '../components/ProfileImgModal';
 import ProfilePwModal from '../components/ProfilePwModal';
 import ProfileDeleteModal from '../components/ProfileDeleteModal';
 import '../style/ProfilePage.scss';
@@ -11,7 +11,7 @@ const ProfilePage = () => {
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
   const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  
+
   useEffect(() => {
     const fetchProfile = async () => {
       try {
@@ -33,21 +33,30 @@ const ProfilePage = () => {
       {/* 좌측 섹션 */}
       <div className="profile-left">
         <div className="profile-card">
-          <img 
-            className="profile-image" 
-            src={profileData.profileImage || "https://via.placeholder.com/100"} 
-            alt="Profile" 
+          <img
+            className="profile-image"
+            src={profileData.profileImage || 'https://via.placeholder.com/100'}
+            alt="Profile"
           />
           <h2 className="profile-name">{profileData.username}</h2>
 
           <div className="profile-actions">
-            <button className="icon-button" onClick={() => setIsProfileModalOpen(true)}>
+            <button
+              className="icon-button"
+              onClick={() => setIsProfileModalOpen(true)}
+            >
               <FaCamera />
             </button>
-            <button className="icon-button" onClick={() => setIsPasswordModalOpen(true)}>
+            <button
+              className="icon-button"
+              onClick={() => setIsPasswordModalOpen(true)}
+            >
               <FaCog />
             </button>
-            <button className="icon-button" onClick={() => setIsDeleteModalOpen(true)}>
+            <button
+              className="icon-button"
+              onClick={() => setIsDeleteModalOpen(true)}
+            >
               <FaUserTimes />
             </button>
           </div>
@@ -74,13 +83,22 @@ const ProfilePage = () => {
       </div>
 
       {/* 📌 프로필 사진 변경 모달 */}
-      <ProfileImgModal isOpen={isProfileModalOpen} onClose={() => setIsProfileModalOpen(false)} />
+      <ProfileImgModal
+        isOpen={isProfileModalOpen}
+        onClose={() => setIsProfileModalOpen(false)}
+      />
 
       {/* 📌 비밀번호 변경 모달 */}
-      <ProfilePwModal isOpen={isPasswordModalOpen} onClose={() => setIsPasswordModalOpen(false)} />
-      
+      <ProfilePwModal
+        isOpen={isPasswordModalOpen}
+        onClose={() => setIsPasswordModalOpen(false)}
+      />
+
       {/* 📌 회원 탈퇴 모달 */}
-      <ProfileDeleteModal isOpen={isDeleteModalOpen} onClose={() => setIsDeleteModalOpen(false)} />
+      <ProfileDeleteModal
+        isOpen={isDeleteModalOpen}
+        onClose={() => setIsDeleteModalOpen(false)}
+      />
     </div>
   );
 };
